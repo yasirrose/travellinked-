@@ -1,0 +1,2664 @@
+@font-face {
+  font-family: 'AvenirNextLTPro-Demi';
+  src: url('..../fonts/AvenirNextLTPro-Demi.eot');
+  src: url('../fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
+       url('../fonts/AvenirNextLTPro-Demi.woff') format('woff'),
+       url('../fonts/AvenirNextLTPro-Demi.ttf') format('truetype'),
+       url('../fonts/AvenirNextLTPro-Demi.svg#AvenirNextLTPro-Demi') format('svg'),
+       url('../fonts/AvenirNextLTPro-Demi.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+	font-family: 'AvenirNextLTPro-Regular';
+	src: url('..../fonts/AvenirNextLTPro-Regular.eot');
+	src: url('../fonts/AvenirNextLTPro-Regular.woff2') format('woff2'),
+		url('../fonts/AvenirNextLTPro-Regular.woff') format('woff'),
+		url('../fonts/AvenirNextLTPro-Regular.ttf') format('truetype'),
+		url('../fonts/AvenirNextLTPro-Regular.svg#AvenirNextLTPro-Regular') format('svg'),
+		url('../fonts/AvenirNextLTPro-Regular.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'PlayfairDisplaySC-Regular';
+	src: url('..../fonts/PlayfairDisplaySC-Regular.eot');
+	src: url('../fonts/PlayfairDisplaySC-Regular.woff2') format('woff2'),
+		url('../fonts/PlayfairDisplaySC-Regular.woff') format('woff'),
+		url('../fonts/PlayfairDisplaySC-Regular.ttf') format('truetype'),
+		url('../fonts/PlayfairDisplaySC-Regular.svg#PlayfairDisplaySC-Regular') format('svg'),
+		url('../fonts/PlayfairDisplaySC-Regular.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'PlayfairDisplay-Regular';
+	src: url('..../fonts/PlayfairDisplay-Regular.eot');
+	src: url('../fonts/PlayfairDisplay-Regular.woff2') format('woff2'),
+		url('../fonts/PlayfairDisplay-Regular.woff') format('woff'),
+		url('../fonts/PlayfairDisplay-Regular.ttf') format('truetype'),
+		url('../fonts/PlayfairDisplay-Regular.svg#PlayfairDisplay-Regular') format('svg'),
+		url('../fonts/PlayfairDisplay-Regular.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+*{
+	margin:0;
+	padding:0;
+	 
+}
+*,
+*:after,
+*:before{
+	box-sizing:border-box;
+}
+body{
+	font-family: 'AvenirNextLTPro-Regular';
+}
+a,
+button,
+input[type="submit"]{
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+	outline:none;
+}
+img{
+	max-width:100%;
+	height:auto;
+}
+a:hover,
+a:focus,
+button,
+input[type="submit"]{
+	outline:none;
+	cursor:pointer;
+}
+.clear{
+	clear:both;
+}
+ul{
+	list-style:none;
+}
+.search-engine-box {
+	width: 44.28%;
+	border-radius: 3px;
+	background-color: #f8f9fb;
+	border: 1px solid #e1e7e7;
+	padding:14px 20px 20px;  
+	float:left;
+}
+.deal-of-day > img {
+	border-radius: 3px;
+}
+.image-product {
+	float: right;
+	width: 53.92%;
+}
+.search-engine-box h2{
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 28px;
+	color: #272d34;
+	font-weight:normal;
+	letter-spacing:-1px;
+}
+.search-engine-box p {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: #272d34;
+	padding-top:8px;
+}
+.search-engine-box p b  {
+	font-family: 'AvenirNextLTPro-Demi';
+}
+.search-engine-box label,
+.payment-form label {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: #72767b;
+	padding-bottom:8px;
+	display:block;
+}
+.search-engine-box .control-field{
+	width: 100%;
+	height: 32px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #bec0c2;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: #bec0c2;
+	padding:6px 10px;
+}
+.payment-form .control-field, .hotel-landing-page .pform-1 .control-field {
+	width: 100%;
+	height: 36px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #bec0c2;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: #bec0c2;
+	padding:6px 10px;
+}
+.search-engine-box .control-field:focus,
+.search-engine-box .control-field:hover,
+.payment-form .control-field:focus,
+.payment-form .control-field:hover, .hotel-landing-page .pform-1 .control-field:hover {
+	border-color:#8dcbc9;
+}
+.search-engine-box .control-field:focus ~ span{
+	color:#8dcbc9 !important;
+}
+
+.search-engine-box select.control-field,
+.payment-form select.control-field, .hotel-landing-page .pform-1 .control-field {
+	-webkit-appearance: none;
+	-moz-appearance:    none;
+	appearance:         none;
+}
+.search-engine-box .icon-control .control-field,
+.payment-form .ion-control .control-field {
+	padding-right:26px;
+}
+
+.icon-control{
+	position:relative;
+}
+.icon-control .ion {
+	color: #272d34;
+	font-size: 16px;
+	position: absolute;
+	top: 8px;
+	right:9px;
+}
+input.error ~ span.ion{
+	color:#fa5050 !important;
+}
+.w-180{
+	width:41.47%;
+	float:left;
+	margin-right:2.30%;
+}
+.w-54{
+	width:12.44%;
+	float:left;
+	text-align:center;
+}
+.w-100{
+	float:left;
+	width:23.04%;
+}
+.w-157{
+	float:left;
+	width:36.17%;
+	margin-left:2.30%;
+}
+.nights-select {
+	margin: 0 auto;
+	max-width: 32px;
+}
+.search-engine-box .nights-select .control-field {
+	border-radius: 50%;
+	float: right;
+	margin: 0 auto;
+	padding: 5px;
+	text-align: center;
+	background-color: #e1e7e7;
+	border-color: #e1e7e7;
+	color:#fff;
+}
+@-moz-document url-prefix() {
+.search-engine-box .nights-select .control-field {
+	text-indent: -1px;
+}
+}
+.icon-control .ion.ion-ios-search {
+	color: #bfc3c3;
+	font-size: 18px;
+	top: 7px;
+}
+.search-engine-submit{
+	text-align:right;
+	margin-top:20px;
+}
+.search-engine-submit button {
+	width: 140px;
+	height: 44px;
+	border-radius: 3px;
+	background-color: #8dcbc9;
+	line-height:42px;
+	text-align: center;
+	color: #ffffff;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 16px;
+	border:none;
+}
+.search-engine-submit button:hover {
+	background-color:#8dcbc9;	
+}
+.search-engine-row {
+	border-bottom: 1px solid #e1e7e7;
+	margin: 18px -20px 0;
+	padding: 0 20px 20px;
+}
+.container{
+	max-width:1120px;
+	width:100%;
+	margin:0 auto;
+}
+.body-section{
+	padding:0 20px;
+	float:left;
+	width:100%;
+	overflow-x:hidden;
+}
+.header-top {
+	height: 36px;
+	background-color: #ffffff;
+}
+.ht-left span {
+	font-family: 'AvenirNextLTPro-Demi';
+	font-size: 13px;
+	color: #272d34;
+}
+.ht-left {
+	float: left;
+	padding: 10px 0;
+}
+.ht-right{
+	float:right;
+	padding:10px 0;
+}
+.ht-right li {
+	float: left;
+	margin-right: 20px;
+}
+.ht-right li a{
+	display:inline-block;
+	padding-left:20px;
+	position:relative;
+	font-family: 'AvenirNextLTPro-Demi';
+	font-size: 13px;
+	color: #272d34;
+	text-decoration:none;
+}
+.ht-right li a i{
+	font-size: 16px;
+	color: #8dcbc9;
+	position:absolute;
+	left:0;
+	top:0;
+	bottom:0;
+	line-height:16px;
+}
+.ht-right li a i.fa-key{
+	font-size: 15px;
+	color: #8dcbc9;
+	 -webkit-transform: rotate(135deg);
+	transform: rotate(135deg);
+}
+.header-btm {
+	background-color: #272d34;
+	float: left;
+	width: 100%;
+	padding:15px 0;
+}
+.logo-main a{
+    font-family: 'Playfair Display', serif;
+	font-size: 18px;
+	color: rgba(255,255,255,0.9);
+	display:inline-block;
+	vertical-align:middle;
+	text-decoration:none;
+	line-height:32px;
+	padding-right:10px;
+	margin-right:8px;
+	position:relative;
+}
+.logo-main a:after {
+	width: 1px;
+	height: 20px;
+	border-radius: 2px;
+	background-color: #ffffff;
+	content:'';
+	position:absolute;
+	top:2px;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+.logo-main a em{
+	font-size:24px;
+	font-style:normal;
+	vertical-align:baseline;
+}
+.logo-main  span {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: rgba(255,255,255,0.8);
+	vertical-align:middle;
+	line-height:32px;
+}
+.hb-left {
+	float: left;
+	padding: 2px 0;
+}
+.hb-right{
+	float:right;
+}
+.hb-right li {
+	display: inline-block;
+}
+.hb-right li a {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: rgba(255,255,255,0.8);
+	text-decoration:none;
+}
+.hb-right li.sign-in{
+	margin-left:36px;
+}
+.hb-right li.sign-in a{
+	width: 100px;
+	height: 40px;
+	line-height:40px;
+	border-radius: 3px;
+	background-color: rgba(255,255,255,0.2);
+	display:inline-block;
+	text-align:center;
+}
+.section-main-nav li {
+	float: left;
+	margin-right:40px;
+}
+.section-main-nav li a {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	color: #8dcbc9;
+	text-decoration:none;
+}
+.section-main-nav {
+	border-bottom: 1px solid #bec0c2;
+	margin-bottom: 20px;
+	padding: 20px 0;
+}
+.deal-of-day {
+	position: relative;
+}
+.deal-of-day img {
+	vertical-align: middle;
+	min-height:441px;
+}
+.deal-of-day-content {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.dod-top {	
+	padding: 20px 10px 10px 20px;
+}
+.dod-top h2{
+	font-family: 'AvenirNextLTPro-Demi';
+	font-size: 28px;
+	font-weight: normal;
+	color: #ffffff;
+}
+.dod-top p{
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 24px;
+	font-weight: normal;
+	color: #ffffff;
+	padding-top:5px;
+}
+.dod-btm{
+	position:absolute;
+	bottom:0;
+	left:0;
+	padding: 20px 10px 10px 20px;
+}
+.dod-btm span.hotel-stars{ 
+	width: 101px;
+	height: 36px;
+	line-height:36px;
+	border-radius: 3px;
+	background-color: #272d34;
+	display:inline-block;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 14px;
+	text-align: center;
+	color: #ffffff;
+}
+.dod-btm h2 {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 28px;
+	font-weight: normal;
+	color: #ffffff;
+	padding-top:15px;
+}
+.dod-btm p{
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 18px;
+	font-weight: normal;
+	color: #e1e7e7;
+}
+.title-section{
+	padding-top:72px;
+	padding-bottom:40px;
+}
+.title-section h2 {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 32px;
+	font-weight: normal;
+	text-align: center;
+	color: #272d34;
+}
+.title-section p {
+	font-family: 'AvenirNextLTPro-Regular';
+	font-size: 18px;
+	font-weight: normal;
+	text-align: center;
+	color: #272d34;
+	padding-top:16px;
+}
+.one-third {
+	float: left;
+	margin-right: 1.79%;
+	width: 32.14%;
+	position:relative;
+	border-radius:3px;
+	overflow:hidden;
+}
+.daytop-picks {
+	float: left;
+	width: 100%;
+}
+.daytop-picks > .one-third:last-child,
+.top-picks-row > .one-third:last-child {
+	margin-right: 0;
+}
+.one-third > img {
+	vertical-align: middle;
+}
+.top-pick-content {
+	left: 0;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color:rgba(0,0,0,0.1);
+}
+.top-pick-content:hover {
+	background-color:rgba(0,0,0,0.16);
+}
+
+
+
+.top-pick-position {
+	bottom: 0;
+	color: #ffffff;
+	left: 0;
+	padding: 10px;
+	position: absolute;
+	right: 0;
+}
+.hotel-rating {
+	width: 102px;
+	height: 28px;
+	line-height:28px;
+	border-radius: 3px;
+	text-align:center;
+	font-size: 14px;
+	display:inline-block;
+	color:#fff;
+}
+.hotel-rating.five-star {
+	background-color:#272d34;
+}
+.hotel-rating.four-star {
+	background-color:#0e184f;
+}
+.hotel-rating.three-star {
+	background-color:#373269;
+}
+.hotel-rating.two-star {
+	background-color:#3f6bb1;
+}
+.hotel-rating.one-star {
+	background-color:#7bb385;
+}
+.top-pick-content h3 {
+	font-size: 18px;
+	font-weight: normal;
+	color: #ffffff;
+	padding-top:6px;
+}
+.top-pick-content p {
+	font-size: 14px;
+	font-weight: normal;
+	color: #e1e7e7;
+	padding-top:4px;
+}
+.top-picks-row{
+	float:left;
+	width:100%;
+	margin-bottom:20px;
+}
+.section-main-5{
+	height: 220px;
+	background-color: #37404a;
+	float:left;
+	width:100%;
+	position:relative;
+	text-align:center;
+	padding:32px 0 40px 0;
+}
+/*.section-main-5:after{
+	background-color: #37404a;
+	content:'';
+	left:-2000px;
+	right:-2000px;
+	top:0;
+	height:100%;
+	z-index:-1;
+	position:absolute;
+}*/
+.section-main-5 h2 {
+	font-size: 28px;
+	font-weight: normal;
+	text-align: center;
+	color: #ffffff;
+}
+.section-main-5 p {
+	font-size: 18px;
+	font-weight: normal;
+	text-align: center;
+	color: #e1e7e7;
+	padding-top:8px;
+}
+.free-access-form {
+	margin: 38px auto 0;
+	padding-right: 170px;
+	position: relative;
+	width: 610px;
+}
+.free-access-form > input[type="email"] {
+	width: 100%;
+	height: 44px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid  #bec0c2;
+	color: #72767b;
+	font-size: 14px;
+	padding:8px 10px;
+}
+.free-access-form > input[type="submit"] {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 44px;
+	width: 159px;
+	border-radius: 3px;
+	background-color: rgba(255,255,255,0.2);
+	line-height:42px;
+	color: rgba(255,255,255,0.8);
+	text-align: center;
+	font-size: 16px;
+	padding:0;
+	border:none;
+}
+.footer-main {
+	float: left;
+	width: 100%;
+	background-color: #272d34;
+	padding:18px 0;
+}
+.footer-top-left, .footer-top-right.header li {
+	float: left;
+}
+.footer-main ul li{
+	float:left;
+}
+.footer-top-right {
+	float: right;
+}
+.footer-top-left ul li{
+	margin-right:22px;
+}
+.footer-top-left ul li:last-child{
+	margin-right:0;
+}
+.footer-top-left ul li a {
+	font-size: 12px;
+	font-weight: normal;
+	color: rgba(255,255,255,0.8);
+	text-decoration:none;
+}
+.footer-top-left ul li a:hover,
+.footer-top-right ul li a:hover{
+	color:#fff;
+}
+.footer-top-right ul li, .footer-top-right.header li{
+	margin-right:28px;
+}
+.footer-top-right ul li:last-child{
+	margin-right:0;
+}
+.footer-top-right ul li a {
+	font-size: 18px;
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration:none;
+}
+.footer-btm{
+	padding-top:18px;
+}
+.footer-btm p {
+	font-size: 12px;
+	font-weight: normal;
+	color: #ffffff;
+}
+.grid-item img {
+	vertical-align: middle;
+	border-radius:3px;
+}
+.grid-item{
+	margin-bottom:21px;
+	margin-right:10px;
+	margin-left:10px;
+}
+.col-one-third{
+	width: calc(33.333% - 20px);
+}
+.col-two-third{
+	width: calc(66.666% - 20px);
+}
+.grid-container{
+	margin:0 -10px;
+}
+.masonry-box {
+	position:relative;
+	border-radius:3px;
+}
+.m-titlenav{
+	border-radius: 0 0 3px 3px;
+	background-color: rgba(39, 45, 52, 0.8);
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	padding:10px 10px 11px 10px;
+	height:40px;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+}
+.m-titlenav.active {
+	border-radius:3px;
+	height:100%;
+}
+.m-titlenav.active h2{
+	padding-bottom:10px;
+}
+.m-titlenav .title{
+	float:left;
+	font-size: 16px;
+	color: #ffffff;
+	font-weight:normal;
+}
+.toggle-list{
+	float:right;
+	font-size: 16px;
+	color: #ffffff;
+}
+.search-container {
+	float: left;
+	margin: 40px 0;
+	width: 100%;
+}
+.search-container-left {
+	float: left;
+	width: 240px;
+}
+.map-box {
+	position: relative;
+}
+.map-box img{
+	vertical-align:middle;
+}
+.map-box a{
+	width: 80px;
+	height: 28px;
+	border-radius: 3px 0 0 0;
+	background-color: rgba(255, 255, 255, 0.98);
+	border: 1px solid #e1e7e7;
+	text-align:center;
+	line-height:28px;
+	position:absolute;
+	right:0;
+	bottom:0;
+	font-size: 10px;
+	color: #8dcbc9;
+	text-decoration:none;
+}
+.rating-check {
+	width: 18px;
+	height: 18px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #bec0c2;
+	display:inline-block;
+	position:relative;
+	text-align:center;
+	line-height:18px;
+	float:left;
+}
+.rating-check input {
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index:1;
+}
+.rating-check i {
+	font-size: 15px;
+	color: #272d34;
+	line-height:16px;
+	vertical-align:top;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+	opacity:0;	
+	width:100%;
+	display:inline-block;
+	padding-top:1px;
+}
+.rating-check input:checked ~ i{
+	opacity:1;
+}
+.age-select-boxes .icon-control {
+	border-right: 1px solid #e1e7e7;
+	float: left;
+	margin-left: -2px;
+	width: calc(12.5% + 2px);
+}
+.age-select-boxes .icon-control:hover{
+	border-color:#8dcbc9;
+}
+.age-select-boxes .icon-control:first-child{
+	margin-left:0;
+	width: 12.5%;
+	border-radius: 3px 0 0 3px;	
+}
+.age-select-boxes .icon-control:last-child{
+	border-right:none;
+	border-radius: 0 3px 3px 0;	
+}
+.age-select-boxes .icon-control:first-child select.control-field {
+	border-radius: 3px 0 0 3px;	
+}
+.age-select-boxes .icon-control:last-child select.control-field{
+	border-radius: 0 3px 3px 0;	
+}
+.age-select-boxes select.control-field {
+	border-radius: 0;
+	position:relative;
+	z-index:1;
+	padding-left:5px;
+}
+
+.age-select-boxes .icon-control .ion{
+	z-index:2;
+}
+.age-select-boxes select.control-field:disabled ~ span {
+	display: none;
+}
+.age-select-boxes select.control-field:disabled {
+	text-indent:-999px;
+	border-color:#e1e7e7;
+	z-index:0;
+}
+.chldr-age-row {
+	padding-top: 18px;
+	clear:both;
+}
+.rm-num-row {
+	float: left;
+	width: 100%;
+}
+.rm-num-row > div{
+	float:left;
+}
+.room-label {
+	width: 28.38%;
+}
+.rm-num-row .w-158{
+	width:34.93%;
+	margin-right:1.76%;
+}
+.rm-num-row .w-158:last-child{
+	margin-right:0;
+}
+.search-engine-box .room-label > label {
+	color: #272d34;
+	font-size: 14px;
+	padding: 30px 0 0;
+}
+.m-hover-nav {
+	clear: both;
+	margin: 0 -10px;
+	display:none;
+}
+.active .m-hover-nav {
+	display:block;
+}
+.m-hover-nav li a {
+	font-size: 12px;
+	font-weight: normal;
+	color: rgba(255,255,255,0.8);
+	display:block;
+	padding:5px 10px;
+	height:24px;
+	text-decoration:none;
+}
+.m-hover-nav li:hover a {
+	background-color: rgba(255, 255, 255, 0.4);
+	color: #ffffff;
+}
+.m-titlenav-h {
+	cursor: pointer;
+	float: left;
+	width: 100%;
+}
+.header-btm.header-search {
+	background-color: #f8f9fb;
+}
+.header-search .logo-main a {
+	color: #24272c;
+	padding-right:0;
+	margin-right:0;
+}
+.header-search .logo-main a:before {
+	display:none;
+}
+.header-search .hb-left {
+	width: 17.85%;
+}
+.hb-center {
+	float: left;
+	min-height: 1px;
+	width: 64.28%;
+	padding-right:100px;
+	position:relative;
+	margin-top:4px;
+}
+.hb-center .control-field {
+	background-color: #ffffff;
+	border-top: 1px solid #bec0c2;
+	border-bottom: 1px solid #bec0c2;
+	border-left: 1px solid #bec0c2;
+	border-right: none;
+	color: #bec0c2;
+	font-family: "AvenirNextLTPro-Regular";
+	font-size: 14px;
+	height: 32px;
+	padding: 6px 10px;
+	width: 100%;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+}
+.hb-center .destination-autofill .control-field{
+	border-radius: 3px 0 0 3px;
+}
+.hb-center .control-field:hover,
+.hb-center .control-field:focus,
+.staying-days:hover  {
+	border-color:#8dcbc9;
+}
+.destination-autofill {
+	float: left;
+	width: 30.6451%;
+}
+.destination-autofill:after,
+.staying-days:after {
+	background-color: #8dcbc9;
+	content: "";
+	height: 100%;
+	position: absolute;
+	right: -1px;
+	top: 0;
+	width: 1px;
+	z-index: 1;
+	opacity:0;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+}
+.destination-autofill:hover:after,
+.staying-days:hover:after{
+	opacity:1;
+}
+.staying-days {
+	background-color: #ffffff;
+	border-bottom: 1px solid #bec0c2;
+	border-left: 1px solid #bec0c2;
+	border-top: 1px solid #bec0c2;
+	float: left;
+	padding-right: 30px;
+	position: relative;
+	width: 44.0322%;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+}
+.rooms-and-guests {
+	float: left;
+	width: 25.239%;
+}
+.hb-center button {
+	height: 32px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100px;
+	border:none;
+	background-color:#8dcbca;
+	font-family: "AvenirNextLTPro-Regular";
+	border-radius: 0 3px 3px 0;
+	color: #ffffff;
+	line-height:30px;
+	font-size:16px;
+}
+.hb-center .staying-days .control-field {
+	float: left;
+	width: 40.3846%;
+}
+.hb-center .staying-days .control-field {
+	border: none;
+	float: left;
+	height: 30px;
+	line-height: 29px;
+	width: 44.185%;
+	box-shadow:none;
+}
+.check-arrow {
+	display: block;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	width: 11.53%;
+	text-align: center;
+	color:#666666;
+	font-size: 30px;
+}
+.staying-days > a {
+	color: #bec0c2;
+	font-size: 18px;
+	line-height: 30px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	width: 30px;
+}
+.hb-right-search {
+	float: right;
+}
+.my-account {
+	padding-left: 26px;
+	position: relative;
+}
+.hb-right-search {
+	float: right;
+	padding-top: 10px;
+}
+.my-account .ion-person {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 20px;
+	color:#272d34;
+}
+.my-account a{
+	font-size:14px;
+	display:inline-block;
+	color:#272d34;
+	text-decoration:none;
+	padding-top:3px;
+}
+.my-account a i{
+	margin-left:2px;
+}
+.header-btm.header-search {
+	padding: 20px 0;
+}
+.rt-left {
+	float: left;
+}
+.rt-left > span {
+	color: #72767b;
+	font-size: 14px;
+}
+.rt-left h4 {
+	font-size: 24px;
+	font-weight: normal;
+	color: #272d34;
+	margin:5px 0 0;
+}
+.rt-left > p {
+	font-size: 16px;
+	font-weight: normal;
+	color: #272d34;
+	padding-top:6px;
+}
+.rt-right {
+	float: right;
+	text-align: right;
+}
+.rt-right li{
+	padding-bottom:2px;
+}
+.rt-right a {
+	text-decoration: none;
+	font-size: 12px;
+	text-align: right;
+	color: #8dcbc9;
+}
+.results-top-sect {
+	padding-bottom: 40px;
+}
+.search-container-left h3 {
+	color: #272d34;
+	line-height: 30px;
+	font-weight: normal;
+	padding-bottom:10px;
+	font-size: 18px;
+	font-weight: normal;
+}
+.search-container-left h3 a {
+	color: #bec0c2;
+	float: right;
+	font-size: 12px;
+	font-weight: normal;
+	margin-top: 2px;
+	text-decoration: none;
+}
+.sidebar-panel {
+	border-top: 1px solid #e1e7e7;
+	float: left;
+	padding: 15px 5px 20px;
+	width: 100%;
+}
+.sidebar-panel > h4 {
+	color: #272d34;
+	font-size: 14px;
+	padding-bottom: 12px;
+	font-family: AvenirNextLTPro-Demi;
+	font-weight: normal;
+}
+.rating-stars {
+	float: left;
+	padding-left: 8px;
+}
+.rating-stars i{
+	color: #272d34;
+	margin-right:5px;
+	font-size: 16px;
+}
+.rating-stars i.empty {
+	color: #bec0c2;
+}
+.sidebar-content li {
+	float: left;
+	width: 100%;
+	margin-bottom:16px;
+}
+.sidebar-content li:last-child {
+	margin-bottom:0;
+}
+.star-qty {
+	color: #bec0c2;
+	float: right;
+	font-size: 12px;
+	font-family: AvenirNextLTPro-Demi;
+	font-weight: normal;
+	margin-top:3px;
+}
+
+label.price-range {
+	float: right;
+	width: 100px;
+}
+.price-range > input {
+	border: none;
+	color: #272d34;
+	float: right;
+	font-family: "AvenirNextLTPro-Regular";
+	font-size: 12px;
+	text-align: right;
+	width: 100%;
+	margin-top: 2px;
+}
+.sidebar-content .ui-slider.ui-widget.ui-widget-content {
+	border-color: #8dcbc9;
+	height: 3px;
+	width: calc(100% - 18px);
+	margin: 10px auto 5px;
+}
+.sidebar-content .ui-widget-header {
+	background: #8dcbc9;
+	border:none;
+}
+.sidebar-content .ui-slider-horizontal .ui-slider-handle {
+	background-color: #ffffff;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	top: -10px;
+	box-shadow: 0 1px 4px 0 #bec0c2;
+	border: solid 0.5px #e1e7e7;
+}
+.sidebar-content .control-field {
+	background-color: #ffffff;
+	border: 1px solid #bec0c2;
+	border-radius: 3px;
+	color: #bec0c2;
+	font-family: "AvenirNextLTPro-Regular";
+	font-size: 14px;
+	height: 36px;
+	padding: 6px 10px;
+	width: 100%;
+}
+.rating-stars > span {
+	font-size: 12px;
+	font-weight: normal;
+	color: #272d34;
+}
+a.see-more {
+	font-size: 12px;
+	color: #272d34;
+	text-decoration:none;
+	float:left;
+	margin-top:12px;
+}
+a.see-more i{
+	color: #8dcbc9;
+	font-size: 18px;
+	margin-right:10px;
+	vertical-align:middle;
+}
+.search-container-right{
+	float:right;
+	width:852px;
+}
+.tabs-btn {
+	border-top: 3px solid #e1e7e7;
+	border-right: 1px solid #e1e7e7;
+	border-left: 1px solid #e1e7e7;
+	border-bottom:3px solid #71757a;
+	padding:0 10px;
+}
+.sort-by {
+	font-size: 12px;
+	color: #72767b;
+	display:block;
+	float:left;
+	padding:14px 0;
+}
+.tab-list{
+	margin-left:40px;
+	float:left;
+}
+.tab-list li a {
+	color: #272d34;
+	display: inline-block;
+	font-size: 12px;
+	padding: 14px 20px;
+	text-decoration:none;
+	position:relative;
+}
+.tab-list li a:after{
+	width:100%;
+	top:-3px;
+	left:0;
+	height:3px;
+	content:'';
+	background-color:#8dcbc9;
+	position:absolute;
+}
+.tab-list li a.inactive {
+	color: #bec0c2;
+}
+.tab-list li a.inactive:after{
+	opacity:0;
+}
+.tabs-btn{
+	float:left;
+	width:100%;
+}
+.tab-list li{
+	float:left;
+}
+.share-droplink {
+	font-size: 12px;
+	color: #bec0c2;
+	float:right;
+	padding: 14px 0;
+}
+.share-droplink i{
+	font-size: 14px;
+	vertical-align:middle;
+	margin-left:10px;
+}
+.tabs-content {
+	clear: both;
+	width: 100%;
+}
+.hotel-desp-box {
+	border: 1px solid #e1e7e7;
+	float: left;
+	width: 100%;
+	margin-top: 8px;
+	border-radius: 3px;
+}
+.hotel-img {
+	width: 300px;
+	border-radius: 3px 0 0 3px;
+	border-right:1px solid #e1e7e7;
+	float:left;
+} 
+.hotel-img img {
+	vertical-align: middle;
+	border-radius: 2px 0 0 2px;
+}
+.hotel-desp {
+	width: 530px;
+	float:right;
+	padding-right:20px;
+} 
+.hotel-desp .hotel-rating {
+	color:#fff;
+	border-radius:0 0 3px 3px;
+}
+.left-align {
+	float: left;
+	max-width:80%;
+}
+.right-align {
+	float: right;
+}
+.hotel-name-price {
+	float: left;
+	width: 100%;
+	padding-top: 16px;
+}
+.hotel-name-price .left-align,
+.hotel-name-price .right-align  {
+	font-size: 18px;
+	color: #272d34;
+}
+.hotel-name-price .left-align span {
+	color: #72767b;
+	display: block;
+	font-size: 14px;
+	overflow: hidden;
+	padding-top: 3px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.hotel-name-price .right-align span{
+	color: #72767b;
+}
+.hotel-desp p {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 1.67;
+	color: #72767b;
+	clear:both;
+	padding-top:10px;	
+}
+.hotel-links .left-align li a{
+	font-size: 12px;
+	color: #8dcbc9;
+	text-decoration:none;
+}
+.hotel-links .left-align li {
+	float: left;
+	margin-right: 40px;
+}
+.hotel-links .right-align a {
+	font-family: AvenirNextLTPro-Demi;
+	font-size: 14px;
+	color: #8dcbc9;
+	text-decoration:none;
+}
+.hotel-links .right-align a i{
+	font-size: 24px;
+	vertical-align:middle;
+	margin-left:12px;
+}
+.hotel-links {
+	float: left;
+	padding-top: 30px;
+	width: 100%;
+}
+
+input.error,
+select.error {
+    border-color:#fa5050 !important;
+}
+label.error {
+    color:#fa5050 !important;
+	padding:0 !important;
+}
+
+.input-div .search_result {
+	background-color: #ffffff;
+	border: 1px solid #e1e7e7;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 0;
+	height: 484px;
+	overflow: auto;
+	padding: 0 0 20px;
+	position: absolute;
+	width: 100%;
+	z-index: 99;
+}
+.Location {
+	
+}
+.input-div {
+  position: relative;
+}
+
+.hotel-lable-0,
+.city-lable-0{
+	display:block !important;
+	font-family: 'AvenirNextLTPro-Demi';
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	color: #272d34;
+	padding:20px 20px 10px;
+}
+.selected_value {
+	border-radius: 3px;
+	color: #272d34;
+	font-size: 12px;
+	overflow: hidden;
+	padding: 9px 20px;
+	text-overflow: ellipsis;
+	white-space: normal;
+}
+.selected_value:hover {
+	background-color:#eef5f6;
+}
+.search-loading {
+	background-color: #fff;
+	display: table;
+	height: 100vh;
+	left: 0;
+	margin: 0 auto;
+	max-width: 100%;
+	overflow: hidden;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: 9999;
+}
+.search-loading-inner {
+	display: table-cell;
+	vertical-align: middle;
+}
+.loading-logo a {
+	font-family: 'PlayfairDisplaySC-Regular';
+	font-size: 28px;
+	font-weight: normal;
+	color: #272d34;
+	text-decoration:none;
+}
+.loading-logo a span {
+  font-size: 42px;
+}
+.loading-logo {
+	border-bottom: 1px solid #e1e7e7;
+	margin: 0 auto 40px;
+	max-width: 600px;
+	padding-bottom: 40px;
+}
+.loading-content h4 {
+	font-size: 24px;
+	font-weight: normal;
+	color: #272d34;
+}
+.wander-wisley {
+	font-family: 'PlayfairDisplay-Regular';
+	font-size: 64px;
+	font-weight: normal;
+	line-height: 1;
+	color: #72767b;
+	text-transform:capitalize;
+}
+.loader-sect img {
+	vertical-align: middle;
+}
+.loader-sect{
+	padding:50px 0;
+}
+/*===========payment-portal===========*/
+.paymentportal-sect {
+	background-color: #f8f9fb;
+	margin: 0 -20px;
+	padding: 0 20px;
+}
+.paymentportal-sect .container {
+	padding: 70px 80px;
+	background-color:#fff;
+	border-left:1px solid #e1e7e7;
+	border-right:1px solid #e1e7e7;
+}
+.paymentportal-sect-left {
+	float: left;
+	width: 500px;
+}
+.hotel-name-desp h3 {
+	color: #272d34;
+	font-size: 26px;
+}
+.hotel-name-desp > p {
+	color: #72767b;
+	font-size: 18px;
+	padding-top: 5px;
+}
+.hotel-name-desp {
+	border-bottom: 1px solid #e1e7e7;
+	padding-bottom: 40px;
+}
+.pform-row {
+	float: left;
+	padding-bottom: 18px;
+	width: 100%;
+}
+.pform-1 {
+	float: left;
+	width: 20.51%;
+}
+.pform-2 {
+	float: left;
+	width: 36.45%;
+	margin-left:3.2%;
+}
+.payment-signin {
+	border-bottom: 1px solid #e1e7e7;
+	padding: 35px 0;
+}
+.payment-signin > span {
+	color: #272d34;
+	font-family: "AvenirNextLTPro-Regular";
+	font-size: 18px;
+	vertical-align: middle;
+}
+.payment-signin > a, .payment-signin.reservation > input, .hotel-landing-page .payment-signin.reservation .control-field{
+	width:102px;
+	height:42px;
+	line-height:40px;
+	text-align:center;
+	display:inline-block;
+	vertical-align:middle;
+	background-color:#8dcbc9;
+	border:1px solid #8dcbc9;
+	color:#fff;
+	text-decoration:none;
+	border-radius:4px;
+	margin-left:5px;
+}
+.payment-form {
+	border-bottom: 1px solid #e1e7e7;
+	float: left;
+	padding: 38px 0;
+	width: 100%;
+}
+.payment-form h4 {
+	color: #272d34;
+	font-size: 24px;
+}
+.payment-form .pform-row:first-of-type{
+	padding-top:38px;
+}
+.payment-form .pform-row:last-of-type{
+	padding-bottom:0;
+}
+.paymentportal-sect-right {
+	border: 1px solid #e1e7e7;
+	border-radius: 5px;
+	float: right;
+	width: 302px;
+	background-color:#f8f9fb;
+}
+.venue-img img {
+	vertical-align: middle;
+	border-radius:5px 5px 0 0;
+}
+
+/*=========Ehtisham Styling=========*/
+
+.paymentportal-sect-left .title_promo > p {
+	display: inline-block;
+	float: right;
+	margin: 4px 0 0;
+	color:#72767b;
+	font-size:18px;
+	}
+.paymentportal-sect-left .title_promo > h4, .payment .billing_address, .payment .card_info  {
+	display: inline-block;
+	}
+.paymentportal-sect-left .title_promo a, .card_info .pform-2 a, .payment-form.terms_conditoin a {
+	color: #8dcbc9;
+	text-decoration: none;
+	}
+.paymentportal-sect-left .title_promo .card_list > li {
+	display: inline-block;
+	margin: 0 9px 0 0;
+	}
+.paymentportal-sect-left .title_promo .card_list > li:last-child {
+	margin: 0;
+	}
+.paymentportal-sect-left .title_promo .card_list {
+	float: right;
+	}
+.paymentportal-sect-left .card_list img {
+	max-width: 60px;
+	}
+.paymentportal-sect-left .payment .title_promo > h4 {
+	margin: 6px 0 0;
+	}
+.paymentportal-sect-left .payment .pform-1:first-child {
+	margin-right: 3.2%;
+	}
+.paymentportal-sect-left .payment .pform-1 { 
+	width: 29%;
+	}
+.paymentportal-sect-left .payment .pform-2 {
+	width: 35.45%;
+	}
+.payment-form.payment h5 {
+	font-family:"AvenirNextLTPro-Regular";
+	font-size: 16px;
+	margin: 0px 0 ;
+	color:#272d34;
+	}
+.paymentportal-sect-left .payment .pform-1.country {
+	width: 100%;
+	}
+.card_info, .billing_address {
+	padding-top: 35px;
+	}
+.payment .billing_address .pform-2 {
+	width: 32%;
+	}
+.payment  .billing_address .pform-1.state {
+	width: 24%;
+	}
+.payment .billing_address .pform-1 {
+	width: 33%;
+	}
+.payment .billing_address .pform-1 {
+	width: 37%;
+	}
+.payment .member_become .pform-1.title {
+	width: 20%;
+	}
+.payment .member_become .pform-2, .payment .member_become .pform-1 {
+	width: 36.6%;
+	}
+.payment-form.payment.member > p {
+	margin: 30px 0 0;
+	font-size: 16px;
+	color:#272d34;
+	}
+.payment-form.terms_conditoin > p {
+	color: #72767b;
+	font-size: 14px;
+	line-height: 1.43;
+	margin: 0 0 25px;
+	}
+.payment-form.terms_conditoin > h4 {
+	margin-bottom: 34px;
+	}
+.payment-signin.reservation, .payment-form.terms_conditoin {
+	border: none;
+	}
+.payment-signin.reservation > input {
+	color: #ffffff;
+	width: 220px;
+	font-size:16px;
+	}
+.trip_summary {
+	padding: 0 21px;
+	}
+.venu-text h2, .venu-text.box {
+	border-bottom: 1px solid #e4e9e9;
+	padding: 14px 0;
+	}
+.venu-text.box > h4 {
+	font-size: 18px;
+	margin-bottom: 19px;
+	color:#353b41;
+	}
+.venu-text.box > span, .top_night_parent  .right_excl > span {
+	display: block;
+	color: #72767b;
+	font-size: 14px;
+	line-height: 23px;
+	}
+.top_night_parent .left_excl {
+	display: inline-block;
+	}
+.top_night_parent .right_excl {
+	display: inline-block;
+	float: right;
+	}
+.top_night_parent  .right_excl > span {
+	display:inline-block;
+	line-height:inherit;	
+	color:#72767b;
+	}
+.top_night_parent {
+	margin-bottom: 3px;
+	}
+.top_night_parent .left_excl > h5 {
+	color: #272d34;
+	font-size:14px;
+	font-weight:normal;
+	}
+.total-amount {
+	background-color: #ffffff;
+	border-radius: 0 0 5px 5px;
+	border-top: 2px solid #e2e8e8;
+	padding: 16px 21px 15px;
+	}
+.total-amount .top_night_parent .left_excl > h5, .total-amount  .top_night_parent .right_excl > span {
+	font-size: 22px;
+	color:#383e44;
+	}
+.venu-text.box:last-child {
+	border: none;
+	}
+.top_night_parent.bold .left_excl > h5 {
+	color:#272d34;
+	font-weight:600;
+	}
+.top_night_parent.bold .right_excl > span {
+	font-weight: 600;
+	font-size: 14px;
+	color:#72767b;
+	}
+.top_night_parent.bold {
+	margin: 10px 0 0;
+	}
+.venu-text.box .policy {
+	margin: 10px 0 0;
+	}
+.venu-text.box .red {
+	color: #fa5050;
+	}
+.venu-text.box > p {
+	line-height: 23px;
+	}
+.paymentportal-sect .pform-row.padding_0 {
+	padding-top: 0;
+	}
+.payment-form p.mar_top {
+	clear: both;
+	display: inline-block;
+	margin: 30px 0;
+	color:#272d34;
+	font-size:16px;
+	}
+.promo .pform-row.padding_top {
+	padding-top: 36px;
+	}
+
+
+.payment-form.Traveler  .control-field, .paymentportal-sect .billing_address .control-field {
+	color: #272d34;
+	}
+.payment-form.Traveler .pform-1.choose {
+	width: 100%;
+	}
+/*===========payment-portal===========*/
+
+
+
+
+.header-btm.soical {
+	background: rgba(39, 45, 52, 0.5) none repeat scroll 0 0;
+	}
+.hb-left > label {
+	color: #fff;
+	}
+.hotel-landing-page .sidebar-panel a {
+	font-size:14px;
+	color:#bec0c2;	
+	text-decoration:none;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-weight:normal;
+	}
+.hotel-landing-page .sidebar-panel li {
+	margin-bottom: 13px;
+	}
+.hotel-landing-page .pform-1 .control-field {
+	border-radius: 0;
+	height: 42px;
+	}
+.hotel-landing-page .payment-signin.reservation .control-field {
+	width: 100%;
+	line-height: 0;
+	margin: 0;
+	border-radius: 0 4px 4px 0px;
+	cursor:pointer;
+	}
+.hotel-landing-page .pform-1.payment-signin.reservation {
+	padding: 0;
+	}
+.hotel-landing-page .pform-1.checkin .control-field {
+	border-radius: 4px 0px 0px 4px;
+	}
+.hotel-landing-page .pform-1.width-200 {
+	width: 28.4%;
+	}
+.hotel-landing-page .pform-1 {
+	width: 23.8%;
+	}
+.hotel-landing-page .search-container-right .pform-row > h3, .hotel-landing-page .search-container-left > h3 {
+	color: #272d34;
+	font-size: 20px;
+	margin-bottom: 23px;
+	font-weight:normal;
+	}
+.hotel-landing-page .search-container-left > h3  {
+	margin:0;
+	padding:0;
+	}
+.hotel-landing-page .search-container-left .sidebar-panel {
+	border: none;
+	}
+.hotel-landing-page .search-container-right {
+	width: 870px;
+	}
+.top-room-description {
+	background-color: #f8f9fb;
+	padding: 0 40px 25px;
+	border-bottom: 1px solid #e1e7e7;
+	}
+.btm-room-description {
+	padding: 40px;
+	}
+.left-check-title {
+	float: left;
+	min-width: 370px;
+	}
+.right-amout {
+	float: right;
+	}
+.left-check-title .rating-check {
+	margin: 0 16px 0 0;
+	}
+.inner-right-title > h4 {
+	color: #272d34;
+	font-size: 16px;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-weight:normal;
+	}
+.left-check-title > a {
+	color: #8dcbc9;
+	font-size: 14px;
+	text-decoration: none;
+	margin: 14px 0 0 36px;
+	display: inline-block;
+	}
+.right-amout > h4 {
+	color: #8dcbc9;
+	font-size: 20px;
+	font-family: 'AvenirNextLTPro-Regular';
+	font-weight:normal;
+	}
+.right-amout span {
+	color: #bec0c2;
+	}
+.hotel-landing-page .pform-row.pick-room .pform-1 {
+	background-color: #ffffff;
+	border: 1px solid #e1e7e7;
+	padding: 18px 20px;
+	width: 100%;
+	}
+.pform-row.pick-room {
+	padding: 0;
+	border-radius: 0;
+	}
+.hotel-landing-page .pform-row.pick-room .pform-1:hover {
+	background-color: #eef5f6;
+	}
+.pick-room.btn .pform-1 > a {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	font-size:18px;
+	color:#272d34;
+	padding: 14px 0;
+	}
+.hotel-landing-page .pick-room.btn .pform-1 {
+	border: solid 1px #e1e7e7;
+	opacity: 0.98;
+	padding:0;
+	margin:20px 0 ;
+	border-radius:3px;
+	
+	}
+.hotel-landing-page .search-container-left {
+	padding-top: 70px;
+	height: 100%;
+	min-height: 100%;
+	position: relative;
+	}
+.hotel-description > p {
+	color: #272d34;
+	line-height: 1.14;
+	margin-bottom: 20px;
+	font-size: 14px;
+	}
+.hotel-list > li {
+	color: #272d34;
+	font-size: 14px;
+	margin-bottom: 20px;
+	}
+.hotel-description > h4 {
+	color: #272d34;
+	font-size: 16px;
+	margin-bottom: 25px;
+	}
+.btm-room-description > h3 {
+	color: #272d34;
+	font-size: 28px;
+	margin-bottom: 40px;
+	}
+.hotel-description {
+	clear: both;
+	margin-bottom: 40px;
+	}
+.hotel-list  li:last-child, .hotel-description  p:last-child, .hotel-description.btm-0  {
+	margin: 0;
+	}
+.hotel-landing-page .search-container-right {
+	border: 1px solid  #e1e7e7 ;
+	}
+.hotel-landing-page .sidebar-panel a:hover {
+	color: #8dcbc9;
+	}
+.top_bttn_nowp.payment-signin {
+	border: medium none;
+	float: right;
+	padding-bottom: 20px;
+	padding-top: 0;
+	margin: -1px 0 0;
+	}
+.top_bttn_nowp.payment-signin > a {
+	height: 50px;
+	width: 182px;
+	border-radius:0 0 4px 4px;
+	}
+.caption .left-caption {
+	display: inline-block;
+	position: relative;
+	top: 30px;
+	}
+.caption .top_bttn_nowp.payment-signin {
+	padding: 0px 42px 0 0;
+	}
+.caption .top_bttn_nowp.payment-signin > a {
+	border-radius: 4px 4px 0 0;
+	background: #272d34;
+	border-color: #272d34;
+	}
+.caption .left-caption > a {
+	background-color: #272d34;
+	border-radius: 3px;
+	color: #ffffff;
+	display: inline-block;
+	font-size: 14px;
+	height: 36px;
+	line-height: 33px;
+	text-align: center;
+	text-decoration: none;
+	width: 101px;
+	margin: 0 0 12px;
+	}
+.caption .left-caption > h3 {
+	font-size: 28px;
+	margin-bottom: 5px;
+	font-weight:normal;
+	}
+.caption .left-caption > p {
+	color: #e1e7e7;
+	font-size: 18px;
+	}	
+.pick-room.btn .fa.fa-long-arrow-down {
+	color: #8dcbc9;
+	}
+	
+.view_more_option .top-room-description {
+	border: medium none;
+	padding-bottom: 40px;
+	padding-top: 73px;
+	}
+.top-room-description  .icon-control .ion {
+	top: 6px;
+	}
+
+.payment-form span.ion.ion-arrow-down-b {
+	top: 3px;
+	}
+.pick-room h4.mar_top {
+	color: #272d34;
+	font-size: 16px;
+	margin: 0 0 17px;
+	}
+.hotel-landing-page.view_more_option .pform-row.pick-room.btn.bottom .pform-1 {
+	margin-bottom: 0;
+	}
+.right-amout .payment-signin.see {
+	padding: 0;
+	border: none;
+	}
+
+.right-amout .payment-signin.see > a {
+	font-size: 12px;
+	height: 36px;
+	width: 103px;
+	line-height: 33px;
+	}
+.no_dates .hb-center .control-field, .no_dates  .hb-center button {
+	height: 36px;
+	}
+.no_dates .hb-center .staying-days .control-field {
+	height: 34px;
+	}
+.no_dates .icon-control .ion.ion-arrow-down-b {
+	  top: 3px;
+	}
+.no_dates .staying-days .check-arrow, .no_dates .staying-days > a {
+	line-height:36px;	
+	}
+.no_dates .header-btm.header-search {
+	border-bottom: 1px solid #e1e7e7;
+	}
+.search-container-left .payment-signin.see > a {
+	width: 136px;
+	height: 40px;
+	font-size: 16px;
+	line-height: 38px;
+	}
+.dis_table .search-container-right, .dis_table .search-container-left  {
+	display: table-cell;
+	vertical-align: top;
+	float: none;
+	}
+.dis_table {
+	display: table;
+	table-layout: fixed;
+	}
+.dis_table .search-container-right {
+	width: 880px;
+	}
+.search-container-left .payment-signin.see {
+	position: absolute;
+	bottom: 0;
+	border: none;
+	}
+.payment-signin.see .icon.ion-ios-arrow-thin-right {
+	font-size: 21px;
+	position: relative;
+	top: 3px;
+	padding: 0 4px 0 10px;
+	}
+.search-container-left .payment-signin.see.arrow > a {
+	line-height: 34px;
+	width: 121px;
+	}
+.payment-signin.see.arrow > h4 {
+	color: #272d34;
+	font-size: 16px;
+	font-weight: normal;
+	margin-bottom: 20px;
+	text-align: center;
+	}
+.view_more_option select.control-field, .view_more_option .top-room-description select.control-field {
+	color: #272d34;
+	}
+.payment-signin.see.arrow span {
+	color: #bec0c2;
+	}
+.select_date form .control-field {
+	color: #272d34;
+	}
+.pick-room .right-amout .payment-signin.adjust {
+	border: none;
+	padding: 0;
+	}
+.pick-room .payment-signin.adjust > a {
+	width: 90px;
+	font-size: 12px;
+	height: 36px;
+	line-height: 33px;
+	}
+.pick-room .hide_box {
+	clear: both;
+	padding: 20px 0 0 35px;
+	}
+/*=========Ehtisham Styling=========*/
+
+.popup-centered{
+	background-color: rgba(39, 45, 52, 0.8);
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 200;
+	display:none;
+}
+.popup-centered.open{
+	display:block;
+}
+.popup-inner {
+	background-color: rgba(255,255,255,0.99);
+	border-radius: 3px;
+	margin: 90px auto 40px;
+	max-width: 100%;
+	position: relative;
+	width: 500px;
+	border:solid 1px #e1e7e7;
+}
+.popup-logo{
+	text-align:center;
+	padding:12px 0;
+	border-bottom:1px solid #eef1f1;
+}
+.popup-logo a {
+	color: #272d34;
+	display: inline-block;
+	font-family: "Playfair Display",serif;
+	font-size: 18px;
+	line-height: 32px;
+	position: relative;
+	text-decoration: none;
+	vertical-align: middle;
+}
+.popup-logo a em {
+	font-size: 24px;
+	font-style: normal;
+	vertical-align: baseline;
+}
+.popup-body {
+	margin: 0 auto;
+	width: 340px;
+}
+.popup-body > h2 {
+	font-weight: normal;
+	text-align: center;
+	padding-bottom:40px;
+	padding-top:36px;
+}
+.fb-btn {
+	background-color: #3d5d98;
+	border: 1px solid #2e4672;
+	border-radius: 3px;
+	color: #ffffff;
+	display: block;
+	height: 40px;
+	padding-left: 42px;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	line-height: 38px;
+	font-size:14px;
+}
+.fb-btn > span {
+	background-color: #365185;
+	border-right: 1px solid #2e4672;
+	bottom: 0;
+	float: left;
+	font-size: 16px;
+	left: 0;
+	line-height: 38px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 41px;
+}
+.or-divider {
+	padding: 15px 0;
+	text-align: center;
+	position:relative;
+}
+.or-divider:after {
+	position:absolute;
+	top:50%;
+	left:0;
+	width:100%;
+	background-color:#e1e7e7;
+	content:'';
+	height:1px;
+}
+.or-divider > span {
+	padding:0 10px;
+	background-color:rgba(255,255,255,0.99);
+	position:relative;
+	z-index:1;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #72767b;
+}
+.login-field {
+	background-color: #ffffff;
+	border: 1px solid #bec0c2;
+	border-radius: 3px;
+	color: #bec0c2;
+	font-family: "AvenirNextLTPro-Regular";
+	font-size: 14px;
+	height: 40px;
+	padding: 6px 10px;
+	width: 100%;
+}
+.login-fields-holder{
+	padding-bottom:20px;
+}
+.login-remember {
+	float: left;
+	width: 100%;
+	padding-bottom:20px;
+}
+.remember-check {
+	float: left;
+}
+.login-remember > a {
+	color: #8dcbc9;
+	display: inline-block;
+	float: right;
+	font-size: 14px;
+	margin-top: 2px;
+	text-decoration: none;
+}
+.login-submit {
+	clear: both;
+}
+.login-submit > button {
+	background-color: #8dcbc9;
+	border: none;
+	border-radius: 3px;
+	color: #ffffff;
+	display: block;
+	font-size: 14px;
+	height: 40px;
+	line-height: 38px;
+	width: 100%;
+}
+.remember-check .rating-check {
+	margin-right: 5px;
+}
+.popup-foot {
+	border-top: 1px solid #e1e7e7;
+	padding: 10px 0;
+	text-align: center;
+}
+.popup-foot p {
+	font-size: 14px;
+	color: #272d34;
+}
+.popup-foot a{
+	color:#8dcbc9;
+	text-decoration:none;
+}
+.close-btn {
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 14px;
+	padding-top: 30px;
+	position: absolute;
+	right: -60px;
+	top: 4px;
+	transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+	opacity:0.9;
+}
+.close-btn:before {
+	font-family:'Ionicons';
+	font-size:20px;
+	left:0;
+	right:0;
+	top:0;
+	color:#fff;
+	content:'\f12a';
+	position:absolute;
+	text-align:center;
+	transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+}
+body.popup-open{
+	overflow:hidden;
+}
+.signup-txt {
+	padding: 40px 0 38px;
+	text-align: center;
+}
+.signup-txt > p {
+	color: #272d34;
+	padding-bottom:30px;
+	font-size: 16px;
+}
+.signup-txt > span {
+	font-size: 14px;
+	color: #72767b;
+	display:block;
+}
+.login-submit {
+	padding-bottom: 40px;
+}
+.remember-check label {
+	font-size: 14px;
+	color: #272d34;
+}
+.signup-txt > span.frgt-spn {
+	font-size: 12px;
+	line-height: 1.5;
+}
+.email-sent .signup-txt > p,
+.reset-popup .signup-txt > p {
+	font-size: 20px;
+	padding-bottom: 20px;
+}
+.reset-popup .popup-inner {
+	background-color: rgba(0, 0, 0, 0);
+	border: medium none;
+}
+.reset-popup .popup-body {
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.99);
+	border: 1px solid #e1e7e7;
+	border-radius: 3px;
+}
+.reset-popup .signup-txt,
+.reset-popup .login-fields,
+.reset-popup .login-submit{
+	max-width:340px;
+	margin:0 auto;
+}
+.reset-popup .popup-logo {
+	border-bottom: none;
+	padding: 0;
+	margin-bottom:40px;
+}
+.popup-logo a{
+	font-size: 24px;
+	color: #ffffff;
+}
+.popup-logo a{
+	font-size: 24px;
+	color: #ffffff;
+	line-height:34px;
+}
+.popup-logo a em{
+	font-size: 30px;
+}
+.ui-datepicker.ui-widget {
+	padding: 20px;
+	width: 564px !important;
+	border: 1px solid #e1e7e7 !important;
+	border-radius: 3px !important;
+	background-color: #ffffff !important;
+	box-shadow: 1px 2px 4px 0 #e1e7e7 !important;
+	margin-top:17px;
+}
+.ui-datepicker.ui-widget:after {
+	position:absolute;
+	left:25px;
+	height:0;
+	width:0;
+	top:-12px;
+	border-bottom:24px solid #e1e7e7;
+	border-top:24px solid rgba(0,0,0,0);
+	border-left:12px solid rgba(0,0,0,0);
+	border-right:12px solid rgba(0,0,0,0);
+	content:'';
+}
+.ui-datepicker.ui-widget:before {
+	position:absolute;
+	left:25px;
+	height:0;
+	width:0;
+	top:-11px;
+	border-bottom:22px solid #fff;
+	border-top:22px solid rgba(0,0,0,0);
+	border-left:11px solid rgba(0,0,0,0);
+	border-right:11px solid rgba(0,0,0,0);
+	z-index:1;
+	content:'';
+}
+
+.ui-datepicker .ui-datepicker-title {
+  font-family: 'AvenirNextLTPro-Demi';
+  color: #272d34 !important;
+}
+.ui-datepicker .ui-datepicker-header {
+	background: rgba(0, 0, 0, 0) !important;
+	padding: 6px 0 !important;
+}
+.ui-datepicker .ui-datepicker-calendar thead th {
+	font-size: 12px !important;
+	color: #72767b !important;
+	text-align:center !important; 
+}
+.ui-datepicker-calendar thead th.ui-datepicker-week-end {
+	color: #72767b !important;
+}
+.ui-datepicker td {
+	border: 1px solid #e1e7e7 !important;
+	height: 34px !important;
+	padding: 0 !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	width: 36px !important;
+}
+.ui-datepicker-unselectable.ui-state-disabled.ui-datepicker-other-month {
+	border: none !important;
+}
+.ui-datepicker-calendar tr td .ui-state-default {
+	background-color: rgba(0, 0, 0, 0) !important;
+	border: medium none !important;
+	color: #272d34 !important;
+	font-size: 12px !important;
+	height: 100% !important;
+	line-height: 28px;
+	text-align: center;
+	width: 100% !important;
+}
+.ui-datepicker .ui-datepicker-group-first {
+	border-right: none;
+}
+.ui-datepicker-calendar tr td .ui-state-default.ui-state-highlight {
+	background-color: #eef5f6 !important;
+}
+.section-main-4 {
+	float: left;
+	padding-bottom: 44px;
+	width: 100%;
+}
+#loading-img {
+    background-image: url('../images/loader.gif');
+	background-repeat:no-repeat;
+    height: 100%;
+	position:absolute;
+	height:100px;
+	width:100px;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+}
+.overlay {
+    background: #fff;
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+	z-index:9999;
+}
+/*sss*/
+.payment-pag {
+	background-color: #f8f9fb;
+	border-bottom: 1px solid #e1e7e7;
+	margin: 0 -20px;
+	padding: 12px 20px;
+}
+.payment-pag span{
+	font-size: 14px;
+	color: #272d34;
+	float:left;
+	margin-right:5px;
+}
+.booking-cmplet-sect {
+	padding: 80px 0;
+}
+.bcmplt-head {
+	text-align: center;
+	padding-bottom:40px;
+}
+.bcmplt-head h2 {
+	font-size: 28px;
+	font-weight: normal;
+	color: #272d34;
+	margin-bottom:20px;
+}
+.bcmplt-head p {
+	font-size: 14px;
+	line-height: 1.71;
+	color: #72767b;
+	padding-bottom:18px;
+}
+.bcmplt-head li {
+	display: inline-block;
+	margin: 0 7px;
+}
+.bcmplt-head li a{
+	font-size: 12px;
+	color: #8dcbc9;
+	text-decoration:none;
+}
+.bcmplt-head li a i{
+	margin-right:5px;
+	font-size:14px;
+}
+.bcmplt-head li a i.fa{
+	font-size:12px;
+}
+.bcmplt-info-left {
+	width: 540px;
+	border-radius: 3px 0 0 3px;
+	background-color: #f8f9fb;
+	border: 1px solid #e1e7e7;
+	float:left;
+	padding:20px;
+	float:left;
+}
+.bcmplt-info-left h4 {
+	font-size: 20px;
+	font-weight: normal;
+	color: #272d34;
+	margin-bottom:13px;
+}
+.bcmplt-info-left p {
+	font-size: 14px;
+	line-height: 1.71;
+	color: #72767b;
+}
+.btn-aright {
+	padding-right: 38%;
+	position: relative;
+	padding-bottom:40px;
+}
+.btn-aright .hotel-rating {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.booking-code {
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #e1e7e7;
+	padding:20px 20px;
+	float:left;
+	width:100%;
+}
+.booking-code span{
+	font-size: 14px;
+	line-height:18px;
+	color: #272d34;
+}
+.booking-code span.right-align{
+	font-size: 18px;
+}
+.bcmplt-row {
+	border-bottom: 1px solid #e1e7e7;
+	padding: 40px 0;
+}
+.bcmplt-row h3{
+	font-size: 18px;
+	font-weight: normal;
+	color: #272d34;
+	padding-bottom:40px;
+}
+.bcmplt-row ul {
+	list-style: disc;
+	margin-left:20px;
+}
+.bcmplt-row ul li{
+	font-size: 14px;
+	line-height: 1.71;
+	color: #272d34;
+	padding-left:4px;
+}
+.bcmplt-row ul li span{
+	color:#fa5050;
+}
+.bcmplt-row table {
+	table-layout: fixed;
+	width: 100%;
+}
+.bcmplt-row table td h5{
+	font-weight: normal;
+	color: #272d34;
+	padding-bottom:10px
+}
+.bcmplt-row table td{
+	font-size: 14px;
+	color: #72767b;
+	padding-bottom:40px;
+}
+.bcmplt-row table tr:last-child td{
+	padding-bottom:0;
+} 
+.bcmplt-row table th{
+	font-size: 16px;
+	font-weight: normal;
+	color: #272d34;
+	padding-bottom:20px;
+	text-align:left;
+}
+.total-chagebox {
+	float: right;
+	width: 480px;
+}
+.total-chagebox h5 {
+	font-size: 16px;
+	font-weight: normal;
+	color: #272d34;
+	padding:0 20px 20px;
+}
+.charge-list{
+	float:left;
+	width:100%;
+	padding:0 20px 10px;
+}
+.charge-list span{
+	font-size: 14px;
+	color: #272d34;
+}
+.charge-list span.right-align{
+	color: #72767b;
+}
+.charge-list.est-grand-total{
+	padding-top:10px;
+}
+.est-grand-total.charge-list span  {
+	font-family: "AvenirNextLTPro-Demi";
+}
+.total-chagebox .booking-code{
+	background-color: rgba(248, 249, 251,0.98);
+}
+.total-chagebox .booking-code span.left-align {
+	font-size: 16px;
+}
+.bcmplt-row p{
+	font-size: 14px;
+	line-height: 1.71;
+	color: #72767b;
+}
+.mb-10 {
+	margin-bottom: 20px;
+}
+.bcmplt-row h6{
+	font-size: 14px;
+	font-weight: normal;
+	color: #272d34;
+	margin-bottom:10px;
+}
+.bcmplt-row .mb-10 ul li {
+	color: #72767b;
+}
+.bcmplt-img {
+	width: 580px;
+	float:right;
+}
+.bcmplt-img img {
+	width: 100%;
+	height: 227px;
+	vertical-align:middle;
+	border-radius:0 3px 3px 0;
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

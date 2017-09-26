@@ -1,0 +1,219 @@
+
+.header-top {
+  background: rgba(255, 255, 255, 0.95) none repeat scroll 0 0;
+  border-bottom: 1px solid #dddddd;
+  color: #333333;
+  height: 76px;
+  overflow: hidden;
+  width: 100%;
+  padding: 5px;
+}
+.header-top * {
+    margin-right: 4px;
+    position: relative;
+    line-height: 1.2em;
+}
+
+.header-top .logo-left {
+    float: left;
+    padding-bottom: 40px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+.header-top .logo-left img {
+    width: 63px;
+    height: 63px;
+    margin-right: 0;
+}
+.header-top .vertically-align-middle {
+  float: left;
+  margin: 15px 0 0;
+}
+.header-top .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+.header-top .description {
+    font-size: 12px;
+    font-weight: normal;
+    color: #777;
+    max-height: 30px;
+    overflow: hidden;
+}
+.header-top .details > * {
+    display: block;
+}
+.header-form input {
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  display: inline-block;
+  height: 30px;
+  padding: 5px 7px 4px;
+  vertical-align: middle;
+  width: 145px;
+}
+.header-form {
+  float: right;
+  margin-top: 18px;
+}
+
+.header-form .btn {
+  background: #7ab55c none repeat scroll 0 0;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 14px;
+  height: 30px;
+  font-weight: 400;
+  margin-left: 5px;
+  margin-top: 0;
+  padding: 6px 12px;
+  text-decoration: none;
+  transition: all 0.2s ease 0s;
+}
+
+.login-main {
+  background: #30373b url("../images/main-bk.jpg") no-repeat scroll center top / cover ;
+  height: 100vh;
+  min-height: 34.375em;
+}
+.marketing-block {
+  background: #f9fafa none repeat scroll 0 0;
+  margin-top: 90px;
+  padding: 2.8125em;
+}
+.marketing-block .form-control {
+  border: 1px solid #a9a9a9;
+  box-shadow: none;
+  height: 60px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.section-heading-session h2 {
+  color: #30373b;
+  display: block;
+  font-kerning: normal;
+  font-size: 1.5em;
+  margin:0  0 30px;
+  font-weight: 500;
+  line-height: 1.38;
+  margin-bottom: 1.875em;
+  text-align: center;
+}
+
+.marketing-button .btn{
+  background-color: #7ab55c;
+  background-image: none;
+  border: 0 none;
+  border-radius: 3px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.125em;
+  font-weight: 500;
+  padding: 0.77778em 1.66667em;
+  height: 62px;
+  text-align: center;
+  transition: all 150ms ease 0s;
+}
+.marketing-remember {
+  display: inline-block;
+  margin-top: 20px;
+  width: 100%;
+}
+.marketing-remember p {
+  float: none;
+  list-style: outside none none;
+  margin: 0 0 0 30px;
+  width: auto;
+}
+.squaredThree input {
+   visibility:hidden;
+}
+
+.squaredThree {
+	width: 20px;	
+	position: relative;
+	float: left;
+}
+
+.squaredThree label, .squaredThree span {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 0;
+	top: 0;
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	background: #6aa84f none repeat scroll 0 0;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+}
+
+.squaredThree label:after, .squaredThree span:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 13px;
+	height: 8px;
+	background: transparent;
+	top: 5px;
+	left: 4px;
+	border: 3px solid #fff;
+	border-top: none;
+	border-right: none;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.squaredThree label:hover::after, .squaredThree span:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+}
+
+.squaredThree input[type=checkbox]:checked + label:after, 
+.squaredThree input[type=checkbox]:checked + label.check_box_round:after{
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+
+@media (max-width:600px) {
+.header-top {
+  height: auto;
+  text-align: center;
+}
+.header-top .logo-left {
+  padding-bottom: 0;
+}
+.header-form {
+  width: 100%;
+}
+.header-top .logo-left {
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+}
+.header-top .vertically-align-middle {
+  display: inline-block;
+  float: none;
+  text-align: left;
+  vertical-align: middle;
+}
+}

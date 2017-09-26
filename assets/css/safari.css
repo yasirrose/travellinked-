@@ -1,0 +1,175 @@
+.ht-right li a span{
+
+	padding-top: 2px;
+
+}
+
+.ht-right li a i{
+
+	top:0;
+
+}
+
+.ht-right li a i.fa-key{
+
+	bottom:1px;
+
+}
+
+.hotel-links .right-align a i{
+
+	display:inline-block;
+
+	vertical-align:middle;
+
+	position:relative;
+
+	top:2px;
+
+}
+
+.close-popup .icon {
+
+	top: -2px;
+
+	display:inline-block;
+
+}
+.getmeout-link span i {
+  top: 0px;
+}
+
+.rooms-topbar label i{
+
+	top:2px;
+
+}
+
+.remember-check label {
+
+	display:inline-block;
+
+	position:relative;
+
+	top:1px;
+
+}
+
+/*.logo-main  span {
+
+	padding-top:12px;
+
+}	*/
+
+.ht-left,
+
+.ht-right {
+
+	padding: 10px 0 7px;
+
+}
+
+.m-titlenav {
+
+	padding: 12px 10px 9px;
+
+}
+
+.m-hover-nav li a {
+
+	padding: 6px 10px 4px;
+
+}
+
+/*.deal-of-day img {
+
+	max-height: 437px;
+
+	min-height: 437px;
+
+}*/
+
+.hb-center .control-field,
+
+.hb-center .staying-days .control-field {
+
+	padding-top:2px;
+
+	padding-bottom:0;
+
+	line-height:inherit;
+
+}
+
+.ht-right li a.icon-key {
+
+   /* background-image: url(../images/key.png);*/
+
+    background-position: 0 14px;
+
+}
+
+.ht-right {
+
+    padding-top: 0;
+
+	padding-bottom:0;
+
+}
+
+.ht-right ul li a {
+
+    padding-top: 12px;
+
+}
+
+.ht-right li a.icon-globe {
+
+    /*background-image: url(../images/globe.png);*/
+
+    background-position: 0 10px;
+
+}
+
+.left-check-title .rating-check {
+	top: 0;
+}
+.travelers-container-left li#logout a span svg,
+.travelers-container-left li#profile a span svg,
+body.mac .travelers-container-left li#logout a span svg,
+body.mac .travelers-container-left li#profile a span svg{
+	top: 3px;
+}
+
+
+.travelers-container-left li#Trip a span svg,
+.travelers-container-left li#password a span svg,
+.travelers-container-left li#history a span svg,
+.travelers-container-left li#billing a span svg,
+body.mac .travelers-container-left li#Trip a span svg,
+body.mac .travelers-container-left li#password a span svg,
+body.mac .travelers-container-left li#history a span svg,
+body.mac .travelers-container-left li#billing a span svg{
+	position: relative;
+	top: 2px;
+}
+body.mac .travelers-container-left ul li a em {
+	top: 0px;
+}
+body.mac .travelers-container-left li#profile a em{
+	top: 1px;
+}
+body.mac .travelers-container-left ul li#travelers a em{
+	top:1px;
+}
+.travelers-container-left li#travelers a span svg,
+body.mac .travelers-container-left li#travelers a span svg{
+	top: 3px;
+}
+body.mac .travelers-container-left li#Trip a em,
+body.mac .travelers-container-left li#password a em,
+body.mac .travelers-container-left li#reservation a em,
+body.mac .travelers-container-left li#history a em,
+body.mac .travelers-container-left li#logout a em{
+	top: 1px;
+}
