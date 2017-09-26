@@ -1,0 +1,1 @@
+[08-Nov-2016 04:48:10 CST6CDT] PHP Fatal error:  Call to undefined function env() in /home/travel37/public_html/travellinked/application/config/database.php on line 29
