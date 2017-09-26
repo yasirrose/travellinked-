@@ -50,8 +50,7 @@ class SearchController extends Controller
 
     /*========================== end function for not found response ======================*/
     /*========================== function for searching hotels ===========================*/
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $currentUrl = "";
         $search_name = $request->input("location_name");
         $flag = $request->input("sflag");
@@ -77,18 +76,14 @@ class SearchController extends Controller
         /*====== search by location ========*/
 
         $hGroup = "";
-        if($search2 != "" && $flag == "hotelgroupname")
-        {
+        if($search2 != "" && $flag == "hotelgroupname") {
             $hGroup = DB::table("tblhotelgroupcodes")->select("hotelgroupcode","hotelgroupname")->where('hotelgroupcode',$search2)->first();
-        }
-        elseif($search2 == "")
-        {
+        } elseif($search2 == "") {
             $city = DB::table("hotel")->select("hotelCode","cityCode","stateCode","state","city")
                 ->where('city','LIKE',$search_name.'%')
                 ->orWhere('name','LIKE',$search_name.'%')
                 ->orWhere('state','LIKE',$search_name.'%')->first();
-        }
-        else {
+        } else {
             $city = DB::table("hotel")->select("hotelCode","cityCode","stateCode","state","city")->where('hotelCode','=',$search2)->orWhere('cityCode','=',$search2)->first();
         }
         $Arr_age = array();
@@ -101,77 +96,46 @@ class SearchController extends Controller
             $Arr_adlt[] = $_GET[$adlt];
             $chlds = "children_".$j;
             $Arr_child[] = $_GET[$chlds];
-            if($request->input("children_".$i) != 0 )
-            {
+            if($request->input("children_".$i) != 0 ) {
                 $age[$i] = "";
                 $ch = $_GET["children_".$i];
-                for($n = 1; $n <= $ch; $n++)
-                {
+                for($n = 1; $n <= $ch; $n++) {
                     $ages = "children_".$i."_age_".$n;
                     $Arr_age['room'.$i][] = $_GET[$ages];
                     $age[$i] .= '<childAge>'.$_GET[$ages].'</childAge>';
                 }
             }
-            if(isset($age[$i]))
-            {
-
+            if(isset($age[$i])) {
                 $xml .= '<roomInfo>
-
 				<roomTypeId>0</roomTypeId>
-
 				<bedTypeId>0</bedTypeId>
-
 				<adultsNum>'.$_GET[$adlt].'</adultsNum>
-
 				<childNum>'.$_GET[$chlds].'</childNum>
-
 				<childAges>'.$age[$i].'</childAges>
-
 				</roomInfo>';
-            }
-
-            else
-
-            {
-
+            } else {
                 $xml .= '<roomInfo>
-
 				<roomTypeId>0</roomTypeId>
-
 				<bedTypeId>0</bedTypeId>
-
 				<adultsNum>'.$_GET[$adlt].'</adultsNum>
-
 				<childNum>'.$_GET[$chlds].'</childNum>
-
 				<childAges>0</childAges>
-
 				</roomInfo>';
-
-
-
             }
-
         }
 
-        if($hGroup == "")
-        {
+        if($hGroup == "") {
             $hGroups = "";
-            if($city != null)
-            {
+            if($city != null) {
                 $currentUrl = url('cities/'.str_replace(' ','-',$city->city).'/'.$city->cityCode);
                 $cCode = $city->cityCode;
                 $hCode = $city->hotelCode;
-            }
-            else
-            {
+            } else {
                 $cCode = -1;
                 $hCode = -1;
             }
             $newXml = '<?xml version="1.0" encoding="utf-8" ?>
-
 			<availabilityRequest cancelpolicy = "Y" hotelfees="Y">
-
 			<control>
 
 			<userName>'.$this->APiUser.'</userName>
@@ -241,8 +205,7 @@ class SearchController extends Controller
         $result = curl_exec($ch);
         $rawData = new \SimpleXMLElement($result);
         $errors = $rawData->xpath('//errors');
-        if(empty($rawData))
-        {
+        if(empty($rawData)) {
             return redirect()->to("500");
         }
         $request->session()->set("adults",array_sum($Arr_adlt));
@@ -252,65 +215,38 @@ class SearchController extends Controller
         $request->session()->set("childAgesArr",$Arr_age);
         $_SESSION["childs"] =  count($Arr_child);
         $request->session()->set("childsArr",$Arr_child);
-        if (count($errors) > 0)
-        {
+        if (count($errors) > 0) {
             $errors = json_decode(json_encode($errors), true);
-
-            if($flag == 'hotelgroupname')
-            {
+            if($flag == 'hotelgroupname') {
                 $message =  "Sorry about that. We couldn’t find any deals for selected <span>Area</span>";
-            }
-            else
-            {
-                if(empty($flag))
-                {
+            } else {
+                if(empty($flag)) {
                     $message =  "Sorry about that. We couldn’t find any deals for selected <span>City</span>";
-                }
-                else
-                {
+                } else {
                     $message =  "Sorry about that. We couldn’t find any deals for selected <span>".$flag."</span>";
-
                 }
-
             }
-
             $request->session()->set('msg', $message);
-
             return redirect()->to('no/inventory');
-        }
-        else
-        {
-
+        } else {
             $finalResult = $rawData->xpath('//hotelList/hotel');
             $Harr = json_decode(json_encode($finalResult), true);
             $Harr = Helper::removeElementsFromHotelArray($Harr);
-
             if(count($Harr)==0){
                 $request->session()->set('msg', 'All Rooms are on Request, Please search with differenct criteria');
                 return redirect()->to('no/inventory');
             }
             session()->put("hcode",array());
-
             $total_result = 0;
-
             /*============== loop to get stars and destinations count ===========================*/
-
             $starCount = array(
-
                 'star5' => 0,
-
                 'star4' => 0,
-
                 'star3' => 0,
-
                 'star2' => 0,
-
                 'star1' => 0
-
             );
-
             $dests = array();
-
             $destsCount = array();
 
             $allDest = "";

@@ -132,6 +132,8 @@ class HomeController extends Controller
 
         $sas = DB::table('tblbooking')->whereIn('hotelCode', $saveID)->update(['crond_job' => 1]);
     }
+
+    /*--------------------------Main Function for home Page ---------------- */
     public function index(Request $request){
         /*==== get most populor booked , destination and deals hotels from db====*/
         $activeDeals = DB::table('bonotel_deals')->take(21)->groupBy('HotelID')->inRandomOrder()->get();
@@ -258,7 +260,8 @@ class HomeController extends Controller
                 }
             }
             $dests[] = $dest;
-        }if($vertiflag < 2) {
+        }
+        if($vertiflag < 2) {
             for($i = 0; $i<count($allindexes); $i++) {
                 if(isset($dests[$allindexes[$i]])) {
                     if($vertiflag < 2) {
@@ -300,6 +303,7 @@ class HomeController extends Controller
         usort($dests, function($a, $b) {
             return $a['pos'] > $b['pos'];
         });
+        /*===========Most Papouler Deals section=========== */
         foreach($mostPopulor as $Populor) {
             $url1 = "http://api.bonotel.com/index.cfm/user/".$this->APiUser."/action/hotel/hotelCode/".$Populor->hotelCode;
             /****************** curl request to get hotel images ******************/
@@ -325,7 +329,7 @@ class HomeController extends Controller
             }
         }
         //For single deal of the week
-        $singDealx =' ';
+        $singDealx = 0;
         $singleDeal = DB::table('bonotel_deals')->take(1)->where('cronw_job','=',0)->first();
         $url2 = "http://api.bonotel.com/index.cfm/user/".$this->APiUser."/action/hotel/hotelCode/".$singleDeal->HotelID;
         /****************** curl request to get hotel images ******************/
@@ -341,7 +345,7 @@ class HomeController extends Controller
         if(empty($xmlhotels)) {
             return redirect()->to("500");
         }
-        if($singDealx==0){
+        if($singDealx == 0){
             $images[] = Helper::getHdImages($xmlhotels->hotel->hotelCode, $this->APiUser);
             $singDealx = $xmlhotels->hotel;
             $singDealx = json_decode(json_encode((array)$singDealx));

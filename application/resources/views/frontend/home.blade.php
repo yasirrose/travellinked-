@@ -1,469 +1,224 @@
 @extends('layouts.main')
 @section('content')
 <div class="search-loader" style="display:none;">
-
 @include('layouts.loader')
-
 </div>
-
    <?php
 $page = Route::getCurrentRoute()->getPath();
     if($page == "/" && (empty(session()->get('userLogin')) || session()->get('userLogin') == 0) ){ ?>
-
 <div class="body-section">
 <?php } else{ ?>
 <div class="body-section scf1123aa">
-
 <?php }    ?>
-    
-
     <div class="container">
-
         <div class="section-main-nav">
-
             <ul>
-
-                <li>
-
-                    <a href="#">Find a Deal</a>
-
-                </li>
-
-                <li>
-
-                    <a href="#">List Your Property</a>
-
-                </li>
-
-                <li>
-
-                    <a href="#">Travel Agents</a>
-
-                </li>
-
-                <li>
-
-                    <a href="#">Become an Affiliate</a>
-
-                </li>
-
-                <li>
-
-                    <a href="#">Travel Linked for Business</a>
-
-                </li>
-
+                <li><a href="#">Find a Deal</a></li>
+                <li><a href="#">List Your Property</a></li>
+                <li><a href="#">Travel Agents</a></li>
+                <li><a href="#">Become an Affiliate</a></li>
+                <li><a href="#">Travel Linked for Business</a></li>
             </ul>
-
             <div class="clear"></div>
-
         </div>
-
         <div class="section-main-1">
-
         <form action="{{url('search')}}" method="get" class="search-form">
-
             <div class="search-engine-box">
-
                 <h2>Get the Best Accommodation Deals</h2>
-
                 <p>Over 230,000 Hotels Worldwide all at <b>Unbeatable Rates</b></p>
-
                 <div class="search-engine-form">
-
                     <div class="search-engine-row">
-
                         <label>Where would you like to go?</label>
-
                         <div class="icon-control input-div">
-
                         <input type="hidden" name="id" id="input_hotel">
-
                         <input type="hidden" name="sflag" id="stype">
-
                         <input type="text" class="control-field search_hotel" autocomplete="off" name="location_name" placeholder="Enter destination, city or hotel name" id="locName">
                         <h4 id="error_locName" style="" class="error">This field is required</h4>
                         <span class="ion ion-ios-search"></span>
-
                         <div class="search-list-holder">
-
                             <datalist class="search_result"></datalist>
-
                         </div>
-
                         </div>
-
                     </div>
-
                     <div class="search-engine-row">
-
                         <div class="rows-3 psn-rlt">
-
                             <div class="w-180">
-
                                 <label>Check In</label>
-
                                 <div class="icon-control">
-
                                     <input type="text" id="datepicker_in" name="checkin" autocomplete="off" class="control-field" placeholder="mm/dd/yyyy">
-
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                     <div class="main_tooltip" style="display:none;"></div>
-
                                     <div id="error_datePicker" style="" class="error_datePicker">Please select checkIn properly</div>
-
                                 </div>
-
                             </div>
-
                             <div class="w-180">
-
                                 <label>Check Out</label>
-
                                 <div class="icon-control">
-
                                     <input type="text" id="datepicker_out" name="checkout" autocomplete="off" class="control-field" placeholder="mm/dd/yyyy">
-
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                     <div class="main_tooltip" style="display:none;"></div>
                                     <div id="error_datePicker" style="" class="error_datePicker">Please select checkout properly</div>
-
                                 </div>
-
                             </div>
-
                             <div class="w-54">
-
                                 <label>Nights</label>
-
                                 <div class="nights-select">
-
                                     <input type="text" class="control-field" id="nights" name="nights" placeholder="0" readonly="readonly">
-
                                 </div>
-
                             </div>
-
                             <input type="hidden" class="datepicker_in">
-
 							<div class="datepicker-container" id="main_date_container" style="display:none;"></div>
-
                             <div class="clear"></div>
-
                         </div>
-                   
-
-
                     </div>
-
                     <?php
-
 					for($mr = 1; $mr<=5; $mr++){
-
 					$style = "";
-
-					if($mr > 1)
-
-					{
-
+					if($mr > 1) {
 						$style = 'style="display:none"';
-
 					}
-
 					$curAges = array();
-
 					$children = '0 Children';
-
 					$childAgeStyle = 'style="display:none"';
-
-					for($a = 0; $a < 8; $a++)
-
-					{
-
+					for($a = 0; $a < 8; $a++) {
 						$childAgeStyle = 'style="display:none"';
-
 						$index = count($curAges);
-
 						$curAges[$index]['age'] = 0;
-
 						$curAges[$index]['style'] = 'disabled="disabled"';
-
 					}
-
 					?>
-
                     <div class="search-engine-row search-engine-row-display-hide" <?php echo $style ?>>
-
 						<?php if($mr == 1){ ?>
-
                             <div class="rows-3">
-
                                 <div class="w-100">
-
                                 <label>Rooms</label>
-
                                 <div class="icon-control">
-
                                     <select class="control-field" id="rooms_count" name="num_rooms">
-
                                         <option value="1" selected="selected">1 Room</option>
-
                                         <option value="2">2 Rooms</option>
-
                                         <option value="3">3 Rooms</option>
-
                                         <option value="4">4 Rooms</option>
-
                                         <option value="5">5 Rooms</option>
-
                                     </select>
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                 </div>
-
                             </div>
-
                             <?php }else{ ?>
-
                             <div class="rm-num-row">
-
                                 <div class="room-label">
-
                                     <label>Room <?php echo $mr ?></label>
-
                                 </div>
-
                             <?php } ?>
-
                             <div class="w-157">
-
                                 <label>Adults</label>
-
                                 <div class="icon-control">
-
                                     <select class="control-field" id="adultmain-<?php echo $mr ?>" name="adults_<?php echo $mr ?>">
-
                                          <option value="1">1 Adult</option>
-
                                          <option value="2" selected="selected">2 Adults</option>
-
                                          <option value="3">3 Adults</option>
-
                                          <option value="4">4 Adults</option>
-
                                          <option value="5">5 Adults</option>
-
                                     </select>
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                 </div>
-
                             </div>
-
                             <input type="hidden" name="total_child" class="total_child" />
-
                             <div class="w-157">
-
                                 <label>Children</label>
-
                                 <div class="icon-control">
-
                                     <select class="control-field total_children search-engine-child select-child-<?php echo $mr ?>" name="children_<?php echo $mr ?>" id="total_child_main<?php echo $mr ?>">
-
                                         <option value="">No Children</option>
-
                                         <option value="1">1 Child</option>
-
                                         <option value="2">2 Children</option>
-
                                         <option value="3">3 Children</option>
-
                                         <option value="4">4 Children</option>
-
                                         <option value="5">5 Children</option>
-
                                         <option value="6">6 Children</option>
-
                                         <option value="7">7 Children</option>
-
                                         <option value="8">8 Children</option>
-
                                     </select>
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                 </div>
-
                             </div>
-
                             <div class="clear"></div>
-
                         </div>
-
                         <div class="chldr-age-row Children-<?php echo $mr ?> total_child_main<?php echo $mr ?>_ages" <?php echo $childAgeStyle ?>>
-
                             <label>Children’s Ages (0 - 17)</label>
-
                             <div class="age-select-boxes">
-
                                 <div class="icon-control">
-
                                     <select class="control-field age-1" name="children_<?php echo $mr ?>_age_1" <?php echo $curAges[0]['style'] ?> id="childmain_<?php echo $mr ?>_ages_1">
-
                                         <option value=""></option>
-
                                         <option value="1">1</option>
-
                                         <option vlalue="2">2</option>
-
                                         <option value="3">3</option>
-
                                         <option value="4">4</option>
-
                                         <option value="5">5</option>
-
                                         <option value="6">6</option>
-
                                         <option value="7">7</option>
-
                                         <option value="8">8</option>
-
                                         <option value="9">9</option>
-
                                         <option value="10">10</option>
-
                                         <option value="11">11</option>
-
                                         <option value="12">12</option>
-
                                         <option value="13">13</option>
-
                                         <option value="14">14</option>
-
                                         <option value="15">15</option>
-
                                         <option value="16">16</option>
-
                                         <option value="17">17</option>
-
-
-
                                     </select>
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                 </div>
-
                                 <div class="icon-control">
-
                                     <select class="control-field age-2" name="children_<?php echo $mr ?>_age_2" <?php echo $curAges[1]['style'] ?> id="childmain_<?php echo $mr ?>_ages_2">
-
                                         <option value=""></option>
-
                                         <option value="1">1</option>
-
                                         <option vlalue="2">2</option>
-
                                         <option value="3">3</option>
-
                                         <option value="4">4</option>
-
                                         <option value="5">5</option>
-
                                         <option value="6">6</option>
-
                                         <option value="7">7</option>
-
                                         <option value="8">8</option>
-
                                         <option value="9">9</option>
-
                                         <option value="10">10</option>
-
                                         <option value="11">11</option>
-
                                         <option value="12">12</option>
-
                                         <option value="13">13</option>
-
                                         <option value="14">14</option>
-
                                         <option value="15">15</option>
-
                                         <option value="16">16</option>
-
                                         <option value="17">17</option>
-
                                     </select>
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                 </div>
-
                                 <div class="icon-control">
-
                                     <select class="control-field age-3" name="children_<?php echo $mr ?>_age_3" <?php echo $curAges[2]['style'] ?> id="childmain_<?php echo $mr ?>_ages_3">
-
                                         <option value=""></option>
-
                                         <option value="1">1</option>
-
                                         <option vlalue="2">2</option>
-
                                         <option value="3">3</option>
-
                                         <option value="4">4</option>
-
                                         <option value="5">5</option>
-
                                         <option value="6">6</option>
-
                                         <option value="7">7</option>
-
                                         <option value="8">8</option>
-
                                         <option value="9">9</option>
-
                                         <option value="10">10</option>
-
                                         <option value="11">11</option>
-
                                         <option value="12">12</option>
-
                                         <option value="13">13</option>
-
                                         <option value="14">14</option>
-
                                         <option value="15">15</option>
-
                                         <option value="16">16</option>
-
                                         <option value="17">17</option>
-
-
-
                                     </select>
-
                                     <span class="ion ion-arrow-down-b"></span>
-
                                 </div>
-
                                 <div class="icon-control">
-
                                     <select class="control-field age-4" name="children_<?php echo $mr ?>_age_4" <?php echo $curAges[3]['style'] ?> id="childmain_<?php echo $mr ?>_ages_4">
-
                                         <option value=""></option>
-
                                         <option value="1">1</option>
-
                                         <option vlalue="2">2</option>
-
                                         <option value="3">3</option>
 
                                         <option value="4">4</option>

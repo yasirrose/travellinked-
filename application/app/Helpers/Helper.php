@@ -491,33 +491,26 @@ class Helper
         if(is_array($starRating)){
             $arr[0] = 0;
             $rating = "";
-        }
-        else
-        {
+        } else {
             $arr = preg_split('/(?<=[0-9])(?=[a-z]+)/i',$starRating);
             $rating = $starRating." Hotel";
         }
         if($arr[0] == 1 || $arr[0] == 1.5){
             $class = "one-star";
             $array['star1'] = $array['star1']+1;
-        }
-        elseif($arr[0] == 2 || $arr[0] == 2.5){
+        } elseif($arr[0] == 2 || $arr[0] == 2.5){
             $class = "two-star";
             $array['star2'] = $array['star2']+1;
-        }
-        elseif($arr[0] == 3 || $arr[0] == 3.5){
+        } elseif($arr[0] == 3 || $arr[0] == 3.5){
             $class = "three-star";
             $array['star3'] = $array['star3']+1;
-        }
-        elseif($arr[0] == 4 || $arr[0] == 4.5){
+        } elseif($arr[0] == 4 || $arr[0] == 4.5){
             $class = "four-star";
             $array['star4'] = $array['star4']+1;
-        }
-        elseif($arr[0] == 5 || $arr[0] == 5.5){
+        } elseif($arr[0] == 5 || $arr[0] == 5.5){
             $class = "five-star";
             $array['star5'] = $array['star5']+1;
         }
-
         return array($rating, $class, $array);
     }
 
