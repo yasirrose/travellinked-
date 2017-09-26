@@ -1,7 +1,5 @@
 @extends('layouts.main')
-
 @section('content')
-
 <div class="search-loader" style="display:none;">
 
 @include('layouts.loader')
