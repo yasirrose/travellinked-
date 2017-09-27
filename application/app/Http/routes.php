@@ -155,11 +155,7 @@ Route::group(['middleware' => ['siteauth']], function (){
         Route::get('reservations/{bookingID}/cancel', 'UserPreference@CancelBooking');
 
         Route::get('reservations/{bookingID}/viewBooking', 'UserPreference@viewBooking');
-        // Route::get('getFilteredReservation/{value}','UserPreference@getFilterOption');
-        // Route::get('getFilterDate/{data}','UserPreference@getFilterDateOption');
-        // Route::get('getSearchResult/{search}','UserPreference@getFilterSearchResult');
         Route::post('getSearchRecords','UserPreference@getFilterRecord');
-
         Route::get('getPDF/{bookingID}','UserPreference@generatePDF');
 
 

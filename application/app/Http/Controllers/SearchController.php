@@ -257,7 +257,6 @@ class SearchController extends Controller
             $maxPrice = 0;
             $minPrice = 0;
             foreach($Harr as $hotel) {
-//                dd($hotel);
                 $currMinDeal = array();
                 $currMinDeal = $hotel["roomInformation"];
 
@@ -289,7 +288,6 @@ class SearchController extends Controller
                 /*============================== rating section =================================*/
 
                 /*============================== making destinations section ========================*/
-                    // dd('abc',$dests[$hotel["city"]]);
                 if(isset($dests[$hotel["city"]])) {
                     $curDestArr = count($dests[$hotel["city"]]);
                     $dests[$hotel["city"]][$curDestArr] = $hotel["hotelCode"];
@@ -310,13 +308,9 @@ class SearchController extends Controller
             $minPrice = $minHotArray[0];
 
             /*============== end loop to get stars and destinations count =======================*/
-
             $total_result = count($Harr);
-
-
 //            $maxPrice = ceil($maxPrice/$nights);
 //            $minPrice = ceil($minPrice/$nights);
-            
             curl_close($ch);
 
             /*==== set search result in session for sort by function ====*/
@@ -365,9 +359,7 @@ class SearchController extends Controller
             {
 
                 return view('frontend.search',compact("hGroup","Harr","Harray","search_name",
-
                     "total_result","nights","facArr","facilityCount", "minPrice","starCount","dests","destsCount","allDest","facs","maxPrice","currentUrl"));
-
             }
 
         }
@@ -2983,7 +2975,6 @@ class SearchController extends Controller
         $resp = array();
 
         $Hotels = $request->session()->get('hotels');
-//        dd($Hotels);
         if($Hotels != null && count($Hotels) > 0)
 
         {
