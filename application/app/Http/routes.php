@@ -106,8 +106,6 @@ Route::group(['middleware' => ['siteauth']], function (){
 
     Route::get('filterByPrice', 'SearchController@filterByPrice');
 
-    Route::get('changeSearch', 'SearchController@changeSearch');
-
     Route::get('hotelFacilities', 'SearchController@hotelFacilities');
 
     Route::get('rooms', 'RoomController@hotelRooms');
