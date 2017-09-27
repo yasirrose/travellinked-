@@ -28,16 +28,16 @@ class SearchController extends Controller{
     /*========================== end function for not found response ======================*/
     /*========================== function for searching hotels ===========================*/
     public function search(Request $request){
-        $currentUrl = "";
-        $search_name = $request->input("location_name");
-        $flag = $request->input("sflag");
-        $check = $request->input("checkin");
-        $checko = $request->input("checkout");
-        $checkInObj = new \DateTime($check);
-        $checkOutObj = new \DateTime($checko);
-        $checkin = $checkInObj->format('d-M-Y');
-        $checkout = $checkOutObj->format('d-M-Y');
-        $search2 = $request->input("id");
+        $currentUrl             = "";
+        $search_name            = $request->input("location_name");
+        $flag                   = $request->input("sflag");
+        $check                  = $request->input("checkin");
+        $checko                 = $request->input("checkout");
+        $checkInObj             = new \DateTime($check);
+        $checkOutObj            = new \DateTime($checko);
+        $checkin                = $checkInObj->format('d-M-Y');
+        $checkout               = $checkOutObj->format('d-M-Y');
+        $search2                = $request->input("id");
 
         /*=== store these values for future usage =======*/
 
@@ -63,115 +63,95 @@ class SearchController extends Controller{
         } else {
             $city = DB::table("hotel")->select("hotelCode","cityCode","stateCode","state","city")->where('hotelCode','=',$search2)->orWhere('cityCode','=',$search2)->first();
         }
-        $Arr_age = array();
-        $Arr_child = array();
-        $Arr_adlt = array();
-        $xml = "";
-        $age = "";
+        $Arr_age        = array();
+        $Arr_child      = array();
+        $Arr_adlt       = array();
+        $xml            = "";
+        $age            = "";
         for($i = 1,$j =1; $i<= $request->input("num_rooms"); $i++,$j++) {
-            $adlt ="adults_".$i;
-            $Arr_adlt[] = $_GET[$adlt];
-            $chlds = "children_".$j;
-            $Arr_child[] = $_GET[$chlds];
+            $adlt           ="adults_".$i;
+            $Arr_adlt[]     = $_GET[$adlt];
+            $chlds          = "children_".$j;
+            $Arr_child[]    = $_GET[$chlds];
             if($request->input("children_".$i) != 0 ) {
                 $age[$i] = "";
                 $ch = $_GET["children_".$i];
                 for($n = 1; $n <= $ch; $n++) {
-                    $ages = "children_".$i."_age_".$n;
-                    $Arr_age['room'.$i][] = $_GET[$ages];
-                    $age[$i] .= '<childAge>'.$_GET[$ages].'</childAge>';
+                    $ages                   = "children_".$i."_age_".$n;
+                    $Arr_age['room'.$i][]   = $_GET[$ages];
+                    $age[$i]                .= '<childAge>'.$_GET[$ages].'</childAge>';
                 }
             }
             if(isset($age[$i])) {
                 $xml .= '<roomInfo>
-				<roomTypeId>0</roomTypeId>
-				<bedTypeId>0</bedTypeId>
-				<adultsNum>'.$_GET[$adlt].'</adultsNum>
-				<childNum>'.$_GET[$chlds].'</childNum>
-				<childAges>'.$age[$i].'</childAges>
-				</roomInfo>';
+                    <roomTypeId>0</roomTypeId>
+                    <bedTypeId>0</bedTypeId>
+                    <adultsNum>'.$_GET[$adlt].'</adultsNum>
+                    <childNum>'.$_GET[$chlds].'</childNum>
+                    <childAges>'.$age[$i].'</childAges>
+                    </roomInfo>';
             } else {
                 $xml .= '<roomInfo>
-				<roomTypeId>0</roomTypeId>
-				<bedTypeId>0</bedTypeId>
-				<adultsNum>'.$_GET[$adlt].'</adultsNum>
-				<childNum>'.$_GET[$chlds].'</childNum>
-				<childAges>0</childAges>
-				</roomInfo>';
+				    <roomTypeId>0</roomTypeId>
+                    <bedTypeId>0</bedTypeId>
+                    <adultsNum>'.$_GET[$adlt].'</adultsNum>
+                    <childNum>'.$_GET[$chlds].'</childNum>
+                    <childAges>0</childAges>
+                    </roomInfo>';
             }
         }
-
         if($hGroup == "") {
             $hGroups = "";
             if($city != null) {
                 $currentUrl = url('cities/'.str_replace(' ','-',$city->city).'/'.$city->cityCode);
-                $cCode = $city->cityCode;
-                $hCode = $city->hotelCode;
+                $cCode      = $city->cityCode;
+                $hCode      = $city->hotelCode;
             } else {
                 $cCode = -1;
                 $hCode = -1;
             }
             $newXml = '<?xml version="1.0" encoding="utf-8" ?>
-			<availabilityRequest cancelpolicy = "Y" hotelfees="Y">
-			<control>
-
-			<userName>'.$this->APiUser.'</userName>
-
-			<passWord>'.$this->ApiPassword.'</passWord>
-
-			</control>
-
-			<checkIn>'.$checkin.'</checkIn>
-
-			<checkOut>'.$checkout.'</checkOut>
-
-			<noOfRooms>'.$request->input("num_rooms").'</noOfRooms>
-
-			<noOfNights>'.$nights.'</noOfNights>
-
-			<country>US</country>';
-
-            if($flag == 'city' || empty($flag))
-            {
+                <availabilityRequest cancelpolicy = "Y" hotelfees="Y">
+                <control>
+                <userName>'.$this->APiUser.'</userName>
+                <passWord>'.$this->ApiPassword.'</passWord>
+                </control>
+                <checkIn>'.$checkin.'</checkIn>
+                <checkOut>'.$checkout.'</checkOut>
+                <noOfRooms>'.$request->input("num_rooms").'</noOfRooms>
+                <noOfNights>'.$nights.'</noOfNights>
+                <country>US</country>';
+            if($flag == 'city' || empty($flag)) {
                 $newXml .= '<city>'.$cCode.'</city>
 				<hotelCodes>
 				<hotelCode>0</hotelCode>
 				</hotelCodes>';
-            }
-            elseif($flag == 'hotel')
-            {
+            } elseif($flag == 'hotel') {
                 $newXml .= '<hotelCodes>
-				<hotelCode>'.$hCode.'</hotelCode>
-				</hotelCodes>';
+                    <hotelCode>'.$hCode.'</hotelCode>
+                    </hotelCodes>';
             }
-            $newXml.='<roomsInformation>'.$xml.'</roomsInformation>
-			</availabilityRequest>';
-        }
-        else
-        {
-            $hGroups = $hGroup->hotelgroupcode;
+            $newXml.='<roomsInformation>'.$xml.'</roomsInformation></availabilityRequest>';
+        } else {
+            $hGroups    = $hGroup->hotelgroupcode;
             $currentUrl = url('destinations/'.$hGroups.'/'.str_replace(' ','-',$search_name));
-            $newXml = '<?xml version="1.0" encoding="utf-8" ?>
-			<availabilityRequest cancelpolicy="Y" hotelfees="Y">
-			<control>
-			<userName>'.$this->APiUser.'</userName>
-			<passWord>'.$this->ApiPassword.'</passWord>
-			</control>
-			<checkIn>'.$checkin.'</checkIn>
-			<checkOut>'.$checkout.'</checkOut>
-			<noOfRooms>'.$request->input("num_rooms").'</noOfRooms>
-			<noOfNights>'.$nights.'</noOfNights>
-			<country>US</country>
-			<state/><hotelGroupCode>'.$hGroups.'</hotelGroupCode>
-			<hotelCodes>
-			<hotelCode>0</hotelCode>
-			</hotelCodes>';
-            $newXml .= '<roomsInformation>'.$xml.'</roomsInformation>
-
-			</availabilityRequest>';
-           
+            $newXml     = '<?xml version="1.0" encoding="utf-8" ?>
+			    <availabilityRequest cancelpolicy="Y" hotelfees="Y">
+                <control>
+                <userName>'.$this->APiUser.'</userName>
+                <passWord>'.$this->ApiPassword.'</passWord>
+                </control>
+                <checkIn>'.$checkin.'</checkIn>
+                <checkOut>'.$checkout.'</checkOut>
+                <noOfRooms>'.$request->input("num_rooms").'</noOfRooms>
+                <noOfNights>'.$nights.'</noOfNights>
+                <country>US</country>
+                <state/><hotelGroupCode>'.$hGroups.'</hotelGroupCode>
+                <hotelCodes>
+                <hotelCode>0</hotelCode>
+                </hotelCodes>';
+            $newXml .= '<roomsInformation>'.$xml.'</roomsInformation></availabilityRequest>';
         }
-        //$url = 'http://ws0.bonotel.com/bonotelapps/bonotel/reservation/GetAvailability.do';
         $url = $this->provider . "bonotelapps/bonotel/reservation/GetAvailability.do";
         $ch = curl_init();
         curl_setopt( $ch, CURLOPT_URL, $url );
@@ -179,9 +159,9 @@ class SearchController extends Controller{
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $newXml );
-        $result = curl_exec($ch);
-        $rawData = new \SimpleXMLElement($result);
-        $errors = $rawData->xpath('//errors');
+        $result     = curl_exec($ch);
+        $rawData    = new \SimpleXMLElement($result);
+        $errors     = $rawData->xpath('//errors');
         if(empty($rawData)) {
             return redirect()->to("500");
         }
@@ -207,8 +187,8 @@ class SearchController extends Controller{
             return redirect()->to('no/inventory');
         } else {
             $finalResult = $rawData->xpath('//hotelList/hotel');
-            $Harr = json_decode(json_encode($finalResult), true);
-            $Harr = Helper::removeElementsFromHotelArray($Harr);
+            $Harr        = json_decode(json_encode($finalResult), true);
+            $Harr        = Helper::removeElementsFromHotelArray($Harr);
             if(count($Harr)==0){
                 $request->session()->set('msg', 'All Rooms are on Request, Please search with differenct criteria');
                 return redirect()->to('no/inventory');
@@ -225,21 +205,15 @@ class SearchController extends Controller{
             );
             $dests = array();
             $destsCount = array();
-
             $allDest = "";
-
             $hCodes = array();
-
             $minHotArray = array();
             $maxPrice = 0;
             $minPrice = 0;
             foreach($Harr as $hotel) {
                 $currMinDeal = array();
                 $currMinDeal = $hotel["roomInformation"];
-
                 $rateInfo = array();
-                $minP = 0;
-                $maxP = 0;
                 foreach($currMinDeal as $deal){
                     if(!isset($deal['rateInformation'])){
                         $rateInfo[] = (int) str_replace(',', '',$currMinDeal['rateInformation']['totalRate']);
@@ -247,35 +221,27 @@ class SearchController extends Controller{
                     else{
                         $abc = $deal['rateInformation'];
                         $rateInfo[] = (int) str_replace(',', '', $abc['totalRate']);
-
                     }
                 }
-
                 $sortArray = sort($rateInfo);
                 $minHotArray[] = ($rateInfo[0])/($nights);
                 $hotel_code = $hotel["hotelCode"];
                 $hCodes[] = $hotel_code;
-
                 /*============================== rating section =================================*/
-
                 $class = "";
-
                 List($rating, $class, $starCount) = Helper::starChecker($hotel["starRating"], $starCount);
-
                 /*============================== rating section =================================*/
-
                 /*============================== making destinations section ========================*/
+                // dd('abc',$dests[$hotel["city"]]);
                 if(isset($dests[$hotel["city"]])) {
-                    $curDestArr = count($dests[$hotel["city"]]);
-                    $dests[$hotel["city"]][$curDestArr] = $hotel["hotelCode"];
-                    $destsCount[$hotel["city"]] = count($dests[$hotel["city"]]);
-                }
-                else
-                {
+                    $curDestArr                             = count($dests[$hotel["city"]]);
+                    $dests[$hotel["city"]][$curDestArr]     = $hotel["hotelCode"];
+                    $destsCount[$hotel["city"]]             = count($dests[$hotel["city"]]);
+                } else {
                     $curDestArr = 0;
                     $dests[$hotel["city"]][$curDestArr] = $hotel["hotelCode"];
-                    $destsCount[$hotel["city"]] = 1;
-                    $allDest .= $hotel["city"].",";
+                    $destsCount[$hotel["city"]]         = 1;
+                    $allDest                            .= $hotel["city"].",";
                 }
                 /*============================== making destinations section ========================*/
             }
@@ -283,68 +249,35 @@ class SearchController extends Controller{
             $sortArr = sort($minHotArray);
             $maxPrice = $minHotArray[count($minHotArray)-1];
             $minPrice = $minHotArray[0];
-
             /*============== end loop to get stars and destinations count =======================*/
             $total_result = count($Harr);
-//            $maxPrice = ceil($maxPrice/$nights);
-//            $minPrice = ceil($minPrice/$nights);
             curl_close($ch);
-
             /*==== set search result in session for sort by function ====*/
-
             $request->session()->set("hGroup",$dests);
-
             $request->session()->set("allCodes",$hCodes);
-
             $request->session()->set("destCount",$destsCount);
-
             $request->session()->set("allDest",$allDest);
-
             $request->session()->set("checkArea",$hGroups);
-
             $request->session()->set('starCount',$starCount);
-
             $request->session()->set('hotels', $Harr);
-
             $request->session()->set("imgCount",0);
-
             $request->session()->set("reqFlag",1);
-
             $request->session()->set("filterChanged",-1);
-
             $request->session()->set("filterCombinations",array());
-
             /*==== set result result in session ====*/
-
-            if($flag == 'hotel')
-
-            {
+            if($flag == 'hotel') {
                 $nameSlug = str_replace(' ','-',$Harr[0]['name']);
-
                 $stateSlug = str_replace(' ','-',$Harr[0]['stateProvince']);
-
                 $citySlug = str_replace(' ','-',$Harr[0]['city']);
-
                 $reUrl = url('deals').'/'.$stateSlug.'/'.$citySlug.'/'.$Harr[0]['hotelCode'];
-
                 return redirect($reUrl);
-
-            }
-
-            else
-
-            {
-
+            } else {
                 return view('frontend.search',compact("hGroup","Harr","Harray","search_name",
                     "total_result","nights","facArr","facilityCount", "minPrice","starCount","dests","destsCount","allDest","facs","maxPrice","currentUrl"));
             }
-
         }
-
     }
-
     /*========================== end function for searching hotels =======================*/
-
     /*============ function for getting chunk of 10 records with applied filters ============*/
 
     public function loadFilterRecords(Request $request){

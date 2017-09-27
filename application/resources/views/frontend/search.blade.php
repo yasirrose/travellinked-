@@ -1,232 +1,109 @@
+{{dd(session()->all())}}
 @extends('layouts.inner_main')
-
 @section('content')
-
     <style>
-
         .outer-fac-filter{
-
             display:none;
-
         }
-
     </style>
-
     <?php
-
     $url = urlencode(Request::fullurl());
-
-
-
     ?>
-
     <div class="overlay">
-
         <div id="loading-img"></div>
-
     </div>
-
     <div class="body-section">
-
         <div class="container">
-
             <div class="search-container">
-
                 <div class="results-top-sect">
-
                     <div class="rt-left">
-
                         <span>Showing Results for</span>
-
                         <h4>{{session()->get("destination")}}</h4>
-
                         <p id="">{{$total_result}} Deals found</p>
-
                         <input type="hidden" id="totalDeals" value="{{$total_result}}"/>
-
                     </div>
-
                     <div class="rt-right">
-
                         <ul>
-
-                            <li>
-
-                                <a href="javascript:void(0)" class="policy-link">Question? (000) 000-000</a>
-
-                            </li>
-
-                            <li>
-
-                                <a href="javascript:void(0)" class="policy-link">Do I have to be a member to book?</a>
-
-                            </li>
-
-                            <li>
-
-                                <a href="javascript:void(0)" class="policy-link">What is the cancellation policy?</a>
-
-                            </li>
-
-                            <li>
-
-                                <a href="javascript:void(0)" class="policy-link">More...</a>
-
-                            </li>
-
+                            <li><a href="javascript:void(0)" class="policy-link">Question? (000) 000-000</a></li>
+                            <li><a href="javascript:void(0)" class="policy-link">Do I have to be a member to book?</a></li>
+                            <li><a href="javascript:void(0)" class="policy-link">What is the cancellation policy?</a></li>
+                            <li><a href="javascript:void(0)" class="policy-link">More...</a></li>
                         </ul>
-
                     </div>
-
                     <div class="clear"></div>
-
                 </div>
-
-
                 <div class="results-btm-sect">
-
                     <div class="search-container-left">
-
                         <h3>Filter By <a href="javascript:void(0)" class="clear-search" onclick="window.location.reload()">Clear all</a></h3>
-
                         <div class="sidebar-panel" id="appendStars">
-
                             <h4>Star Rating</h4>
-
                             <div class="sidebar-content">
-
                                 <ul>
-
                                     <li>
-
                                         <div class="rating-check">
-
                                             <input type="checkbox" id="star-5start" value="5star" class="star-filter">
-
                                             <i class="icon ion-checkmark-round"></i>
-
                                         </div>
-
                                         <div class="rating-stars">
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                         </div>
-
                                         <span class="star-qty" ><?php echo $starCount['star5'] ?></span>
-
                                     </li>
-
                                     <li>
-
                                         <div class="rating-check">
-
                                             <input type="checkbox" name="rate[]" id="star-4start" value="4star" class="star-filter">
-
                                             <i class="icon ion-checkmark-round"></i>
-
                                         </div>
-
                                         <div class="rating-stars">
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                         </div>
-
                                         <span class="star-qty" ><?php echo $starCount['star4'] ?></span>
-
                                     </li>
-
                                     <li>
-
                                         <div class="rating-check">
-
                                             <input type="checkbox" name="rate[]" id="star-3start" value="3star" class="star-filter">
-
                                             <i class="icon ion-checkmark-round"></i>
-
                                         </div>
-
                                         <div class="rating-stars">
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                         </div>
-
                                         <span class="star-qty" ><?php echo $starCount['star3'] ?></span>
-
                                     </li>
-
                                     <li>
-
                                         <div class="rating-check">
-
                                             <input type="checkbox" name="rate[]" id="star-2start" value="2star" class="star-filter">
-
                                             <i class="icon ion-checkmark-round"></i>
-
                                         </div>
-
                                         <div class="rating-stars">
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                         </div>
-
                                         <span class="star-qty" ><?php echo $starCount['star2'] ?></span>
-
                                     </li>
-
                                     <li>
-
                                         <div class="rating-check">
-
                                             <input type="checkbox" name="rate[]" id="star-1start" value="1star" class="star-filter">
-
                                             <i class="icon ion-checkmark-round"></i>
-
                                         </div>
-
                                         <div class="rating-stars">
-
                                             <i class="icon ion-android-star"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                             <i class="icon ion-android-star empty"></i>
-
                                             <i class="icon ion-android-star empty"></i>
 
                                             <i class="icon ion-android-star empty"></i>

@@ -48,7 +48,7 @@
 
                 <div class="icon-control">
 
-                    <select class="control-field" id="rooms_change" name="total_rooms">
+                    <select class="control-field" id="rooms_change" name="num_rooms">
 
                         <option value="1" selected="selected">1 Room</option>
 

@@ -1,18 +1,10 @@
-<?php
-
-	$code = session()->get("code");
-
-	$flag = session()->get("srcFlage");
-
-?>
-
-<form action="{{url('changeSearch')}}" method="get" class="sticky-form">
+<form action="{{url('search')}}" method="get" class="sticky-form">
 
     <input type="hidden" id="nightsSticky" name="nights" value="{{session()->get('nights')}}">
 
-    <input type="hidden" name="id" id="input_hotelSticky" value="<?php echo $code; ?>">
+    <input type="hidden" name="id" id="input_hotelSticky" value="{{session()->get("code")}}">
 
-    <input type="hidden" name="sflag" id="stypeSticky" value="<?php echo $flag; ?>">
+    <input type="hidden" name="sflag" id="stypeSticky" value="{{session()->get("srcFlage")}}">
 
     <div class="destination-autofill input-div">
 
@@ -22,11 +14,11 @@
 
     <div class="search-list-holder-sticky"> <datalist class="search_result_sticky" style="width:auto !important;"></datalist></div>
 
-    <?php if(session()->has("serchBack")){ ?>
+    @if(session()->has("serchBack"))
 
-    <span style="color:red;"><?php echo session()->get("serchBack"); ?></span>   
+    <span style="color:red;">{{ session()->get("serchBack")}}</span>
 
-    <?php }?>
+    @endif
 
     </div>
 

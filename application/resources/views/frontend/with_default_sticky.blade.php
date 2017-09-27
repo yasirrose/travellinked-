@@ -1,4 +1,4 @@
-<form action="{{url('changeSearch')}}" method="get" class="sticky-form">
+<form action="{{url('search')}}" method="get" class="sticky-form">
 
     <input id="nightsSticky" name="nights" type="hidden">
 

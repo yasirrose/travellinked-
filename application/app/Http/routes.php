@@ -70,17 +70,19 @@ Route::group(['middleware' => ['siteauth']], function (){
     Route::get('verify_email/{confirmation_code}','RegisterController@verifyUser');
     Route::post('submitForm', 'RegisterController@RegisterUser');
     Route::post('afterRegister','RegisterController@ConfiremAccountByEmail');
-    
+
+    /*Home page*/
     Route::get('/', 'HomeController@index');
+    /*Search functionality*/
     Route::get('search', 'SearchController@search');
+    Route::get('no/inventory', 'SearchController@Inventory_Not_Fount');
 
     /* -------- Tested by Zee ---------*/
-    /*Home page*/
+
 
     Route::post('getTDeals','HomeController@getTDeals');
     Route::get('search_hotels', 'HomeController@search_hotels');
     Route::get('checkLocation', 'HomeController@checkLocation');
-    Route::get('no/inventory', 'SearchController@Inventory_Not_Fount');
     Route::get('hotelNames', 'SearchController@getHotelNames');
     Route::get('hotelFacs', 'SearchController@getHotelFacs');
     Route::get('hotelImages', 'SearchController@loadFilterRecords');
