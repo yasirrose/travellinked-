@@ -2575,71 +2575,38 @@ class SearchController extends Controller{
         $codesList = implode(',',$codes);
         $allHotels = DB::select("SELECT DISTINCT(MFC.facility_name),MFC.facility_name_code from tblfacilities AS MFC where MFC.hotel_id IN (".$codesList.")");
         $html .='<h4>Amenities</h4>
-		<div class="sidebar-content">
-		<ul>
-
-		<li>
-
-		<div class="rating-check">
-
-		<input type="checkbox" id="common-srch" class="fac-filter">
-
-		<i class="icon ion-checkmark-round"></i>
-
-		</div>
-
-		<div class="rating-stars">
-
-		<span>All amenities</span>
-
-		</div>
-
-		</li>';
-
-        foreach($allHotels as $fac)
-
-        {
-
+            <div class="sidebar-content">
+            <ul>
+            <li>
+            <div class="rating-check">
+            <input type="checkbox" id="common-srch" class="fac-filter">
+            <i class="icon ion-checkmark-round"></i>
+            </div>
+            <div class="rating-stars">
+            <span>All amenities</span>
+            </div>
+            </li>';
+        foreach($allHotels as $fac) {
             $curFac = $fac->facility_name_code;
-
             $facsCount = DB::select("SELECT COUNT(*) AS fac_count from tblfacilities AS FC WHERE FC.facility_name_code = '$curFac' AND FC.hotel_id IN (".$codesList.")");
-
             $html .='<li class="outer-fac-filter">
-
-			<div class="rating-check">
-
-			<input type="checkbox" class="fac-filter" id="'.$fac->facility_name_code.'">
-
-			<i class="icon ion-checkmark-round"></i>
-
-			</div>
-
-			<div class="rating-stars">
-
-			<span>'.$fac->facility_name.'</span>
-
-			</div>
-
-			<span class="star-qty" >'.$facsCount[0]->fac_count.'</span>
-
-			</li>';
-
+                <div class="rating-check">
+                <input type="checkbox" class="fac-filter" id="'.$fac->facility_name_code.'">
+                <i class="icon ion-checkmark-round"></i>
+                </div>
+                <div class="rating-stars">
+                <span>'.$fac->facility_name.'</span>
+                </div>
+                <span class="star-qty" >'.$facsCount[0]->fac_count.'</span>
+                </li>';
         }
-
         $html .='</ul>
-
-        <a class="see-more" href="javascript:void(0)" id="more-facs"><i class="icon ion-ios-arrow-thin-down"></i>See more</a>
-
-        <a class="see-more" href="javascript:void(0)" id="less-facs" style="display:none;">
-
-        <i class="icon ion-ios-arrow-thin-up"></i>See less</a>
-
-		</div>';
-
+            <a class="see-more" href="javascript:void(0)" id="more-facs"><i class="icon ion-ios-arrow-thin-down"></i>See more</a>
+            <a class="see-more" href="javascript:void(0)" id="less-facs" style="display:none;">
+            <i class="icon ion-ios-arrow-thin-up"></i>See less</a>
+            </div>';
         echo json_encode($html);
-
         exit;
-
     }
 
     /*========= end function to get hotel facilities for search page =================*/

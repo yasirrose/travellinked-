@@ -76,6 +76,9 @@ Route::group(['middleware' => ['siteauth']], function (){
     /*Search functionality*/
     Route::get('search', 'SearchController@search');
     Route::get('no/inventory', 'SearchController@Inventory_Not_Fount');
+    Route::get('hotelImages', 'SearchController@loadFilterRecords');
+    Route::get('hotelNames', 'SearchController@getHotelNames');
+    Route::get('hotelFacs', 'SearchController@getHotelFacs');
 
     /* -------- Tested by Zee ---------*/
 
@@ -83,9 +86,7 @@ Route::group(['middleware' => ['siteauth']], function (){
     Route::post('getTDeals','HomeController@getTDeals');
     Route::get('search_hotels', 'HomeController@search_hotels');
     Route::get('checkLocation', 'HomeController@checkLocation');
-    Route::get('hotelNames', 'SearchController@getHotelNames');
-    Route::get('hotelFacs', 'SearchController@getHotelFacs');
-    Route::get('hotelImages', 'SearchController@loadFilterRecords');
+
     Route::get('deals/{city}/{id}','DealsController@goToHotelLandingPage');
     Route::get('viewHotel/{city}/{id}','DealsController@ViewHotel');
 

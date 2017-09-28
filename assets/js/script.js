@@ -9,7 +9,6 @@ $(window).load(function() {
 $(document).ready(function(e) {
 
 
-
     var destsCheker = false;
 
     var requestFlag = true;
@@ -66,8 +65,6 @@ $(document).ready(function(e) {
 
     }
 
-
-
     function dateADD(currentDate)
 
     {
@@ -111,7 +108,6 @@ $(document).ready(function(e) {
     }
 
 
-
     function nights()
 
     {
@@ -141,7 +137,6 @@ $(document).ready(function(e) {
     }
 
     /*================ end functions for date calculations and others ==============*/
-
     /*====================== home page search box script here ======================*/
 
     currentDate = '';
@@ -602,8 +597,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $('#datepicker_in').on('focus',function(event){
 
         currCalendar = 'datepicker_in';
@@ -720,9 +713,6 @@ $(document).ready(function(e) {
         }
     });
 
-
-
-
     $(document).on("click", ".selected_value", function(){
 
         var value = $(this).text();
@@ -740,7 +730,6 @@ $(document).ready(function(e) {
         $('.search_result').hide();
 
     });
-
 
 
     $(document).on('change','.control-field',function(event){
@@ -852,7 +841,6 @@ $(document).ready(function(e) {
         }
 
     });
-
 
 
     $(".search-form").validate({
@@ -1020,8 +1008,6 @@ $(document).ready(function(e) {
     });
 
     /*====================== end home page search box script here ======================*/
-
-
 
     /*====================== sticky header search box script here ======================*/
 
@@ -1532,8 +1518,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $('#datepicker_in_sticky').on('focus',function(event){
 
         currCalendar = '#datepicker_in_sticky';
@@ -1687,8 +1671,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $(document).on("click", ".selected_value_sticky", function(){
 
         var value = $(this).text();
@@ -1706,8 +1688,6 @@ $(document).ready(function(e) {
         $('.search_result_sticky').hide();
 
     });
-
-
 
     $(".sticky-form").validate({
 
@@ -1984,54 +1964,6 @@ $(document).ready(function(e) {
 
     /*====================== end sticky header search box script here ======================*/
 
-
-
-    /*$('.top_deal_offerbox:first').addClass('current');
-
-     $('.result_row:first').addClass('current');
-
-     $("#list_view").click(function() {
-
-     $(".list_data").css("display", "block");
-
-     $(".grid_data").css("display", "none");
-
-     $('.bar i').addClass('icon_ative');
-
-     $('.bar_grid i').removeClass('icon_ative');
-
-     });
-
-     $("#grid_view").click(function() {
-
-     $(".list_data").css("display", "none");
-
-     $(".grid_data").css("display", "block");
-
-     $('.bar i').removeClass('icon_ative');
-
-     $('.bar_grid i').addClass('icon_ative');
-
-     });
-
-
-
-     $('ul.tabs li').click(function () {
-
-     var tab_id = $(this).attr('data-tab');
-
-     $('ul.tabs li').removeClass('current');
-
-     $('.tab-content').removeClass('current');
-
-     $(this).addClass('current');
-
-     $('.' + tab_id).addClass('current');
-
-     });*/
-
-
-
     size_li = $(".result_row").size();
 
     x=3;
@@ -2072,28 +2004,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
-
-
-    /*$(window).bind("pageshow", function() {
-
-     $(".search-loader").css("display","none");
-
-     var page = window.location.pathname;
-
-     if(page == "/travellinked/"){
-
-     $(".search-form")[0].reset();
-
-     }
-
-     });*/
-
-
-
-
-
     $(window).click(function (event) {
 
         $('.search_result').hide();
@@ -2127,8 +2037,6 @@ $(document).ready(function(e) {
         }
 
     });
-
-
 
     /********************** script for searech page filters **************************/
 
@@ -2312,8 +2220,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $(".stars").click(function(){
 
         sorterFlag = '.stars';
@@ -2374,10 +2280,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
-
-
     $(".hotels").click(function(){
 
         sorterFlag = '.hotels';
@@ -2437,8 +2339,6 @@ $(document).ready(function(e) {
         });
 
     });
-
-
 
     $(document).on("change",".star-filter",function(){
 
@@ -2519,10 +2419,6 @@ $(document).ready(function(e) {
 
 
     });
-
-
-
-
 
     $(document).on("change","#common-srch",function(){
 
@@ -2718,359 +2614,149 @@ $(document).ready(function(e) {
 
         "-" + $( "#slider-range" ).slider( "values", 1 ));
 
-
-
     /*==== End Ui Slider=====*/
 
-    if(strUrl.search("/search") !== -1 || strUrl.search("/changeSearch") !== -1 || strUrl.search("/destinations") !== -1
-
-        || strUrl.search("/cities") !== -1)
-
-    {
+    if(strUrl.search("/search") !== -1 || strUrl.search("/changeSearch") !== -1 || strUrl.search("/destinations") !== -1 || strUrl.search("/cities") !== -1) {
 
         /*=========== get facilities ============*/
-
         requestFlag = false;
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/hotelFacs",
-
             dataType : 'json',
-
             cache : false,
-
             async:true,
-
             success : function(data){
-
                 $('#Facilities').html(data);
-
                 var  size_facs = $(".outer-fac-filter").size();
-
                 x=6;
-
                 $('.outer-fac-filter:lt('+x+')').fadeIn();
-
                 $("#more-facs").show();
-
                 requestFlag = true;
-
-                if(requestFlag === true)
-
-                {
-
+                if(requestFlag === true) {
                     requestFlag = false;
-
                     checkAllFilters();
-
                     getSelectedFilters();
-
                     tickMarkSelectedFilters();
-
                     facsParam = facs;
-
                     starsParam = stars;
-
                     destsParam = dests;
-
                     if(facs.length == 0){
-
                         facsParam = 0;
-
                     }
-
                     if(stars.length == 0){
-
                         starsParam = 0;
-
                     }
-
                     if(dests.length == 0){
-
                         destsParam = 0;
-
                     }
 
                     $.ajax({
-
                         type : "GET",
-
                         url : site_url + "/hotelImages",
-
                         data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
                         dataType : 'json',
-
                         cache : false,
-
                         async:false,
-
                         success : function(data){
-
                             var classCount = $('.'+data.identity).length;
-
-                            if(classCount <= 0)
-
-                            {
-
+                            if(classCount <= 0) {
                                 $(".filter-data").html(data.msg);
-
                                 requestFlag = true;
-
                                 lastIndex = data.lastindex;
-
                                 tickMarkSelectedFilters();
-
-                            }
-
-                            else
-
-                            {
-
+                            } else {
                                 $(".filter-data").append(data.msg);
-
                                 requestFlag = true;
-
                                 lastIndex = data.lastindex;
-
                                 tickMarkSelectedFilters();
-
                             }
-
                             $(".search-loader").hide();
-
                         }
-
                     });
-
                 }
-
             }
-
         });
-
         /*=========== get facilities ============*/
-
         $(document).scroll(function() {
-
             if ($(window).scrollTop()+1 >= $(document).height() - $(window).height()) {
-
-                if(requestFlag === true)
-
-                {
-
+                if(requestFlag === true) {
                     requestFlag = false;
-
                     getSelectedFilters();
-
                     tickMarkSelectedFilters();
-
                     facsParam = facs;
-
                     starsParam = stars;
-
                     destsParam = dests;
-
                     if(facs.length == 0){
-
                         facsParam = 0;
-
                     }
-
                     if(stars.length == 0){
-
                         starsParam = 0;
-
                     }
-
                     if(dests.length == 0){
-
                         destsParam = 0;
-
                     }
-
-                    if(lastIndex < totalDeals)
-
-                    {
-
+                    if(lastIndex < totalDeals) {
                         ShowProgress();
-
                         $.ajax({
-
                             type : "GET",
-
                             url : site_url + "/hotelImages",
-
                             data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
                             dataType : 'json',
-
                             cache : false,
-
                             async:true,
-
                             success : function(data){
-
-                                if(data.error == 1)
-
-                                {
-
+                                if(data.error == 1) {
                                     var classCount = $('.'+data.identity).length;
-
                                     lastIndex = totalDeals;
-
-                                    if(classCount == 0)
-
-                                    {
-
+                                    if(classCount == 0) {
                                         $(".filter-data").html('<h3>No records found</h3>');
-
-                                    }
-
-                                    else
-
-                                    {
-
+                                    } else {
                                         $("#textMsg").html("No more items to load!");
-
                                     }
-
                                     tickMarkSelectedFilters();
-
-                                }
-
-                                else if(data.error == 0)
-
-                                {
-
+                                } else if(data.error == 0) {
                                     var classCount = $('.'+data.identity).length;
-
                                     lastIndex = data.lastindex;
-
-                                    if(classCount <= 0)
-
-                                    {
-
-                                        if(sorterFlag == '.recommended')
-
-                                        {
-
+                                    if(classCount <= 0) {
+                                        if(sorterFlag == '.recommended') {
                                             $(".filter-data").html(data.msg);
-
                                             tickMarkSelectedFilters();
-
-                                        }
-
-                                        else
-
-                                        {
-
-                                            if(sorterFlag == '.sortByPrice')
-
-                                            {
-
+                                        } else {
+                                            if(sorterFlag == '.sortByPrice') {
                                                 getFlagResults('.sort_price','/sortByPrice');
-
-                                            }
-
-                                            else if(sorterFlag == '.stars')
-
-                                            {
-
+                                            } else if(sorterFlag == '.stars') {
                                                 getFlagResults('.sort_star','/sortByStars');
-
-                                            }
-
-                                            else if(sorterFlag == '.hotels')
-
-                                            {
-
+                                            } else if(sorterFlag == '.hotels') {
                                                 getFlagResults('.sort_hotels','/sortByHotelNames');
-
                                             }
-
                                         }
-
-                                    }
-
-                                    else
-
-                                    {
-
-                                        if(sorterFlag == '.recommended')
-
-                                        {
-
+                                    } else {
+                                        if(sorterFlag == '.recommended') {
                                             $(".filter-data").append(data.msg);
-
                                             tickMarkSelectedFilters();
-
-                                        }
-
-                                        else
-
-                                        {
-
-                                            if(sorterFlag == '.sortByPrice')
-
-                                            {
-
+                                        } else {
+                                            if(sorterFlag == '.sortByPrice') {
                                                 getFlagResults('.sort_price','/sortByPrice');
-
-                                            }
-
-                                            else if(sorterFlag == '.stars')
-
-                                            {
-
+                                            } else if(sorterFlag == '.stars') {
                                                 getFlagResults('.sort_star','/sortByStars');
-
-                                            }
-
-                                            else if(sorterFlag == '.hotels')
-
-                                            {
-
+                                            } else if(sorterFlag == '.hotels') {
                                                 getFlagResults('.sort_hotels','/sortByHotelNames');
-
                                             }
-
                                         }
-
                                     }
-
                                 }
-
                             }
-
                         }).done(function(){
-
                             HideProgress();
-
                             requestFlag = true;
-
                         });
-
-                    }
-
-                    else
-
-                    {
-
+                    } else {
                         requestFlag = true;
-
                     }
-
                 }
-
             }
-
         });
-
-
 
         function getFlagResults(appendClass,urlSegment)
 
@@ -3117,7 +2803,7 @@ $(document).ready(function(e) {
                 cache : false,
 
                 success : function(data){
-
+                    console.log();
                     tickMarkSelectedFilters();
 
                     $(appendClass).html(data);
@@ -3138,8 +2824,6 @@ $(document).ready(function(e) {
 
         }
 
-
-
         function ShowProgress(){
 
             $('#infscr-loading').show();
@@ -3147,8 +2831,6 @@ $(document).ready(function(e) {
             $("#textMsg").html("loading more items!");
 
         }
-
-
 
         $(document).on('click','.sidebar-content ul li',function(event){
 
@@ -3201,9 +2883,6 @@ $(document).ready(function(e) {
             }
 
         });
-
-
-
     }
 
     function getSelectedFilters()
@@ -3704,8 +3383,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $(document).on("click",".dest-filters",function(){
         debugger
 
@@ -3808,7 +3485,6 @@ $(document).ready(function(e) {
     });
 
 
-
     /*============ End script for filter by area=================*/
 
     /*=========script for load more facilities =================*/
@@ -3832,8 +3508,6 @@ $(document).ready(function(e) {
         }
 
     });
-
-
 
     $(document).on('click','#less-facs',function (){
 
@@ -3899,8 +3573,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $(document).on('change','.search-engine-child',function(event){
 
         var horizClass = $(this).attr('id');
@@ -3952,8 +3624,6 @@ $(document).ready(function(e) {
     });
 
     /*========= End script for displaying home page search box rooms ========*/
-
-
 
     /*========= script for displaying horizontal search box =================*/
 
@@ -4031,8 +3701,6 @@ $(document).ready(function(e) {
 
     });
 
-
-
     $(document).on('click','#addStickyRoom',function(event){
 
         event.preventDefault();
@@ -4066,7 +3734,6 @@ $(document).ready(function(e) {
         }
 
     });
-
 
     $(document).on('change','.adults-sticky',function(event){
 
@@ -4150,8 +3817,6 @@ $(document).ready(function(e) {
         //$('.engine-dropdown-row:lt('+horizVal+')').css('display','block');
 
     });
-
-
 
 
     $(document).on('change','.horiz-child',function(event){
@@ -4305,9 +3970,6 @@ $(document).ready(function(e) {
     }
 
     /*========= End script for displaying horizontal search box ===========*/
-
-
-
     /*========= Script for displaying toggle hotel list on destination box ========*/
 
     $(".m-titlenav-h").click(function(){
@@ -4318,19 +3980,13 @@ $(document).ready(function(e) {
 
     /*==== end script for displaying toggle hotel list on destination box ========*/
 
-
-
     $(document).on('click','.scroll-btn',function(){
 
         $(".popup-d-body").mCustomScrollbar("scrollTo","top");
 
     });
 
-
-
 }); /*===== Close ready function =======*/
-
-
 
 $(document).on("click", function () {
 

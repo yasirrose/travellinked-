@@ -1,4 +1,3 @@
-{{dd(session()->all())}}
 @extends('layouts.inner_main')
 @section('content')
     <style>
@@ -485,10 +484,6 @@
                                                 ?>
 
 
-                                                {{--<div class="right-align">$ <?php echo $perNight = round(App\Helpers\Helper::getCalculatedPrice($newrates)/$nights,2); ?><span>/night</span></div>--}}
-
-
-
 
                                             </div>
 
@@ -649,9 +644,7 @@
             $('.tab-list li a').on('click', function () {
                 $(".tab-list li").removeClass('active');
                 $(this).parent('li').addClass('active');
-
             });
         });
     </script>
-
 @endsection
