@@ -2722,60 +2722,6 @@ $(document).ready(function(e) {
 
     /*==== End Ui Slider=====*/
 
-
-
-    /*======== Login pop up ====*/
-
-    $(".login-link").click(function () {
-
-        $("body").addClass("popup-open");
-
-        $(".login-popup").addClass("open");
-
-    });
-
-    $(".close-btn").click(function () {
-
-        $("body").removeClass("popup-open");
-
-        $(".login-popup, .signup-popup, .forgot-popup, .reset-popup").removeClass("open");
-
-    });
-
-    $(".signup-link").click(function () {
-
-        $("body").addClass("popup-open");
-
-        $(".signup-popup").addClass("open");
-
-    });
-
-    $(".signup-to-login").click(function () {
-
-        $(".signup-popup").removeClass("open");
-
-        $(".login-popup").addClass("open");
-
-    });
-
-    $(".login-to-signup").click(function () {
-
-        $(".login-popup").removeClass("open");
-
-        $(".signup-popup").addClass("open");
-
-    });
-
-    $(".login-to-forgot").click(function () {
-
-        $(".login-popup").removeClass("open");
-
-        $(".forgot-popup").addClass("open");
-
-    });
-
-    /*========End Login pop up ====*/
-
     if(strUrl.search("/search") !== -1 || strUrl.search("/changeSearch") !== -1 || strUrl.search("/destinations") !== -1
 
         || strUrl.search("/cities") !== -1)
