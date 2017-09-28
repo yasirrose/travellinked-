@@ -272,8 +272,8 @@ class SearchController extends Controller{
                 $reUrl = url('deals').'/'.$stateSlug.'/'.$citySlug.'/'.$Harr[0]['hotelCode'];
                 return redirect($reUrl);
             } else {
-                return view('frontend.search',compact("hGroup","Harr","Harray","search_name",
-                    "total_result","nights","facArr","facilityCount", "minPrice","starCount","dests","destsCount","allDest","facs","maxPrice","currentUrl"));
+                return view('frontend.search',compact("hGroup","Harr","search_name",
+                    "total_result","nights","minPrice","starCount","dests","destsCount","allDest","maxPrice","currentUrl"));
             }
         }
     }
