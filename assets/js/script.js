@@ -630,89 +630,45 @@ $(document).ready(function(e) {
     });
 
     $(".search_hotel").keyup(function(){
-
-        $("#input_hotel").val("");
+       var abc = $("#input_hotel").val("");
         $("#locName").removeClass("error");
 // $('#error_locName').css('display', 'none');
-
         var value = $(this).val();
-
-
-
         var html = "";
         if(value.length>1){
             $.ajax({
-
                 type : "GET",
-
                 url : site_url + "/search_hotels",
-
                 data : {
-
                     name : value
-
                 },
-
                 dataType : 'json',
-
                 cache : false,
-
                 async:true,
-
                 success : function(data) {
-
                     var c = 0;
-
                     var co = 0;
-
                     $.each(data, function(i, value) {
-
                         $('.search_result').css("display", "block");
-
                         if(value.hotelgroupname){
-
                             html += "<span class='location-lable-"+i+"' style='display:none;'>Location</span>"+
-
                                 "<label class='selected_value' name='hotelgroupname' id='"+value.hotelgroupcode+"' value = '"+value.hotelgroupname+"'>" +value.hotelgroupname +"</label>";
-
                         }
-
                         if(value.city){
-
                             html += "<span class='city-lable-"+co+"' style='display:none;'>City</span>"+
-
                                 "<label class='selected_value' name='city' id ='"+value.cityCode+"' value = '"+value.city+"'>" +value.city +"</label>";
-
                             co++;
-
                         }if(value.name){
-
-
-
                             var count = c++;
-
                             html += "<span class='hotel-lable-"+count+"' style='display:none;'>Hotel</span>"+
-
                                 "<label class='selected_value' name='hotel' id='"+value.hotelCode+"' value = '"+value.name+"'>" +value.name +" (Hotel)</label>";
-
-
-
                         }
-
-
-
                     });
-
                     $('.search_result').html(html);
-
-
-
                 }
-
             });
         }
     });
-
     $(document).on("click", ".selected_value", function(){
 
         var value = $(this).text();
@@ -918,9 +874,7 @@ $(document).ready(function(e) {
             var rooms;
 
             rooms = $("#rooms_count").val();
-
             for(var i = 1; i<= rooms; i++){
-
                 var val = $("#adultmain-"+i).val();
 
                 var childVal = $("select[id=total_child_main"+i+"]").val();
@@ -2156,189 +2110,163 @@ $(document).ready(function(e) {
 
     });
 
-    $(".sortByPrice").click(function(){
 
-        sorterFlag = '.sortByPrice';
-
-        var check = $(".sort_price .check-price").text();
-
-        $(".overlay").show();
-
-        getSelectedFilters();
-
-        tickMarkSelectedFilters();
-
-        facsParam = facs;
-
-        starsParam = stars;
-
-        destsParam = dests;
-
-        if(facs.length == 0){
-
-            facsParam = 0;
-
-        }
-
-        if(stars.length == 0){
-
-            starsParam = 0;
-
-        }
-
-        if(dests.length == 0){
-
-            destsParam = 0;
-
-        }
-
-        $.ajax({
-
-            type : "GET",
-
-            url : site_url + "/sortByPrice",
-
-            data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
-            dataType : 'json',
-
-            cache : false,
-
-            success : function(data){
-
-                tickMarkSelectedFilters();
-
-                $(".overlay").hide();
-
-                $(".sort_price").html(data);
-
-            }
-
-        });
-
-
-
-    });
-
-    $(".stars").click(function(){
-
-        sorterFlag = '.stars';
-
-        $(".overlay").show();
-
-        getSelectedFilters();
-
-        tickMarkSelectedFilters();
-
-        facsParam = facs;
-
-        starsParam = stars;
-
-        destsParam = dests;
-
-        if(facs.length == 0){
-
-            facsParam = 0;
-
-        }
-
-        if(stars.length == 0){
-
-            starsParam = 0;
-
-        }
-
-        if(dests.length == 0){
-
-            destsParam = 0;
-
-        }
-
-        $.ajax({
-
-            type : "GET",
-
-            url : site_url + "/sortByStars",
-
-            dataType : 'json',
-
-            data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
-            cache : false,
-
-            success : function(data){
-
-                tickMarkSelectedFilters();
-
-                $(".overlay").hide();
-
-                $(".sort_star").html(data);
-
-            }
-
-        });
-
-    });
-
-    $(".hotels").click(function(){
-
-        sorterFlag = '.hotels';
-
-        $(".overlay").show();
-
-        getSelectedFilters();
-
-        tickMarkSelectedFilters();
-
-        facsParam = facs;
-
-        starsParam = stars;
-
-        destsParam = dests;
-
-        if(facs.length == 0){
-
-            facsParam = 0;
-
-        }
-
-        if(stars.length == 0){
-
-            starsParam = 0;
-
-        }
-
-        if(dests.length == 0){
-
-            destsParam = 0;
-
-        }
-
-        $.ajax({
-
-            type : "GET",
-
-            url : site_url + "/sortByHotelNames",
-
-            dataType : 'json',
-
-            data:{price:$("#amount").val()},
-
-            cache : false,
-
-            success : function(data){
-
-                tickMarkSelectedFilters();
-
-                $(".overlay").hide();
-
-                $(".sort_hotels").html(data);
-
-            }
-
-        });
-
-    });
+    // $(".sortByPrice").click(function(){
+    //     sorterFlag = '.sortByPrice';
+    //     var check = $(".sort_price .check-price").text();
+    //     $(".overlay").show();
+    //     getSelectedFilters();
+    //     tickMarkSelectedFilters();
+    //     facsParam = facs;
+    //     starsParam = stars;
+    //     destsParam = dests;
+    //
+    //     if(facs.length == 0){
+    //         facsParam = 0;
+    //     }
+    //     if(stars.length == 0){
+    //         starsParam = 0;
+    //     }
+    //     if(dests.length == 0){
+    //         destsParam = 0;
+    //     }
+    //     $.ajax({
+    //
+    //         type : "GET",
+    //
+    //         url : site_url + "/sortByPrice",
+    //
+    //         data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
+    //
+    //         dataType : 'json',
+    //
+    //         cache : false,
+    //
+    //         success : function(data){
+    //
+    //             tickMarkSelectedFilters();
+    //
+    //             $(".overlay").hide();
+    //
+    //             $(".sort_price").html(data);
+    //
+    //         }
+    //
+    //     });
+    //
+    //
+    //
+    // });
+    // $(".stars").click(function(){
+    //     sorterFlag = '.stars';
+    //     $(".overlay").show();
+    //     getSelectedFilters();
+    //     tickMarkSelectedFilters();
+    //     facsParam = facs;
+    //     starsParam = stars;
+    //     destsParam = dests;
+    //     if(facs.length == 0){
+    //         facsParam = 0;
+    //
+    //     }
+    //
+    //     if(stars.length == 0){
+    //
+    //         starsParam = 0;
+    //
+    //     }
+    //
+    //     if(dests.length == 0){
+    //
+    //         destsParam = 0;
+    //
+    //     }
+    //
+    //     $.ajax({
+    //
+    //         type : "GET",
+    //
+    //         url : site_url + "/sortByStars",
+    //
+    //         dataType : 'json',
+    //
+    //         data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
+    //
+    //         cache : false,
+    //
+    //         success : function(data){
+    //
+    //             tickMarkSelectedFilters();
+    //
+    //             $(".overlay").hide();
+    //
+    //             $(".sort_star").html(data);
+    //
+    //         }
+    //
+    //     });
+    //
+    // });
+    //
+    // $(".hotels").click(function(){
+    //
+    //     sorterFlag = '.hotels';
+    //
+    //     $(".overlay").show();
+    //
+    //     getSelectedFilters();
+    //
+    //     tickMarkSelectedFilters();
+    //
+    //     facsParam = facs;
+    //
+    //     starsParam = stars;
+    //
+    //     destsParam = dests;
+    //
+    //     if(facs.length == 0){
+    //
+    //         facsParam = 0;
+    //
+    //     }
+    //
+    //     if(stars.length == 0){
+    //
+    //         starsParam = 0;
+    //
+    //     }
+    //
+    //     if(dests.length == 0){
+    //
+    //         destsParam = 0;
+    //
+    //     }
+    //
+    //     $.ajax({
+    //
+    //         type : "GET",
+    //
+    //         url : site_url + "/sortByHotelNames",
+    //
+    //         dataType : 'json',
+    //
+    //         data:{price:$("#amount").val()},
+    //
+    //         cache : false,
+    //
+    //         success : function(data){
+    //
+    //             tickMarkSelectedFilters();
+    //
+    //             $(".overlay").hide();
+    //
+    //             $(".sort_hotels").html(data);
+    //
+    //         }
+    //
+    //     });
+    //
+    // });
 
     $(document).on("change",".star-filter",function(){
 
@@ -2759,43 +2687,24 @@ $(document).ready(function(e) {
         });
 
         function getFlagResults(appendClass,urlSegment)
-
         {
-
             getSelectedFilters();
-
             tickMarkSelectedFilters();
-
             facsParam = facs;
-
             starsParam = stars;
-
             destsParam = dests;
-
             if(facs.length == 0){
-
                 facsParam = 0;
-
             }
-
             if(stars.length == 0){
-
                 starsParam = 0;
-
             }
-
             if(dests.length == 0){
-
                 destsParam = 0;
-
             }
-
             $.ajax({
-
                 type : "GET",
-
                 url : site_url+urlSegment,
-
                 data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
 
                 dataType : 'json',
@@ -2805,31 +2714,22 @@ $(document).ready(function(e) {
                 success : function(data){
                     console.log();
                     tickMarkSelectedFilters();
-
                     $(appendClass).html(data);
-
                     HideProgress();
-
                     requestFlag = true;
-
                 }
-
             });
 
         }
 
         function HideProgress(){
-
             $('#infscr-loading').hide();
 
         }
 
         function ShowProgress(){
-
             $('#infscr-loading').show();
-
             $("#textMsg").html("loading more items!");
-
         }
 
         $(document).on('click','.sidebar-content ul li',function(event){
@@ -2886,327 +2786,139 @@ $(document).ready(function(e) {
     }
 
     function getSelectedFilters()
-
     {
-
         starElems   = $('.star-filter');
-
         facElems 	= $('.fac-filter');
-
         destElems   = $(".dest-count li").length;
-
-
-
         /*================= this script is to manage filter by area ======================*/
-
         dests = [];
-
         facs = [];
-
         stars = [];
-
         filterFlag = false;
-
-
-
         $(".dest-count li").find("input").each(function(i, val){
-
-            if($(this).prop("checked") === true)
-
-            {
-
+            if($(this).prop("checked") === true) {
                 $(this).prop("checked",true);
-
                 dests.push($(this).attr('id'));
-
                 filterFlag = true;
-
             }
-
             else
-
             {
-
                 $(this).prop("checked",false);
-
             }
-
         });
-
         /*================= Ens script to manage filter by area ======================*/
-
-
-
         for(i = 0; i< starElems.length; i++)
-
         {
-
             if($(starElems[i]).prop('checked'))
-
             {
-
                 $(starElems[i]).prop("checked",true);
-
                 stars.push($(starElems[i]).val());
-
                 filterFlag = true;
-
             }
-
             else
-
             {
-
                 $(starElems[i]).prop("checked",true);
-
             }
-
         }
-
         for(i = 0; i< facElems.length; i++)
-
         {
-
             if($(facElems[i]).prop('checked'))
-
             {
-
                 $(facElems[i]).prop("checked",true);
-
                 facs.push($(facElems[i]).attr('id'));
-
                 filterFlag = true;
-
             }
-
             else
-
             {
-
                 $(facElems[i]).prop("checked",false);
-
             }
-
         }
-
     }
-
-    function tickMarkSelectedFilters()
-
-    {
-
+    function tickMarkSelectedFilters() {
         starElems   = $('.star-filter');
-
         facElems 	= $('.fac-filter').not('#common-srch');
-
         /*================= this script is to manage filter by area ======================*/
-
         $(".dest-count li").find("input").each(function(i, val){
-
             var curElem = $(this).attr('id');
-
             var curFlag = 0;
-
-            for(j = 0; j<dests.length; j++)
-
-            {
-
-                if(curElem === dests[j])
-
-                {
-
+            for(j = 0; j<dests.length; j++) {
+                if(curElem === dests[j]) {
                     curFlag = curFlag+1;
-
                     break;
-
                 }
-
             }
-
-            if(curFlag > 0)
-
-            {
-
+            if(curFlag > 0) {
                 $(this).prop('checked',true);
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $(this).prop('checked',false);
-
             }
-
         });
-
         /*================= this script is to manage filter by area ======================*/
-
-
-
-        for(i = 0; i< starElems.length; i++)
-
-        {
-
+        for(i = 0; i< starElems.length; i++) {
             var curElem = $(starElems[i]).val();
-
             var curFlag = 0;
-
-            for(k = 0; k<stars.length; k++)
-
-            {
-
-                if(curElem === stars[k])
-
-                {
-
+            for(k = 0; k<stars.length; k++) {
+                if(curElem === stars[k]) {
                     curFlag = curFlag+1;
-
                     break;
-
                 }
-
             }
-
-            if(curFlag > 0)
-
-            {
-
+            if(curFlag > 0) {
                 $(starElems[i]).prop('checked',true);
-
-            }
-
-            else
-
-            {
-
+            } else {
                 $(starElems[i]).prop('checked',false);
-
             }
-
         }
-
         facCount = 0;
-
-        for(i = 0; i< facElems.length; i++)
-
-        {
-
+        for(i = 0; i< facElems.length; i++) {
             var curElem = $(facElems[i]).attr('id');
-
             var curFlag = 0;
-
-            for(l = 0; l<facs.length; l++)
-
-            {
-
-                if(curElem === facs[l])
-
-                {
-
+            for(l = 0; l<facs.length; l++) {
+                if(curElem === facs[l]) {
                     curFlag = curFlag+1;
-
                     break;
-
                 }
-
             }
-
             if(curFlag > 0)
-
             {
-
                 $(facElems[i]).prop('checked',true);
-
                 facCount = facCount+1;
-
-            }
-
-            else
-
+            } else
             {
-
                 $(facElems[i]).prop('checked',false);
-
             }
-
         }
-
-        if(facCount === facElems.length)
-
-        {
-
+        if(facCount === facElems.length) {
             $('#common-srch').prop('checked',true);
 
-        }
-
-        else
-
-        {
-
+        } else {
             $('#common-srch').prop('checked',false);
-
         }
-
     }
-
-    function setQueryStrings()
-
-    {
-
+    function setQueryStrings() {
         if($('#check_in').val() !== '' && $('#check_out').val() !== '')
-
         {
-
             var queryString = '';
-
             var chkIn = $('#check_in').val();
-
             var chkOut = $('#check_out').val();
-
             var urlRooms = $('#horiz_rooms').val();
-
             var queryString = '?checkin='+chkIn+'&checkout='+chkOut+'&rooms='+urlRooms;
-
-            for(var rl = 1;rl<=urlRooms;rl++)
-
-            {
-
+            for(var rl = 1;rl<=urlRooms;rl++) {
                 var urlAdultsName = $('#adultrooms-'+rl).attr('name');
-
                 var urlAdultsVal = $('#adultrooms-'+rl).val();
-
                 queryString = queryString+'&'+urlAdultsName+'='+urlAdultsVal;
-
                 var urlChildrenName = $('#total_child_rooms'+rl).attr('name');
-
                 var urlChildrenVal = $('#total_child_rooms'+rl).val()||0;
-
                 queryString = queryString+'&'+urlChildrenName+'='+urlChildrenVal;
-
-                for(var cl = 1;cl<=urlChildrenVal;cl++)
-
-                {
-
+                for(var cl = 1;cl<=urlChildrenVal;cl++) {
                     var urlAgeName = $('#childrooms_'+rl+'_ages_'+cl).attr('name');
-
                     var urlAgeVal = $('#childrooms_'+rl+'_ages_'+cl).val();
-
                     queryString = queryString+'&'+urlAgeName+'='+urlAgeVal;
-
                 }
-
             }
-
             window.history.pushState({},document.title,queryString);
-
         }
-
-        else
-
-        {
-
+        else {
             window.history.pushState({},document.title,'./');
 
         }
@@ -3384,8 +3096,6 @@ $(document).ready(function(e) {
     });
 
     $(document).on("click",".dest-filters",function(){
-        debugger
-
         $(".overlay").show();
 
         lastIndex = 0;
@@ -3453,27 +3163,14 @@ $(document).ready(function(e) {
             cache : false,
 
             success : function(response){
-
                 tickMarkSelectedFilters();
-
                 $(".overlay").hide();
-
-                if(response.msg == "")
-
-                {
-
+                if(response.msg == "") {
                     lastIndex = totalDeals;
-
                     $(".filter-data").html('<h3>No record found</h3>');
-
                 }
-
-                else
-
-                {
-
+                else {
                     lastIndex = response.lastindex;
-
                     $(".filter-data").html(response.msg);
 
                 }
@@ -3993,3 +3690,43 @@ $(document).on("click", function () {
     $(".ui-menu-item").hide();
 
 });
+function getFilterHotels(type) {
+    var filterTab = type.id;
+    $(".overlay").show();
+    getSelectedFilters();
+    tickMarkSelectedFilters();
+    facsParam = facs;
+    starsParam = stars;
+    destsParam = dests;
+
+    if(facs.length == 0){
+        facsParam = 0;
+    }
+    if(stars.length == 0){
+        starsParam = 0;
+    }
+    if(dests.length == 0){
+        destsParam = 0;
+    }
+    $.ajax({
+
+        type : "GET",
+        url : site_url + "/sortByTab",
+        data:{price:$("#amount").val(),
+            filters:filterFlag,
+            facss:facsParam,
+            destss:destsParam,
+            starss:starsParam,
+            filterTab:filterTab
+        },
+        dataType : 'json',
+        cache : false,
+        success : function(data){
+            tickMarkSelectedFilters();
+            $(".overlay").hide();
+            $(".sort_price").html(data);
+
+        }
+
+    });
+}

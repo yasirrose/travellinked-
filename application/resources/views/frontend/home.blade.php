@@ -456,7 +456,8 @@ $page = Route::getCurrentRoute()->getPath();
                     </div>
 
                 </div>
-
+                </div>
+            </div>
            </form>
 
             </div>
@@ -979,7 +980,6 @@ $page = Route::getCurrentRoute()->getPath();
                 },
                 success: function (data) {
                     data = JSON.parse(data);
-
                     if(data.status==true){
                     //   $('.top-picks-row').after(data.html);
                       $('.morex').append(data.html);

@@ -535,9 +535,9 @@ class Helper
 
 
     public static function getHdImages($hotelCode, $user){
-
         $url = "http://api.bonotel.com/index.cfm/user/".$user."/action/gallery/hotelCode/".$hotelCode;
         $result = @file_get_contents($url);
+//        print_r($result);die();
         $result = simplexml_load_string($result);
         $images = json_decode(json_encode((array)$result->channel));
         if($images==null){
@@ -547,7 +547,6 @@ class Helper
         $hdImages = array();
         $tempImage = '';
         foreach($images->item as $img){
-
             if($img->description == 'Exterior Photo' || $img->description == 'Room Photo' || $img->description == 'Dining Photo')
             {
                 $imgArr = explode('.',$img->link);

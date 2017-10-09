@@ -50,7 +50,6 @@ Route::group(['middleware' => ['siteauth']], function (){
         Cache::flush();
     });
     Route::get('reset-this','RegisterController@resetlogin');
-    Route::post('user_register', 'RegisterController@user_register');
     Route::get('set-password/{id}', 'RegisterController@set_password');
     Route::get('activate-account/{id}', 'RegisterController@activate_account');
     Route::post('update_Password', 'RegisterController@update_password');
@@ -97,8 +96,9 @@ Route::group(['middleware' => ['siteauth']], function (){
 
     Route::get('cities/{city}/{code}/{cityCode}','DealsController@goToSearchPageCitites');
 
-    Route::get('sortByPrice', 'SearchController@sortByPrice');
+    Route::get('sortByTab', 'SearchController@filterHotelsByTabs');
 
+    Route::get('sortByPrice', 'SearchController@sortByPrice');
     Route::get('sortByStars', 'SearchController@sortByStars');
 
     Route::get('sortByHotelNames', 'SearchController@sortByHotelNames');

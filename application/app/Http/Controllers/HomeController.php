@@ -341,10 +341,13 @@ class HomeController extends Controller
         curl_setopt($ch1, CURLOPT_POST, false);
         $result2 = curl_exec($ch1);
         curl_close($ch1);
+//        dd($result2);
         $xmlhotels = @simplexml_load_string($result2);
+
         if(empty($xmlhotels)) {
             return redirect()->to("500");
         }
+//        dd($xmlhotels->hotel->hotelCode);
         if($singDealx == 0){
             $images[] = Helper::getHdImages($xmlhotels->hotel->hotelCode, $this->APiUser);
             $singDealx = $xmlhotels->hotel;
@@ -389,57 +392,31 @@ class HomeController extends Controller
     /*================== function to retrive cities, hotels and hotel groups for autocomplete on home page ==================*/
 
     public function search_hotels(Request $request)
-
     {
 
         $search = $request->input("name");
-
         $hGroup = DB::table("tblhotelgroupcodes")->select("hotelgroupname","hotelgroupcode")
-
             ->where('hotelgroupname', 'LIKE', $search.'%')->get();
-
         $cities = DB::table("hotel")->select("city","cityCode")->where('city', 'LIKE', $search.'%')->groupBy("city")->get();
-
         $hotels = DB::table("hotel")->select("name","hotelCode")->where('name', 'LIKE', $search.'%')->get();
-
-
-
         $array = array();
-
         foreach($cities as $city)
-
         {
-
             $array[] = $city;
-
         }
-
         $array1 = array();
-
         foreach($hotels as $hotel)
-
         {
-
             $array1[] = $hotel;
-
         }
-
         $array2 = array();
-
         foreach($hGroup as $Group)
-
         {
-
             $array2[] = $Group;
-
         }
-
         $merge_arr = array_merge($array2,$array,$array1);
-
         echo json_encode($merge_arr);
-
         exit;
-
     }
 
     /*================= end function to retrive cities, hotels and hotel groups for autocomplete on home page ================*/

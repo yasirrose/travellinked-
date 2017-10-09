@@ -695,17 +695,11 @@ $(document).ready(function(e){
 							$("#submit_booking").hide();
 
 							$(".minDeal").html('See Availability');
-
 							$("#adjustDatesText").hide();
-
 							$("#roomMainHeading").text('No Room Available');
-
 							$("#adjustDatesButton").show();
-
 							$("#adjustDatesFalse").hide();
-
 							$("#adjustDatesTrue").show();
-
 							showRooms();
 
 						}
