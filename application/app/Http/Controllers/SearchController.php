@@ -150,6 +150,7 @@ class SearchController extends Controller{
                 </hotelCodes>';
             $newXml .= '<roomsInformation>'.$xml.'</roomsInformation></availabilityRequest>';
         }
+//        dd($newXml);
         $url = $this->provider . "bonotelapps/bonotel/reservation/GetAvailability.do";
         $ch = curl_init();
         curl_setopt( $ch, CURLOPT_URL, $url );
@@ -186,7 +187,7 @@ class SearchController extends Controller{
         } else {
             $finalResult = $rawData->xpath('//hotelList/hotel');
             $Harr        = json_decode(json_encode($finalResult), true);
-            $Harr        = Helper::removeElementsFromHotelArray($Harr);
+//            $Harr        = Helper::removeElementsFromHotelArray($Harr);
             if(count($Harr)==0){
                 $request->session()->set('msg', 'All Rooms are on Request, Please search with differenct criteria');
                 return redirect()->to('no/inventory');
@@ -871,15 +872,7 @@ class SearchController extends Controller{
 
     /*====================== function for filtring hotels by the ids start =======================*/
     public function filterHotelsByTabs(Request $request){
-        dd($request->all());
-    }
-
-
-    /*======================function for filtring hotels by the ids end=======================*/
-    /*====================== function for sorting hotels by price =======================*/
-    public function sortByPrice(Request $request)
-    {
-        $priceArr = array();
+        $resultArr = array();
         $nights = $request->session()->get('nights');
         $price  = $request->input('price');
         $amount = str_replace("$","",$price);
@@ -905,545 +898,152 @@ class SearchController extends Controller{
             $counter = count($Hotels);
             $identity = $filterComb[$filterChanged]['identity'];
         }
-        $html = "";
-        foreach($hotels as $key => $value)
-        {
-            $currMinDeal = array();
-            $currMinDeal = $hotels[$key]["roomInformation"];
+      if($request->filterId == 'price'){
+          foreach($hotels as $key => $value)
+          {
+              $currMinDeal = array();
+              $currMinDeal = $hotels[$key]["roomInformation"];
 //            $currMinDeal = $value['roomInformation'];
-            if(isset($currMinDeal[0]['roomCode'])) {
-                uasort($currMinDeal, function ($a, $b) {
-                    return intval(str_replace(',','',$a['rateInformation']['totalRate'])) - intval(str_replace(',','',$b['rateInformation']['totalRate']));
-                });
-                $currMinDeal = array_values($currMinDeal);
-            }
-            if(empty($currMinDeal[0]["rateInformation"]["totalRate"])) {
-                $priceArr[$key] = intval(str_replace(',','',$currMinDeal["rateInformation"]["totalRate"]));
-            }
-            else
-            {
-                $priceArr[$key] = intval(str_replace(',','',$currMinDeal[0]["rateInformation"]["totalRate"]));
+              if(isset($currMinDeal[0]['roomCode'])) {
+                  uasort($currMinDeal, function ($a, $b) {
+                      return intval(str_replace(',','',$a['rateInformation']['totalRate'])) - intval(str_replace(',','',$b['rateInformation']['totalRate']));
+                  });
+                  $currMinDeal = array_values($currMinDeal);
+              }
+              if(empty($currMinDeal[0]["rateInformation"]["totalRate"])) {
+                  $resultArr[$key] = intval(str_replace(',','',$currMinDeal["rateInformation"]["totalRate"]));
+              }
+              else {
+                  $resultArr[$key] = intval(str_replace(',','',$currMinDeal[0]["rateInformation"]["totalRate"]));
 
-            }
-        }
-        array_multisort($priceArr, SORT_ASC,$hotels);
-        $Hotels = array_slice($hotels,0,$counter);
-        $filterComb[$filterChanged]['records'] = $Hotels;
-        $request->session()->set('filterCombinations', $filterComb);
-        $request->session()->get('hotels', $hotels);
-        $request->session()->save();
-        for($i = 0; $i < $counter; $i++)
-        {
-            $newrates = 0;
-            /*======= rates calculation for current looped hotel ===========*/
-            $currMinDeal = array();
-            $currMinDeal = $Hotels[$i]["roomInformation"];
-            if(isset($currMinDeal[0]['roomCode'])) {
-                uasort($currMinDeal, function ($a, $b) {
-                    return intval(str_replace(',','',$a['rateInformation']['totalRate'])) - intval(str_replace(',','',$b['rateInformation']['totalRate']));
-
-                });
-                $currMinDeal = array_values($currMinDeal);
-            }
-            if(empty($currMinDeal[0]["rateInformation"]["totalRate"]))
-            {
-                $rate = $currMinDeal["rateInformation"]["totalRate"];
-                $rates = str_replace( ',', '', $rate);
-            }
-            else
-            {
-                $rate = $currMinDeal[0]["rateInformation"]["totalRate"];
-                $rates = str_replace( ',', '', $rate );
-            }
-            $newtotal = str_replace( ',', '', $rates);
-            $newrates += $newtotal;
-            if (($amt1 <= floor($newrates/$nights)) && ($amt2 >= floor($newrates/$nights)))
-            {
-                List($class, $hotelRating, $rating) = Helper::starCheckerWithoutCounter($Hotels[$i]["starRating"]);
-                /*======= end check for current hotel star rating =========*/
-                /*======= check for taxes if any by admin =========*/
-                $totalRent = Helper::getCalculatedPrice($newrates);
-                /*======= check for taxes if any by admin =========*/
-                $cityClass = str_replace(" ","-",$Hotels[$i]["city"]);
-                $roomUrl = url("/rooms");
-                $bookUrl = url("/payment")."/".$Hotels[$i]["hotelCode"];
-                $image = DB::table('hotel')->where('hotelCode', '=', $Hotels[$i]["hotelCode"])->first();
-
-                if($image==null){
-                    $image = $Hotels[$i]['thumbNailUrl'];
-                }
-                else{
-                    $image = $Hotels[$i]['image'];
-                }
-                $html .= '<div class="hotel-desp-box common-srch satr-num-'.$hotelRating.' '.$identity.' '.$Hotels[$i]['hotelCode'].' '.$cityClass.'" id="s-'.$hotelRating.'"><a href="'.$roomUrl.'?hotel='.$Hotels[$i]["hotelCode"].'" class="desp-link"></a><div class="hotel-img">'.
-                    '<img style="height:200px; width:300px;" src="'.$image.'">'.
-                    '</div>'.
-                    '<div class="hotel-desp">'.
-                    '<span class="hotel-rating '.$class.' check-price">'.$rating.'</span>'.
-                    '<div class="hotel-name-price">'.
-                    '<div class="left-align">'.$Hotels[$i]["name"]. '<span>'.$Hotels[$i]["address"] .", ". $Hotels[$i]["city"].
-                    '</span></div>';
-                $html .= '<div class="right-align">$'.round($totalRent/$nights,2).'<span>/night</span></div>'.
-                    '</div>'.
-                    '<p>';
-                $des = "";
-                if(isset($Hotels[$i]["shortDescription"])) {
-                    if(is_array($Hotels[$i]["shortDescription"]))
-                    {
-                        $desc = implode(" ",$Hotels[$i]["shortDescription"]);
-                        @$pos=strpos($desc, ' ', 150);
-                        $des = substr($desc,0,$pos )." "."...";
-                    }
-                    else
-                    {
-                        @$pos = strpos($Hotels[$i]["shortDescription"], ' ', 150);
-                        $des = substr($Hotels[$i]["shortDescription"],0,$pos )." "."...";
-                    }
-                }
-                $html .=  $des.'</p>'.
-                    '<div class="hotel-links">'.
-                    '<div class="left-align">'.
-                    '<ul>'.
-                    '<li>'.
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$i]["hotelCode"].'&section=overview">Overview</a>'.
-                    '</li>'.
-                    '<li>'.
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$i]["hotelCode"].'&section=rooms">Room Details</a>'.
-                    '</li>'.
-                    ' </ul>'.
-                    '</div>'.
-                    '<div class="right-align">'.
-                    '<a href="'.$bookUrl.'">Book Room<i class="ion-ios-arrow-thin-right"></i></a>'.
-                    '</div>'.
-                    '</div>'.
-                    '</div>'.
-                    '<div class="clear"></div>'.
-                    '</div>';
-            }
-        }
-        if(!empty($html))
-        {
-            echo json_encode($html);
-        }
-        else
-        {
-            $html = '<h3>No record found</h3>';
-            echo json_encode($html);
-        }
-        exit;
-
-    }
-
-    /*==================== end function for sorting hotels by price =====================*/
-
-
-
-    /*==================== function for sorting hotels by stars rating ==================*/
-
-    public function sortByStars(Request $request)
-    {
-        $starArr = array();
-        $nights = $request->session()->get('nights');
-        $price  = $request->input('price');
-        $amount = str_replace("$","",$price);
-        $array = explode("-",$amount);
-        $amt1 = $array[0];
-        $amt2 = $array[1];
-        /*===================== get applied filters data ===============*/
-        $filterFlag = $request->input('filters');
-        $filterChanged = $request->session()->get("filterChanged");
-        $filterComb = $request->session()->get('filterCombinations');
-        $hotels = $request->session()->get('hotels');
-        $identity = "";
-        $counter = 0;
-        if($filterChanged == -1)
-        {
-            $Hotels = $request->session()->get('hotels');
-            $counter = $request->session()->get('imgCount');
-            $Hotels = array_slice($Hotels,0,$counter);
-            $identity = "withoutFilter";
-        }
-        elseif($filterChanged >= 0)
-        {
-            $Hotels = $filterComb[$filterChanged]['records'];
-            $counter = count($Hotels);
-            $identity = $filterComb[$filterChanged]['identity'];
-        }
-        /*===================== end get applied filters data =============*/
-
-        foreach ($hotels as $key => $row)
-        {
-            $arr = preg_split('/(?<=[0-9])(?=[a-z]+)/i',$row["starRating"]);
-            $starArr[$key] = $arr[0];
-        }
-
-        // echo "<pre>";
-
-        // var_dump($Hotels);
-
-        // var_dump($hotels);
-        // exit;
-
-        array_multisort($starArr,SORT_DESC,$hotels);
-        $html = "";
-        $Hotels = array_slice($hotels,0,$counter);
-        $filterComb[$filterChanged]['records'] = $Hotels;
-        $request->session()->set('filterCombinations', $filterComb);
-        $request->session()->get('hotels', $hotels);
-        $request->session()->save();
-        for ($a = 0; $a < $counter; $a++)
-        {
-            $newrates = 0;
-            /*======= rates calculation for current looped hotel ===========*/
-            $currMinDeal = array();
-            $currMinDeal = $Hotels[$a]["roomInformation"];
-            if(isset($currMinDeal[0]['roomCode']))
-            {
-                uasort($currMinDeal, function ($a, $b) {
-                    return intval(str_replace(',','',$a['rateInformation']['totalRate'])) - intval(str_replace(',','',$b['rateInformation']['totalRate']));
-
-                });
-                $currMinDeal = array_values($currMinDeal);
-            }
-            if(empty($currMinDeal[0]["rateInformation"]["totalRate"]))
-            {
-                $rate = $currMinDeal["rateInformation"]["totalRate"];
-                $rates = str_replace( ',', '', $rate);
-            }
-            else
-            {
-                $rate = $currMinDeal[0]["rateInformation"]["totalRate"];
-                $rates = str_replace( ',', '', $rate );
-            }
-            $newtotal = str_replace( ',', '', $rates);
-            $newrates += $newtotal;
-            /*======= end rates calculation for current looped hotel ===========*/
-            if (($amt1 <= ($newrates/$nights)) || ($amt2 >= ($newrates/$nights)))
-            {
-                List($class, $hotelRating, $rating) = Helper::starCheckerWithoutCounter($Hotels[$a]["starRating"]);
-                /*====== end check for current hotel star rating =========*/
-                /*======= check for taxes if any by admin =========*/
-                $rate = Helper::Rate();
-                $actualTax  = floatVal(str_replace(",","",$rate[0]->global_value));
-                $actualDis  = floatVal(str_replace(",","",$rate[0]->global_discount));
-                $rateType   = $rate[0]->global_type;
-                $totalRent = Helper::getCalculatedPrice($newrates);
-                /*======= end check for taxes if any by admin =========*/
-                $cityClass = str_replace(" ","-",$Hotels[$a]["city"]);
-                $roomUrl = url("/rooms");
-                $bookUrl = url("/payment")."/".$Hotels[$a]["hotelCode"];
-                $image = DB::table('hotel')->where('hotelCode', '=', $Hotels[$a]["hotelCode"])->first();
-                if($image==null){
-                    $image = $Hotels[$a]['thumbNailUrl'];
-                }
-                else{
-                    $image =$Hotels[$a]['image'];
-                }
-                $html .= '<div class="hotel-desp-box common-srch satr-num-'.$hotelRating.' '.$identity.' '.$cityClass.'" id="s-'.$hotelRating.'">'.
-
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$a]["hotelCode"].'" class="desp-link"></a><div class="hotel-img">'.
-
-                    '<img style="height:200px; width:300px;" src="'.$image.'">'.
-
-                    '</div>'.
-
-                    '<div class="hotel-desp">'.
-
-                    '<span class="hotel-rating '.$class.' check-star">'.$rating.'</span>'.
-
-                    ' <div class="hotel-name-price">'.
-
-                    '<div class="left-align">'.$Hotels[$a]["name"]. '<span>'.$Hotels[$a]["address"] .", ". $Hotels[$a]["city"].
-
-                    '</span></div>';
-
-                $html .= '<div class="right-align">$'.round($totalRent/$nights,2).'<span>/night</span></div>'.
-
-                    '</div>'.
-
-                    '<p>';
-
-                $des = "";
-
-                if(isset($Hotels[$a]["shortDescription"])) {
-                    if(is_array($Hotels[$a]["shortDescription"]))
-                    {
-                        $desc = implode(" ",$Hotels[$a]["shortDescription"]);
-                        @$pos=strpos($desc, ' ', 150);
-                        $des = substr($desc,0,$pos )." "."...";
-                    }
-                    else
-                    {
-                        @$pos = strpos($Hotels[$a]["shortDescription"], ' ', 150);
-                        $des = substr($Hotels[$a]["shortDescription"],0,$pos )." "."...";
-                    }
-                }
-                $html .=  $des.'</p>'.
-                    '<div class="hotel-links">'.
-
-                    '<div class="left-align">'.
-
-                    '<ul>'.
-
-                    '<li>'.
-
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$a]["hotelCode"].'&section=overview">Overview</a>'.
-
-                    '</li>'.
-
-                    '<li>'.
-
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$a]["hotelCode"].'&section=rooms">Room Details</a>'.
-
-                    '</li>'.
-
-                    ' </ul>'.
-
-                    '</div>'.
-
-                    '<div class="right-align">'.
-
-                    '<a href="'.$bookUrl.'">Book Room<i class="ion-ios-arrow-thin-right"></i></a>'.
-
-                    '</div>'.
-
-                    '</div>'.
-
-                    '</div>'.
-
-                    '<div class="clear"></div>'.
-
-                    '</div>';
-            }
-        }
-
-        if(empty($html))
-        {
-            $html = '<h3>No record found</h3>';
-            echo json_encode($html);
-        }
-        else
-        {
-            echo json_encode($html);
-        }
-        exit;
-    }
-
-    /*================== end function for sorting hotels by stars rating ===============*/
-
-
-
-    /*===================== function for sorting hotels by names =======================*/
-
-    public function sortByHotelNames(Request $request)
-    {
-        $nameArr = array();
-        $nights = $request->session()->get('nights');
-        $price  = $request->input('price');
-        $amount = str_replace("$","",$price);
-        $array = explode("-",$amount);
-        $amt1 = $array[0];
-        $amt2 = $array[1];
-        /*===================== get applied filters data ===============*/
-        $filterFlag = $request->input('filters');
-        $filterChanged = $request->session()->get("filterChanged");
-        $filterComb = $request->session()->get('filterCombinations');
-        $hotels = $request->session()->get('hotels');
-        $identity = "";
-        $counter = 0;
-        if($filterChanged == -1) {
-            $Hotels = $request->session()->get('hotels');
-            $counter = $request->session()->get('imgCount');
-            $Hotels = array_slice($Hotels,0,$counter);
-            $identity = "withoutFilter";
-        }
-        elseif($filterChanged >= 0) {
-            $Hotels = $filterComb[$filterChanged]['records'];
-            $counter = count($Hotels);
-            $identity = $filterComb[$filterChanged]['identity'];
-        }
-        /*===================== end get applied filters data =============*/
-        foreach($hotels as $key => $row) {
-            $nameArr[$key] = $row["name"];
-        }
-        array_multisort($nameArr,SORT_ASC,$hotels);
+              }
+          }
+      }else if ($request->filterId == 'stars'){
+          foreach ($hotels as $key => $row) {
+              $arr = preg_split('/(?<=[0-9])(?=[a-z]+)/i',$row["starRating"]);
+              $resultArr[$key] = $arr[0];
+          }
+      }else if($request->filterId == 'names'){
+          foreach($hotels as $key => $row) {
+              $resultArr[$key] = $row["name"];
+          }
+      }
+        array_multisort($resultArr,SORT_ASC,$hotels);
         $Hotels = array_slice($hotels,0,$counter);
         $filterComb[$filterChanged]['records'] = $Hotels;
         $request->session()->set('filterCombinations', $filterComb);
         $request->session()->get('hotels', $hotels);
         $request->session()->save();
         $html = "";
-        for($t = 0; $t < $counter; $t++)
-        {
+        for($t = 0; $t < $counter; $t++) {
             $newrates = 0;
             /*======= rates calculation for current looped hotel ===========*/
             $currMinDeal = array();
             $currMinDeal = $Hotels[$t]["roomInformation"];
-            if(isset($currMinDeal[0]['roomCode']))
-            {
+            if (isset($currMinDeal[0]['roomCode'])) {
                 uasort($currMinDeal, function ($a, $b) {
-                    return intval(str_replace(',','',$a['rateInformation']['totalRate'])) - intval(str_replace(',','',$b['rateInformation']['totalRate']));
+                    return intval(str_replace(',', '', $a['rateInformation']['totalRate'])) - intval(str_replace(',', '', $b['rateInformation']['totalRate']));
                 });
                 $currMinDeal = array_values($currMinDeal);
             }
-            if(empty($currMinDeal[0]["rateInformation"]["totalRate"]))
-            {
+            if (empty($currMinDeal[0]["rateInformation"]["totalRate"])) {
                 $rate = $currMinDeal["rateInformation"]["totalRate"];
-                $rates = str_replace( ',', '', $rate);
-            }
-            else
-            {
+                $rates = str_replace(',', '', $rate);
+            } else {
                 $rate = $currMinDeal[0]["rateInformation"]["totalRate"];
-                $rates = str_replace( ',', '', $rate );
+                $rates = str_replace(',', '', $rate);
             }
-            $newtotal = str_replace( ',', '', $rates);
+            $newtotal = str_replace(',', '', $rates);
             $newrates += $newtotal;
             /*======= end rates calculation for current looped hotel ===========*/
-
-            if (($amt1 <= ($newrates/$nights)) || ($amt2 >= ($newrates/$nights)))
-            {
+            if (($amt1 <= ($newrates / $nights)) || ($amt2 >= ($newrates / $nights))) {
                 List($class, $hotelRating, $rating) = Helper::starCheckerWithoutCounter($Hotels[$t]["starRating"]);
                 /*======= end check for current hotel star rating =========*/
                 /*======= check for taxes if any by admin =========*/
                 $rate = Helper::Rate();
-                $actualTax  = floatVal(str_replace(",","",$rate[0]->global_value));
-                $actualDis  = floatVal(str_replace(",","",$rate[0]->global_discount));
-                $rateType   = $rate[0]->global_type;
+                $actualTax = floatVal(str_replace(",", "", $rate[0]->global_value));
+                $actualDis = floatVal(str_replace(",", "", $rate[0]->global_discount));
+                $rateType = $rate[0]->global_type;
                 $totalRent = Helper::getCalculatedPrice($newrates);
                 /*======= check for taxes if any by admin =========*/
-                $cityClass = str_replace(" ","-",$Hotels[$t]["city"]);
+                $cityClass = str_replace(" ", "-", $Hotels[$t]["city"]);
                 $roomUrl = url("/rooms");
-                $bookUrl = url("/payment")."/".$Hotels[$t]["hotelCode"];
+                $bookUrl = url("/payment") . "/" . $Hotels[$t]["hotelCode"];
                 $image = DB::table('hotel')->where('hotelCode', '=', $Hotels[$t]["hotelCode"])->first();
-                if($image==null){
+                if ($image == null) {
+                    $image = $Hotels[$t]['thumbNailUrl'];
+                } else if(isset($Hotels[$t]['image'])) {
+                    $image = $Hotels[$t]['image'];
+                }else {
                     $image = $Hotels[$t]['thumbNailUrl'];
                 }
-                else{
-                    $image = $Hotels[$t]['image'];
-                }
-                $html .= '<div class="hotel-desp-box common-srch satr-num-'.$hotelRating.' '.$identity.' '.$cityClass.'" id="s-'.$hotelRating.'">'.
-
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$t]["hotelCode"].'" style="text-decoration:none" class="desp-link"></a>'.
-
-                    '<div class="hotel-img">'.
-
-                    '<img style="height:200px; width:300px;" src="'.$image.'">'.
-
-                    '</div>'.
-
-                    '<div class="hotel-desp">'.
-
-                    '<span class="hotel-rating '.$class.' check-hotels">'.$rating.'</span>'.
-
-                    ' <div class="hotel-name-price">'.
-
-                    '<div class="left-align">'.$Hotels[$t]["name"]. '<span>'.$Hotels[$t]["address"] .", ".$Hotels[$t]["city"].
-
+                $html .= '<div class="hotel-desp-box common-srch satr-num-' . $hotelRating . ' ' . $identity . ' ' . $cityClass . '" id="s-' . $hotelRating . '">' .
+                    '<a href="' . $roomUrl . '?hotel=' . $Hotels[$t]["hotelCode"] . '" style="text-decoration:none" class="desp-link"></a>' .
+                    '<div class="hotel-img">' .
+                    '<img style="height:200px; width:300px;" src="' . $image . '">' .
+                    '</div>' .
+                    '<div class="hotel-desp">' .
+                    '<span class="hotel-rating ' . $class . ' check-hotels">' . $rating . '</span>' .
+                    ' <div class="hotel-name-price">' .
+                    '<div class="left-align">' . $Hotels[$t]["name"] . '<span>' . $Hotels[$t]["address"] . ", " . $Hotels[$t]["city"] .
                     '</span></div>';
-
-                $html .= '<div class="right-align">$'.round($totalRent/$nights,2).'<span>/night</span></div>'.
-
-                    '</div>'.
-
+                $html .= '<div class="right-align">$' . round($totalRent / $nights, 2) . '<span>/night</span></div>' .
+                    '</div>' .
                     '<p>';
-
                 $des = "";
-
-                if(isset($Hotels[$t]["shortDescription"])) {
-
-                    if(is_array($Hotels[$t]["shortDescription"]))
-
-                    {
-
-                        $desc = implode(" ",$Hotels[$t]["shortDescription"]);
-
-                        @$pos=strpos($desc, ' ', 150);
-
-                        $des = substr($desc,0,$pos )." "."...";
-
-                    }
-
-                    else
-
-                    {
-
+                if (isset($Hotels[$t]["shortDescription"])) {
+                    if (is_array($Hotels[$t]["shortDescription"])) {
+                        $desc = implode(" ", $Hotels[$t]["shortDescription"]);
+                        @$pos = strpos($desc, ' ', 150);
+                        $des = substr($desc, 0, $pos) . " " . "...";
+                    } else {
                         @$pos = strpos($Hotels[$t]["shortDescription"], ' ', 150);
-
-                        $des = substr($Hotels[$t]["shortDescription"],0,$pos )." "."...";
-
+                        $des = substr($Hotels[$t]["shortDescription"], 0, $pos) . " " . "...";
                     }
-
                 }
-
-                $html .=  $des.'</p>'.
-
-                    '<div class="hotel-links">'.
-
-                    '<div class="left-align">'.
-
-                    '<ul>'.
-
-                    '<li>'.
-
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$t]["hotelCode"].'&section=overview">Overview</a>'.
-
-                    '</li>'.
-
-                    '<li>'.
-
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$t]["hotelCode"].'&section=rooms">Room Details</a>'.
-
-                    '</li>'.
-
-                    ' </ul>'.
-
-                    '</div>'.
-
-                    '<div class="right-align">'.
-
-                    '<a href="'.$bookUrl.'">Book Room<i class="ion-ios-arrow-thin-right"></i></a>'.
-
-                    '</div>'.
-
-                    '</div>'.
-
-                    '</div>'.
-
-                    '<div class="clear"></div>'.
-
+                $html .= $des . '</p>' .
+                    '<div class="hotel-links">' .
+                    '<div class="left-align">' .
+                    '<ul>' .
+                    '<li>' .
+                    '<a href="' . $roomUrl . '?hotel=' . $Hotels[$t]["hotelCode"] . '&section=overview">Overview</a>' .
+                    '</li>' .
+                    '<li>' .
+                    '<a href="' . $roomUrl . '?hotel=' . $Hotels[$t]["hotelCode"] . '&section=rooms">Room Details</a>' .
+                    '</li>' .
+                    '</ul>' .
+                    '</div>' .
+                    '<div class="right-align">' .
+                    '<a href="' . $bookUrl . '">Book Room<i class="ion-ios-arrow-thin-right"></i></a>' .
+                    '</div>' .
+                    '</div>' .
+                    '</div>' .
+                    '<div class="clear"></div>' .
                     '</div>';
 
                 /*======= end check if current hotel price is within range selected by user =========*/
 
             }
-
         }
-
         if(empty($html))
-
         {
-
             $html = '<h3>No record found</h3>';
-
             echo json_encode($html);
-
         }
-
         else
-
         {
-
-            echo json_encode($html);
+            $data = array();
+            $data['tab'] = $request->filterId;
+            $data['html'] = $html;
+//            echo json_encode($html);
+            return response()->json($data);
 
         }
-
         exit;
-
     }
 
-    /*===================== end function for sorting hotels by names ==================*/
 
-
+    /*======================function for filtring hotels by the ids end=======================*/
 
     /*====== function for searching hotel selected from dropdown on search page =======*/
 
@@ -1861,7 +1461,7 @@ class SearchController extends Controller{
             $newrates += $newtotal;
             /*======= rates calculation for current looped hotel ===========*/
             /*======= check if current looped hotel within price range selected by user =========*/
-            if (($amt1 <= ($newrates/$nights)) && ($amt2 >= ($newrates/$nights))) {
+            if (($amt1 <= floor($newrates/$nights)) && ($amt2 >= floor($newrates/$nights))) {
                 /*============================== images section =================================*/
                 if(!isset($Hotels[$m]['image'])) {
                     $url1 = "http://api.bonotel.com/index.cfm/user/".$this->APiUser."/action/hotel/hotelCode/".$Hotels[$m]["hotelCode"];

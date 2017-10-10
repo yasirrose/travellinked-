@@ -246,11 +246,11 @@
                                 <span class="sort-by">Sort By</span>
 
                                 <ul id="tabs" class="tab-list">
-                                    <li><a href="" id="recomended"  class="recommended">Recommended</a></li>
-                                    <li><a href="#tab2" id="price"  onclick="getFilterHotels(this)"  class="price sortByPrice">Price</a></li>
-                                    <li><a href="#tab3" id="stars"  onclick="getFilterHotels(this)"  class="stars">Star Rating</a></li>
-                                    <li><a href="#tab4" id="names"  onclick="getFilterHotels(this)"  class="hotels">Hotel Name</a></li>
-                                    <li><a href="#tab5" id="vacations" onclick="getFilterHotels(this)" class="vacation">Vacation Rentals</a></li>
+                                    <li><a href="#tab1" class="recommended">Recommended</a></li>
+                                    <li><a href="#tab2" id="price" class="price sortByPrice">Price</a></li>
+                                    <li><a href="#tab3" id="stars" class="stars">Star Rating</a></li>
+                                    <li><a href="#tab4" id="names" class="hotels">Hotel Name</a></li>
+                                    <li><a href="#tab5" id="vacations" class="vacation">Vacation Rentals</a></li>
                                 </ul>
                                 <div class="share-dropdown-link">
                                     <span class="share-droplink">Share<i class="icon ion-arrow-down-b"></i></span>

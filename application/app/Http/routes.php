@@ -98,10 +98,10 @@ Route::group(['middleware' => ['siteauth']], function (){
 
     Route::get('sortByTab', 'SearchController@filterHotelsByTabs');
 
-    Route::get('sortByPrice', 'SearchController@sortByPrice');
-    Route::get('sortByStars', 'SearchController@sortByStars');
+//    Route::get('sortByPrice', 'SearchController@sortByPrice');
+//    Route::get('sortByStars', 'SearchController@sortByStars');
 
-    Route::get('sortByHotelNames', 'SearchController@sortByHotelNames');
+//    Route::get('sortByHotelNames', 'SearchController@sortByHotelNames');
 
     Route::get('ClearAll', 'SearchController@ClearAll');
 

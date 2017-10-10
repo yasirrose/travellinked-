@@ -2109,7 +2109,61 @@ $(document).ready(function(e) {
         sorterFlag = '.recommended';
 
     });
+    $("#price, #stars, #names" ).click(function () {
+        var id = $(this).attr('id');
+        // sorterFlag = '.sortByPrice';
+        // var check = $(".sort_price .check-price").text();
+        $(".overlay").show();
+        getSelectedFilters();
+        tickMarkSelectedFilters();
+        facsParam = facs;
+        starsParam = stars;
+        destsParam = dests;
 
+        if(facs.length == 0){
+            facsParam = 0;
+        }
+        if(stars.length == 0){
+            starsParam = 0;
+        }
+        if(dests.length == 0){
+            destsParam = 0;
+        }
+        $.ajax({
+
+            type : "GET",
+
+            url : site_url + "/sortByTab",
+
+            data:{price:$("#amount").val(),
+                filters:filterFlag,
+                facss:facsParam,
+                destss:destsParam,
+                starss:starsParam,
+                filterId: id
+            },
+
+            dataType : 'json',
+
+            cache : false,
+
+            success : function(data){
+                tickMarkSelectedFilters();
+                $(".overlay").hide();
+                console.log(data.tab);
+                if(data.tab == 'price'){
+                    $(".sort_price").html(data.html);
+                }else if(data.tab == 'names'){
+                    $(".sort_hotels").html(data.html);
+                }else if(data.tab == 'stars'){
+                    $(".sort_star").html(data.html);
+                }
+
+
+            }
+
+        });
+    });
 
     // $(".sortByPrice").click(function(){
     //     sorterFlag = '.sortByPrice';
@@ -2207,7 +2261,7 @@ $(document).ready(function(e) {
     //     });
     //
     // });
-    //
+
     // $(".hotels").click(function(){
     //
     //     sorterFlag = '.hotels';
@@ -3690,43 +3744,3 @@ $(document).on("click", function () {
     $(".ui-menu-item").hide();
 
 });
-function getFilterHotels(type) {
-    var filterTab = type.id;
-    $(".overlay").show();
-    getSelectedFilters();
-    tickMarkSelectedFilters();
-    facsParam = facs;
-    starsParam = stars;
-    destsParam = dests;
-
-    if(facs.length == 0){
-        facsParam = 0;
-    }
-    if(stars.length == 0){
-        starsParam = 0;
-    }
-    if(dests.length == 0){
-        destsParam = 0;
-    }
-    $.ajax({
-
-        type : "GET",
-        url : site_url + "/sortByTab",
-        data:{price:$("#amount").val(),
-            filters:filterFlag,
-            facss:facsParam,
-            destss:destsParam,
-            starss:starsParam,
-            filterTab:filterTab
-        },
-        dataType : 'json',
-        cache : false,
-        success : function(data){
-            tickMarkSelectedFilters();
-            $(".overlay").hide();
-            $(".sort_price").html(data);
-
-        }
-
-    });
-}
