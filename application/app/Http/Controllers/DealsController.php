@@ -798,7 +798,6 @@ class DealsController extends Controller
             {
 
                 $finalResult = $rawData->xpath('//hotel');
-                // dd($finalResult[0]->roomInformation[0]);
                 $Harr = json_decode(json_encode($finalResult), true);
 
                 curl_close($ch);

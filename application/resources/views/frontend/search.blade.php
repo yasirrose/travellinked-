@@ -371,9 +371,6 @@
         </div>
 
     </div>
-
-    </div>
-
     <div id="infscr-loading" style="display: none;">
 
         <img alt="Loading..." style="width:50px; height:50px;" src="{{url('assets/images/loader.gif')}}">

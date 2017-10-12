@@ -150,7 +150,6 @@ class SearchController extends Controller{
                 </hotelCodes>';
             $newXml .= '<roomsInformation>'.$xml.'</roomsInformation></availabilityRequest>';
         }
-//        dd($newXml);
         $url = $this->provider . "bonotelapps/bonotel/reservation/GetAvailability.do";
         $ch = curl_init();
         curl_setopt( $ch, CURLOPT_URL, $url );
@@ -231,7 +230,6 @@ class SearchController extends Controller{
                 List($rating, $class, $starCount) = Helper::starChecker($hotel["starRating"], $starCount);
                 /*============================== rating section =================================*/
                 /*============================== making destinations section ========================*/
-                // dd('abc',$dests[$hotel["city"]]);
                 if(isset($dests[$hotel["city"]])) {
                     $curDestArr                             = count($dests[$hotel["city"]]);
                     $dests[$hotel["city"]][$curDestArr]     = $hotel["hotelCode"];
@@ -271,7 +269,6 @@ class SearchController extends Controller{
                 $reUrl = url('deals').'/'.$stateSlug.'/'.$citySlug.'/'.$Harr[0]['hotelCode'];
                 return redirect($reUrl);
             } else {
-//                dd('redirecting to page');
                 return view('frontend.search',compact("hGroup","Harr","search_name",
                     "total_result","nights","minPrice","starCount","dests","destsCount","allDest","maxPrice","currentUrl"));
             }
@@ -1461,16 +1458,29 @@ class SearchController extends Controller{
             $newrates += $newtotal;
             /*======= rates calculation for current looped hotel ===========*/
             /*======= check if current looped hotel within price range selected by user =========*/
-            if (($amt1 <= floor($newrates/$nights)) && ($amt2 >= floor($newrates/$nights))) {
+            if (($amt1 <= $newrates/$nights) && ($amt2 >= $newrates/$nights)) {
                 /*============================== images section =================================*/
-                if(!isset($Hotels[$m]['image'])) {
+                if(isset($Hotels[$m]['image'])) {
+
                     $url1 = "http://api.bonotel.com/index.cfm/user/".$this->APiUser."/action/hotel/hotelCode/".$Hotels[$m]["hotelCode"];
                     $ch1 = curl_init();
                     curl_setopt($ch1, CURLOPT_URL, $url1);
-                    curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch1, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17');
+                    curl_setopt($ch1, CURLOPT_AUTOREFERER, true);
+                    curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
+                    curl_setopt($ch1, CURLOPT_VERBOSE, 1);
                     curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch1, CURLOPT_POST, false);
+                    curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, false);
+                    curl_setopt($ch1, CURLOPT_CONNECTTIMEOUT, 10);
+                    curl_setopt($ch1, CURLOPT_TIMEOUT, 50);
+                    $httpCode = curl_getinfo($ch1, CURLINFO_HTTP_CODE);
                     $result1 = curl_exec($ch1);
+                    if ($result1 === ''){
+                        $response = curl_error($ch1);
+                        echo stripslashes($response);
+                        die();
+                    }
                     curl_close($ch1);
                     $hotelImages = @simplexml_load_string($result1);
                     if(isset($hotelImages->code)) {
@@ -1479,6 +1489,7 @@ class SearchController extends Controller{
                     else {
                         $Hotels[$m]['image'] = (String)$hotelImages->hotel->images->image[0];
                     }$imgName = array('image' => $Hotels[$m]['image'], 'code' => (string)$Hotels[$m]["hotelCode"]);
+
                     $request->session()->push('hImages',$imgName);
                 }
                 /*============================== images section =================================*/
@@ -1510,9 +1521,13 @@ class SearchController extends Controller{
                 $roomUrl = url("/rooms");
                 $bookUrl = url("/payment")."/".$Hotels[$m]["hotelCode"];
                 $html .= '<div class="hotel-desp-box common-srch satr-num-'.$hotelRating.' '.$cityClass.' '.$identity.' " id="s-'.$hotelRating.'">'.
-                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$m]["hotelCode"].'" class="desp-link"></a><div class="hotel-img">'.
-                    '<img style="height:200px; width:300px;" src="'.$Hotels[$m]['image'].'">'.
-                    '</div>'.
+                    '<a href="'.$roomUrl.'?hotel='.$Hotels[$m]["hotelCode"].'" class="desp-link"></a><div class="hotel-img">';
+                if(isset($Hotels[$m]['image'])){
+                    $html .='<img style="height:200px; width:300px;" src="'.$Hotels[$m]['image'].'">';
+                }else{
+                    $html .='<img style="height:200px; width:300px;" src="'.(String)$Hotels[$m]['thumbNailUrl'].'">';
+                }
+                    $html .='</div>'.
                     '<div class="hotel-desp">'.
                     '<span class="hotel-rating '.$class.'">'.$rating.'</span>'.
                     ' <div class="hotel-name-price">'.

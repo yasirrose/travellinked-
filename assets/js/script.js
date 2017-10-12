@@ -966,710 +966,334 @@ $(document).ready(function(e) {
     /*====================== sticky header search box script here ======================*/
 
     $('.datepicker_in_sticky').dateRangePicker({
-
         separator : ' to ',
-
         format: 'MM/DD/YYYY',
-
         startDate: new Date(),
-
         maxDays:31,
-
         stickyMonths: true,
-
         inline:true,
-
         container:'.datepicker-container-sticky',
-
         alwaysOpen:true,
-
         beforeShowDay: function(t)
-
         {
-
             var startDate = $('#datepicker_in_sticky').val();
-
-            if(startDate !== '')
-
-            {
-
+            if(startDate !== '') {
                 var dat = new Date(t);
-
-                if(DateDiff(startDate,dat) > 30)
-
-                {
-
-                    if(currCalendar == '#datepicker_in_sticky')
-
-                    {
-
+                if(DateDiff(startDate,dat) > 30) {
+                    if(currCalendar == '#datepicker_in_sticky') {
                         var valid = true;
-
                         var _class = 'valid';
-
                         var _tooltip = '';
-
                         return [valid,_class,_tooltip];
-
                     }
-
-                    else
-
-                    {
-
+                    else {
                         var valid = false;
-
                         var _class = 'invalid';
-
                         var _tooltip = '';
-
                         return [valid,_class,_tooltip];
-
                     }
-
                 }
-
-                else
-
-                {
-
-                    if(DateDiff(startDate,dat) < 0 && currCalendar == '#datepicker_out_sticky')
-
-                    {
-
+                else {
+                    if(DateDiff(startDate,dat) < 0 && currCalendar == '#datepicker_out_sticky') {
                         var valid = false;
-
                         var _class = 'invalid';
-
                         var _tooltip = '';
-
                         return [valid,_class,_tooltip];
-
                     }
-
-                    else
-
-                    {
-
+                    else {
                         var valid = true;
-
                         var _class = 'valid';
-
                         var _tooltip = '';
-
                         return [valid,_class,_tooltip];
-
                     }
-
                 }
-
             }
-
-            else
-
-            {
-
+            else {
                 var valid = true;
-
                 var _class = 'valid';
-
                 var _tooltip = '';
-
                 return [valid,_class,_tooltip];
-
             }
-
         },
-
-        hoveringTooltip: function(days)
-
-        {
-
-            if(days > 2)
-
-            {
-
+        hoveringTooltip: function(days) {
+            if(days > 2) {
                 return (days-1)+' Days';
-
             }
-
-            else
-
-            {
-
+            else {
                 return (days-1)+' Day';
-
             }
-
         },
-
         setValue:function(s,s1,s2){
-
-            if(DateDiff(s1,s2) <= 0)
-
-            {
-
+            if(DateDiff(s1,s2) <= 0) {
                 overWrite = ((new Date(s1)).getMonth() + 1) + '/' + ((new Date(s1)).getDate()+1) + '/' +  (new Date(s1)).getFullYear();
-
                 $("#datepicker_in_sticky").val(s1);
-
                 $("#datepicker_out_sticky").val(overWrite);
-
                 document.getElementById("nightsSticky").value= DateDiff(s1,overWrite);
                 // $("#"+mainError.element.id).removeClass("error");
-
                 $('#error_datePicker').css('display', 'none');
             }
-
-            else
-
-            {
-
+            else {
                 $("#datepicker_in_sticky").val(s1);
                 $("#datepicker_out_sticky").val(s2);
                 document.getElementById("nightsSticky").value= DateDiff(s1,s2);
                 // $("#"+mainError.element.id).removeClass("error");
                 $('#error_datePicker').css('display', 'none');
             }
-
         }
 
-    }).bind('datepicker-first-date-selected', function(event, obj)
-
-    {
-
+    }).bind('datepicker-first-date-selected', function(event, obj) {
         var startDate = $('#datepicker_in_sticky').val();
-
         var endDate = $('#datepicker_out_sticky').val();
-
-        if(startDate == '')
-
-        {
-
+        if(startDate == '') {
             var month = obj.date1.getMonth()+1;
-
             var day = obj.date1.getDate();
-
-            if(month < 10)
-
-            {
-
+            if(month < 10) {
                 month = '0'+month;
-
             }
-
             if(day < 10)
-
             {
-
                 day = '0'+day;
-
             }
-
             var startDate = month+'/'+day+'/' + obj.date1.getFullYear();
-
             $("#datepicker_in_sticky").val(startDate);
-
             $("#datepicker_in_sticky").addClass('valid');
-
             $("#datepicker_in_sticky").removeClass('error');
-
             $('label[for=datepicker_in_sticky]').css('display','none');
-
             $("#datepicker_out_sticky").val('');
-
             $("#datepicker_out_sticky").removeClass('valid');
-
             $("#nightsSticky").val('');
-
             $(".datepicker_in_sticky").data('dateRangePicker').setStart(startDate);
-
             $("#datepicker_out_sticky").focus();
-
         }
-
-        else if(startDate != '')
-
-        {
-
+        else if(startDate != '') {
             var month = obj.date1.getMonth()+1;
-
             var day = obj.date1.getDate();
-
-            if(month < 10)
-
-            {
-
+            if(month < 10) {
                 month = '0'+month;
-
             }
-
-            if(day < 10)
-
-            {
-
+            if(day < 10) {
                 day = '0'+day;
-
             }
-
             var endDate = month+'/'+day+'/' + obj.date1.getFullYear();
-
             if(currCalendar == '#datepicker_in_sticky')
-
             {
-
                 $(".datepicker_in_sticky").data('dateRangePicker').clear();
-
                 $("#datepicker_in_sticky").val(endDate);
-
                 $("#datepicker_in_sticky").addClass('valid');
-
                 $("#datepicker_in_sticky").removeClass('error');
-
                 $('label[for=datepicker_in_sticky]').css('display','none');
-
                 $("#datepicker_out_sticky").val('');
-
                 $("#datepicker_out_sticky").removeClass('valid');
-
                 $("#nightsSticky").val('');
-
                 $(".datepicker_in_sticky").data('dateRangePicker').setStart(endDate);
-
                 $("#datepicker_out_sticky").focus();
-
             }
-
-            else if(DateDiff(startDate,endDate) <= 0)
-
-            {
-
+            else if(DateDiff(startDate,endDate) <= 0) {
                 overWrite = new Date(startDate);
-
                 overWrite.setDate(overWrite.getDate() + 1);
-
                 overWrite = (overWrite.getMonth() + 1) + '/' + (overWrite.getDate()) + '/' +  overWrite.getFullYear();
-
                 $(".datepicker_in_sticky").data('dateRangePicker').setStart(startDate);
-
                 $(".datepicker_in_sticky").data('dateRangePicker').setEnd(overWrite,true);
-
                 $("#datepicker_in_sticky").addClass('valid');
-
                 $("#datepicker_out_sticky").addClass('valid');
-
                 $("#datepicker_in_sticky").removeClass('error');
-
                 $('label[for=datepicker_in_sticky]').css('display','none');
-
                 $("#datepicker_out_sticky").removeClass('error');
-
                 $('label[for=datepicker_out_sticky]').css('display','none');
-
-                if($('.search_hotel_sticky').val() !== '')
-
-                {
-
+                if($('.search_hotel_sticky').val() !== '') {
                     $('.destination-autofill').removeClass("coloredOutline");
-
                     $('.search_hotel_sticky').addClass('valid');
-
                     $('.search_hotel_sticky').removeClass('error');
-
                     $(".staying-days").removeClass('error');
-
                 }
-
                 setQueryStrings();
-
-
                 $('.datepicker-container-sticky').slideUp();
-
                 $('.sticky_tooltip_in').css('display','none');
-
                 $('.sticky_tooltip_out').css('display','none');
-
                 currCalendar = '';
-
             }
-
             else
-
             {
-
                 $(".datepicker_in_sticky").data('dateRangePicker').setStart(startDate);
-
                 $(".datepicker_in_sticky").data('dateRangePicker').setEnd(endDate,true);
-
                 $("#datepicker_in_sticky").addClass('valid');
-
                 $("#datepicker_out_sticky").addClass('valid');
-
                 $("#datepicker_in_sticky").removeClass('error');
-
                 $('label[for=datepicker_in_sticky]').css('display','none');
-
                 $("#datepicker_out_sticky").removeClass('error');
-
                 $('label[for=datepicker_out_sticky]').css('display','none');
-
-                if($('.search_hotel_sticky').val() !== '')
-
-                {
-
+                if($('.search_hotel_sticky').val() !== '') {
                     $('.destination-autofill').removeClass("coloredOutline");
-
                     $('.search_hotel_sticky').addClass('valid');
-
                     $('.search_hotel_sticky').removeClass('error');
-
                     $(".staying-days").removeClass('error');
-
                 }
-
                 setQueryStrings();
-
                 $('.datepicker-container-sticky').slideUp();
-
                 $('.sticky_tooltip_in').css('display','none');
-
                 $('.sticky_tooltip_out').css('display','none');
-
                 currCalendar = '';
-
             }
-
         }
-
-
-
-    }).bind('datepicker-change',function(event,obj)
-
-    {
-
+    }).bind('datepicker-change',function(event,obj) {
         var startDate = $('#datepicker_in_sticky').val();
-
         var month = obj.date2.getMonth()+1;
-
         var day = obj.date2.getDate();
-
-        if(month < 10)
-
-        {
-
+        if(month < 10) {
             month = '0'+month;
 
         }
-
-        if(day < 10)
-
-        {
-
+        if(day < 10) {
             day = '0'+day;
-
         }
-
         var endDate = month+'/'+day+'/' + obj.date2.getFullYear();
-
         if(startDate == '')
-
         {}
-
         else if(DateDiff(startDate,endDate) <= 0)
-
         {
-
             overWrite = new Date(startDate);
-
             overWrite = (overWrite.getMonth() + 1) + '/' + (overWrite.getDate()) + '/' +  overWrite.getFullYear();
-
             overWrite.setDate(overWrite.getDate() + 1);
-
             $(".datepicker_in_sticky").data('dateRangePicker').setStart(startDate);
-
             $(".datepicker_in_sticky").data('dateRangePicker').setEnd(overWrite,true);
-
             $("#datepicker_in_sticky").addClass('valid');
-
             $("#datepicker_out_sticky").addClass('valid');
-
             $("#datepicker_in_sticky").removeClass('error');
-
             $('label[for=datepicker_in_sticky]').css('display','none');
-
             $("#datepicker_out_sticky").removeClass('error');
-
             $('label[for=datepicker_out_sticky]').css('display','none');
-
-            if($('.search_hotel_sticky').val() !== '')
-
-            {
-
+            if($('.search_hotel_sticky').val() !== '') {
                 $('.destination-autofill').removeClass("coloredOutline");
-
                 $('.search_hotel_sticky').addClass('valid');
-
                 $('.search_hotel_sticky').removeClass('error');
-
                 $(".staying-days").removeClass('error');
-
             }
-
             $('.datepicker-container-sticky').slideUp();
-
             setQueryStrings();
             $('.sticky_tooltip_in').css('display','none');
-
             $('.sticky_tooltip_out').css('display','none');
-
             currCalendar = '';
-
         }
-
-        else
-
-        {
-
+        else {
             $(".datepicker_in_sticky").data('dateRangePicker').setStart(startDate);
-
             $(".datepicker_in_sticky").data('dateRangePicker').setEnd(endDate,true);
-
             $("#datepicker_in_sticky").addClass('valid');
-
             $("#datepicker_out_sticky").addClass('valid');
-
             $("#datepicker_in_sticky").removeClass('error');
-
             $('label[for=datepicker_in_sticky]').css('display','none');
-
             $("#datepicker_out_sticky").removeClass('error');
-
             $('label[for=datepicker_out_sticky]').css('display','none');
-
-            if($('.search_hotel_sticky').val() !== '')
-
-            {
-
+            if($('.search_hotel_sticky').val() !== '') {
                 $('.destination-autofill').removeClass("coloredOutline");
-
                 $('.search_hotel_sticky').addClass('valid');
-
                 $('.search_hotel_sticky').removeClass('error');
-
                 $(".staying-days").removeClass('error');
-
             }
-
             $('.datepicker-container-sticky').slideUp();
             setQueryStrings();
             $('.sticky_tooltip_in').css('display','none');
-
             $('.sticky_tooltip_out').css('display','none');
-
             currCalendar = '';
-
         }
-
     });
 
     $('#datepicker_in_sticky').on('focus',function(event){
-
         currCalendar = '#datepicker_in_sticky';
-
         $('span[class=next]').click();
-
         $('span[class=prev]').click();
-
         $('.sticky_tooltip_out').css('display','none');
-
         $('.sticky_tooltip_in').css('display','block');
-
         $('.datepicker-container-sticky').slideDown();
-
     });
 
     $('#datepicker_out_sticky').on('focus',function(event){
-
         currCalendar = '#datepicker_out_sticky';
-
         $('span[class=next]').click();
-
         $('span[class=prev]').click();
-
         $('.sticky_tooltip_in').css('display','none');
-
         $('.sticky_tooltip_out').css('display','block');
-
         $('.datepicker-container-sticky').slideDown();
-
     });
 
     /*========= set selected date range on page load =========*/
-
     if(strUrl.search("/search") !== -1 || strUrl.search("/changeSearch") !== -1 || strUrl.search("/deals") !== -1
-
         || strUrl.search("/rooms") !== -1 || strUrl.search("/thankYou") !== -1 || strUrl.search("/destinations") !== -1
-
-        || strUrl.search("/cities") !== -1 || strUrl.search("/no/inventory") !== -1)
-
-    {
-
+        || strUrl.search("/cities") !== -1 || strUrl.search("/no/inventory") !== -1) {
         onLoadCheckInSticky = $("#datepicker_in_sticky").val();
-
         onLoadCheckOutSticky = $("#datepicker_out_sticky").val();
-
         $(".datepicker_in_sticky").data('dateRangePicker').setStart(onLoadCheckInSticky);
-
         $(".datepicker_in_sticky").data('dateRangePicker').setEnd(onLoadCheckOutSticky,true);
-
         $("#datepicker_in_sticky").val(onLoadCheckInSticky);
-
         $("#datepicker_out_sticky").val(onLoadCheckOutSticky);
-
         $(".search_hotel_sticky").addClass('valid');
-
         $("#datepicker_in_sticky").addClass('valid');
-
         $("#datepicker_out_sticky").addClass('valid');
-
     }
-
     $(document).on('click','#clearDates',function(){
-
         $(".datepicker_in_sticky").data('dateRangePicker').clear();
-
     });
-
     /*===== end set selected date range on page load =========*/
-
     $(".search_hotel_sticky").keyup(function(){
-
         $("#input_hotelSticky").val("");
-
-
-
-
         var value = $(this).val();
-
         var html = "";
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/search_hotels",
-
             data : {
-
                 name : value
-
             },
-
             dataType : 'json',
-
             cache : false,
-
             async:true,
-
             success : function(data) {
-
                 var c = 0;
-
                 var co = 0;
-
                 $.each(data, function(i, value) {
-
                     $('.search_result_sticky').css("display", "block");
-
                     if(value.hotelgroupname){
-
                         html += "<span class='location-lable-"+i+"' style='display:none;'>Location</span>"+
-
                             "<label class='selected_value_sticky' name='hotelgroupname' id='"+value.hotelgroupcode+"' value = '"+value.hotelgroupname+"'>" +value.hotelgroupname +"</label>";
-
                     }
-
                     if(value.city){
-
                         html += "<span class='city-lable-"+co+"' style='display:none;'>City</span>"+
-
                             "<label class='selected_value_sticky' name='city' id ='"+value.cityCode+"' value = '"+value.city+"'>" +value.city +"</label>";
-
                         co++;
-
                     }if(value.name){
-
-
-
                         var count = c++;
-
                         html += "<span class='hotel-lable-"+count+"' style='display:none;'>Hotel</span>"+
-
                             "<label class='selected_value_sticky' name='hotel' id='"+value.hotelCode+"' value = '"+value.name+"'>" +value.name +" (Hotel)</label>";
-
-
-
                     }
-
-
-
                 });
-
                 $('.search_result_sticky').html(html);
-
-
-
             }
-
         });
-
     });
-
     $(document).on("click", ".selected_value_sticky", function(){
-
         var value = $(this).text();
-
         var id = $(this).attr("id");
-
         var name = $(this).attr("name");
-
         $(".search_hotel_sticky").val(value);
-
         $("#input_hotelSticky").val(id);
-
         $("#stypeSticky").val(name);
-
         $('.search_result_sticky').hide();
-
     });
 
     $(".sticky-form").validate({
-
         rules: {
-
             location_name:{
-
                 required:true
-
             },
-
             checkin: "required",
-
             checkout: "required"
 
         },
-
         messages: {
-
             location_name:{required:"This field is required"},
-
             checkin: "This field is required",
-
             checkout:"This field is required"
-
         },
         showErrors: function(errorMap, errorList) {
-
             var i = errorList.length;
             if(i>=1){
                 var mainError = errorList[0];
@@ -1685,11 +1309,7 @@ $(document).ready(function(e) {
                     }
                 }
                 else{
-                    // $("#"+mainError.element.id).addClass("error");
-
                     $('#error_datePicker2').css('display', 'block');
-
-                    // console.log('handle date picker');
                 }
             }
             else{
@@ -1697,417 +1317,194 @@ $(document).ready(function(e) {
                 $('#error_location_name').css('display', 'none');
                 $("input[name=location_name]").removeClass("error");
                 $("#location_name").addClass("valid");
-
                 // $("#"+mainError.element.id).removeClass("error");
-
             }
-
         },
         highlight: function(element, errorClass, validClass){
-
-            if($(element)[0].id === 'datepicker_out_sticky' || $(element)[0].id === 'datepicker_in_sticky')
-
-            {
-
+            if($(element)[0].id === 'datepicker_out_sticky' || $(element)[0].id === 'datepicker_in_sticky') {
                 $('.destination-autofill').addClass("coloredOutline");
-
                 $('.staying-days').addClass("error");
-
                 $('.search_hotel_sticky').addClass('error');
-
                 $('#datepicker_out_sticky').closest('label').css('display','block');
-
             }
-
-            else if($(element)[0].name === 'location_name')
-
-            {
-
+            else if($(element)[0].name === 'location_name') {
                 $('.destination-autofill').addClass("coloredOutline");
-
                 $('.search_hotel_sticky').removeClass('valid');
-
                 $('.staying-days').addClass("error");
-
                 $(element).addClass("error");
-
             }
-
-            else
-
-            {
-
+            else {
                 $(element).addClass("error");
-
             }
-
-
-
         },
-
         unhighlight: function(element, errorClass, validClass){
-
-            if($(element)[0].id === 'datepicker_out_sticky' || $(element)[0].id === 'datepicker_in_sticky')
-
-            {
-
-                if($('#datepicker_out_sticky').val() !== '' && $('#datepicker_in_sticky').val() !== '')
-
-                {
-
-                    if($('.search_hotel_sticky').val() !== '')
-
-                    {
-
+            if($(element)[0].id === 'datepicker_out_sticky' || $(element)[0].id === 'datepicker_in_sticky') {
+                if($('#datepicker_out_sticky').val() !== '' && $('#datepicker_in_sticky').val() !== '') {
+                    if($('.search_hotel_sticky').val() !== '') {
                         $('.staying-days').removeClass("error");
-
                         $('.destination-autofill').removeClass("coloredOutline");
-
                         $('.search_hotel_sticky').addClass('valid');
-
                         $('label[for=datepicker_in_sticky]').css('display','none');
-
                         $('label[for=datepicker_out_sticky]').css('display','none');
-
                     }
-
                 }
-
             }
-
-            else if($(element)[0].name === 'location_name')
-
-            {
-
-                if($('#datepicker_out_sticky').val() !== '' && $('#datepicker_in_sticky').val() !== '')
-
-                {
-
+            else if($(element)[0].name === 'location_name') {
+                if($('#datepicker_out_sticky').val() !== '' && $('#datepicker_in_sticky').val() !== '') {
                     $('.staying-days').removeClass("error");
-
                     $('.destination-autofill').removeClass("coloredOutline");
-
                     $('.search_hotel_sticky').addClass('valid');
-
                     $('label[for=datepicker_in_sticky]').css('display','none');
-
                     $('label[for=datepicker_out_sticky]').css('display','none');
-
                     $('#datepicker_in_sticky').addClass('valid');
-
                     $('#datepicker_out_sticky').addClass('valid');
-
                     $(element).removeClass("error");
-
                 }
-
             }
-
-            else
-
-            {
-
+            else {
                 $(element).removeClass("error");
-
             }
-
         },
-
         submitHandler: function(form){
-
             var errorFlag = 0;
-
             var rooms;
-
             rooms = $("#rooms_change").val();
-
             for(var i = 1; i<= rooms; i++){
-
                 var val = $("#adultsticky-"+i).val();
-
                 var childVal = $("select[id=total_child_sticky"+i+"]").val();
-
-                if(val == 0)
-                {
-
+                if(val == 0) {
                     $("#adultsticky-"+i).addClass("error");
-
                     $("#adultsticky-"+i).after('<label class="error">Please fill this field</label>');
-
                     errorFlag = errorFlag+1;
-
-                }
-
-                else
-
-                {
-
-                    if($("#adultsticky-"+i).next()[0].localName == 'label')
-
-                    {
-
+                } else {
+                    if($("#adultsticky-"+i).next()[0].localName == 'label') {
                         $("#adultsticky-"+i).next().remove();
-
                     }
-
-                    if(childVal > 0)
-
-                    {
-
-                        for(var j = 1; j<= childVal; j++)
-
-                        {
-
+                    if(childVal > 0) {
+                        for(var j = 1; j<= childVal; j++) {
                             var curChildVal = $("select[id=childsticky_"+i+"_ages_"+j+"]").val();
-
-                            if(curChildVal == 0)
-
-                            {
-
+                            if(curChildVal == 0) {
                                 $("select[id=childsticky_"+i+"_ages_"+j+"]").addClass("error");
-
                                 $("select[id=childsticky_"+i+"_ages_"+j+"]").after('<label class="error">Please fill this field</label>');
-
                                 errorFlag = errorFlag+1;
-
                             }
-
-                            else
-
-                            {
-
-                                if($("select[id=childsticky_"+i+"_ages_"+j+"]").next()[0].localName == 'label')
-
-                                {
-
+                            else {
+                                if($("select[id=childsticky_"+i+"_ages_"+j+"]").next()[0].localName == 'label') {
                                     $("select[id=childsticky_"+i+"_ages_"+j+"]").next().remove();
-
                                 }
-
                             }
-
                         }
-
                     }
-
                 }
-
             }
-
             if(errorFlag == 0)
-
             {
-
                 $(".search-loader").show();
-
                 form.submit();
-
             }
-
             else
-
             {
-
                 $('#horiz-box').show();
-
             }
-
         }
-
     });
-
     /*====================== end sticky header search box script here ======================*/
-
     size_li = $(".result_row").size();
-
     x=3;
-
     $('.result_row:lt('+x+')').show();
-
     $('#loadMore').click(function () {
-
         x= (x+5 <= size_li) ? x+5 : size_li;
-
         $('.result_row li:lt('+x+')').show();
-
         $('#showLess').show();
-
         if(x == size_li){
-
             $('#loadMore').hide();
-
         }
-
     });
-
     $('#showLess').click(function () {
-
         x=(x-5<0) ? 3 : x-5;
-
         $('.result_row').not(':lt('+x+')').hide();
-
         $('#loadMore').show();
-
         $('#showLess').show();
-
         if(x == 3){
-
             $('#showLess').hide();
-
         }
-
     });
-
     $(window).click(function (event) {
-
         $('.search_result').hide();
-
         $('.search_result_sticky').hide();
-
         if($(event.target)[0].id !== 'datepicker_in' && $(event.target)[0].id !== 'datepicker_out')
-
         {
-
             $('.datepicker-container').slideUp('slow',function(){
-
                 $('.main_tooltip').css('display','none');
-
             });
-
         }
-
-        if($(event.target)[0].id !== 'datepicker_in_sticky' && $(event.target)[0].id !== 'datepicker_out_sticky')
-
-        {
-
+        if($(event.target)[0].id !== 'datepicker_in_sticky' && $(event.target)[0].id !== 'datepicker_out_sticky') {
             $('.datepicker-container-sticky').slideUp('slow',function(){
-
                 $('.sticky_tooltip_in').css('display','none');
-
                 $('.sticky_tooltip_out').css('display','none');
-
             });
-
         }
-
     });
 
     /********************** script for searech page filters **************************/
 
     $("#nameTags").ready(function(){
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/hotelNames",
-
             dataType : 'json',
-
             cache : false,
-
             success : function(data){
-
                 $( "#nameTags" ).autocomplete({
-
                     source: data,
-
                     create: function( event, ui ) {
-
                         $("ul.ui-autocomplete.ui-menu,.ui-autocomplete li").css({"background":"lightgrey","font-size":"12px","width":"228px","color":"black"});
-
                     },
-
                     select: function( event, ui ) {
-
                         getSelectedFilters();
-
                         tickMarkSelectedFilters();
-
                         facsParam = facs;
-
                         starsParam = stars;
-
                         destsParam = dests;
-
                         if(facs.length == 0){
-
                             facsParam = 0;
-
                         }
-
                         if(stars.length == 0){
-
                             starsParam = 0;
-
                         }
-
                         if(dests.length == 0){
-
                             destsParam = 0;
-
                         }
-
                         var selVal = ui.item.value;
-
                         $(".recommended").removeClass("inactive");
-
                         var t = $(".recommended").attr('href');
-
                         $('.tab-container').hide();
-
                         $(t).show();
-
-
-
                         $(".price").addClass("inactive");
-
                         $(".stars").addClass("inactive");
-
                         $(".hotels").addClass("inactive");
-
                         $(".vacation").addClass("inactive");
-
                         $(".overlay").show();
-
                         $.ajax({
-
                             type : "GET",
-
                             url : site_url + "/filterByHotelName",
-
                             data : {hotel : selVal,price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
                             dataType : 'json',
-
                             cache : false,
-
                             success : function(data){
-
                                 tickMarkSelectedFilters();
-
                                 $(".overlay").hide();
-
                                 $(".filter-data").html(data);
-
                             }
-
                         });
-
                     }
-
                 });
-
             }
-
         });
-
     });
 
     $(".recommended").click(function(){
-
         sorterFlag = '.recommended';
-
     });
     $("#price, #stars, #names" ).click(function () {
         var id = $(this).attr('id');
@@ -2119,7 +1516,6 @@ $(document).ready(function(e) {
         facsParam = facs;
         starsParam = stars;
         destsParam = dests;
-
         if(facs.length == 0){
             facsParam = 0;
         }
@@ -2130,11 +1526,8 @@ $(document).ready(function(e) {
             destsParam = 0;
         }
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/sortByTab",
-
             data:{price:$("#amount").val(),
                 filters:filterFlag,
                 facss:facsParam,
@@ -2142,11 +1535,8 @@ $(document).ready(function(e) {
                 starss:starsParam,
                 filterId: id
             },
-
             dataType : 'json',
-
             cache : false,
-
             success : function(data){
                 tickMarkSelectedFilters();
                 $(".overlay").hide();
@@ -2158,438 +1548,140 @@ $(document).ready(function(e) {
                 }else if(data.tab == 'stars'){
                     $(".sort_star").html(data.html);
                 }
-
-
             }
-
         });
     });
-
-    // $(".sortByPrice").click(function(){
-    //     sorterFlag = '.sortByPrice';
-    //     var check = $(".sort_price .check-price").text();
-    //     $(".overlay").show();
-    //     getSelectedFilters();
-    //     tickMarkSelectedFilters();
-    //     facsParam = facs;
-    //     starsParam = stars;
-    //     destsParam = dests;
-    //
-    //     if(facs.length == 0){
-    //         facsParam = 0;
-    //     }
-    //     if(stars.length == 0){
-    //         starsParam = 0;
-    //     }
-    //     if(dests.length == 0){
-    //         destsParam = 0;
-    //     }
-    //     $.ajax({
-    //
-    //         type : "GET",
-    //
-    //         url : site_url + "/sortByPrice",
-    //
-    //         data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-    //
-    //         dataType : 'json',
-    //
-    //         cache : false,
-    //
-    //         success : function(data){
-    //
-    //             tickMarkSelectedFilters();
-    //
-    //             $(".overlay").hide();
-    //
-    //             $(".sort_price").html(data);
-    //
-    //         }
-    //
-    //     });
-    //
-    //
-    //
-    // });
-    // $(".stars").click(function(){
-    //     sorterFlag = '.stars';
-    //     $(".overlay").show();
-    //     getSelectedFilters();
-    //     tickMarkSelectedFilters();
-    //     facsParam = facs;
-    //     starsParam = stars;
-    //     destsParam = dests;
-    //     if(facs.length == 0){
-    //         facsParam = 0;
-    //
-    //     }
-    //
-    //     if(stars.length == 0){
-    //
-    //         starsParam = 0;
-    //
-    //     }
-    //
-    //     if(dests.length == 0){
-    //
-    //         destsParam = 0;
-    //
-    //     }
-    //
-    //     $.ajax({
-    //
-    //         type : "GET",
-    //
-    //         url : site_url + "/sortByStars",
-    //
-    //         dataType : 'json',
-    //
-    //         data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-    //
-    //         cache : false,
-    //
-    //         success : function(data){
-    //
-    //             tickMarkSelectedFilters();
-    //
-    //             $(".overlay").hide();
-    //
-    //             $(".sort_star").html(data);
-    //
-    //         }
-    //
-    //     });
-    //
-    // });
-
-    // $(".hotels").click(function(){
-    //
-    //     sorterFlag = '.hotels';
-    //
-    //     $(".overlay").show();
-    //
-    //     getSelectedFilters();
-    //
-    //     tickMarkSelectedFilters();
-    //
-    //     facsParam = facs;
-    //
-    //     starsParam = stars;
-    //
-    //     destsParam = dests;
-    //
-    //     if(facs.length == 0){
-    //
-    //         facsParam = 0;
-    //
-    //     }
-    //
-    //     if(stars.length == 0){
-    //
-    //         starsParam = 0;
-    //
-    //     }
-    //
-    //     if(dests.length == 0){
-    //
-    //         destsParam = 0;
-    //
-    //     }
-    //
-    //     $.ajax({
-    //
-    //         type : "GET",
-    //
-    //         url : site_url + "/sortByHotelNames",
-    //
-    //         dataType : 'json',
-    //
-    //         data:{price:$("#amount").val()},
-    //
-    //         cache : false,
-    //
-    //         success : function(data){
-    //
-    //             tickMarkSelectedFilters();
-    //
-    //             $(".overlay").hide();
-    //
-    //             $(".sort_hotels").html(data);
-    //
-    //         }
-    //
-    //     });
-    //
-    // });
-
     $(document).on("change",".star-filter",function(){
-
         $(".overlay").show();
-
         lastIndex = 0;
-
         getSelectedFilters();
-
         tickMarkSelectedFilters();
-
         facsParam = facs;
-
         starsParam = stars;
-
         destsParam = dests;
-
         if(facs.length == 0){
-
             facsParam = 0;
-
         }
-
         if(stars.length == 0){
-
             starsParam = 0;
-
         }
-
         if(dests.length == 0){
-
             destsParam = 0;
-
         }
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/hotelImages", //filterHotels
-
             dataType : 'json',
-
             data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
             cache : false,
-
             success : function(data){
-
                 tickMarkSelectedFilters();
-
                 $(".overlay").hide();
-
-                if(data.msg == "")
-
-                {
-
+                if(data.msg == "") {
                     lastIndex = totalDeals;
-
                     $(".filter-data").html('<h3>No record found</h3>');
-
                 }
-
-                else
-
-                {
-
+                else {
                     lastIndex = data.lastindex;
-
                     $(".filter-data").html(data.msg);
 
                 }
-
             }
-
         });
-
-
-
     });
-
     $(document).on("change","#common-srch",function(){
-
         lastIndex = 0;
-
         if($(this).prop('checked') === true){
-
             $('.fac-filter').each(function(i){
-
                 $(this).prop('checked',true);
-
             });
-
         }else{
-
             $('.fac-filter').each(function(i){
-
                 $(this).prop('checked',false);
-
             });
-
         }
-
-
-
     });
 
     /*==== End Filter by stars========*/
-
     $(document).on("change",".fac-filter",function(){
-
         var curId = $(this).attr('id');
-
         $(".overlay").show();
-
         lastIndex = 0;
-
         getSelectedFilters();
-
         tickMarkSelectedFilters();
-
         facsParam = facs;
-
         starsParam = stars;
-
         destsParam = dests;
-
         if(facs.length == 0){
-
             facsParam = 0;
-
         }
-
         if(stars.length == 0){
-
             starsParam = 0;
-
         }
-
         if(dests.length == 0){
-
             destsParam = 0;
-
         }
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/hotelImages",//filterHotels
-
             dataType : 'json',
-
             data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
             cache : false,
-
             success : function(data){
-
                 tickMarkSelectedFilters();
-
                 $(".overlay").hide();
-
-                if(data.msg == "")
-
-                {
-
+                if(data.msg == "") {
                     lastIndex = totalDeals;
-
                     $(".filter-data").html('<h3>No records found</h3>');
-
                 }
-
-                else
-
-                {
-
+                else {
                     lastIndex = data.lastindex;
-
                     $(".filter-data").html(data.msg);
 
                 }
-
             }
-
         });
-
     });
 
     /*==== End Filter by amenities ========*/
-
-
-
     /*==== Ui Amount Slider for filter=====*/
     $( "#slider-range" ).slider({
-
         range: true,
-
         min: parseInt($('#minPrice').attr('class')),
-
         max: $('#maxPrice').attr('class'),
-
         values: [parseInt($('#minPrice').attr('class')),$('#maxPrice').attr('class')],
-
         slide: function( event, ui ) {
-
-
             $("#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-
         },
-
         change: function(event, ui) {
-
             $(".overlay").show();
-
             getSelectedFilters();
-
             tickMarkSelectedFilters();
-
             facsParam = facs;
-
             starsParam = stars;
-
             destsParam = dests;
-
             if(facs.length == 0){
-
                 facsParam = 0;
-
             }
-
             if(stars.length == 0){
-
                 starsParam = 0;
-
             }
-
             if(dests.length == 0){
-
                 destsParam = 0;
-
             }
-
             $.ajax({
-
                 type : "GET",
-
                 url : site_url + "/filterByPrice", //FilterByslider
-
                 data : {price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
                 dataType : 'json',
-
                 cache : false,
-
                 success : function(data) {
-
                     tickMarkSelectedFilters();
-
                     $(".overlay").hide();
-
                     $(".filter-data").html(data);
-
                 }
-
             });
-
         }
-
     });
 
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
@@ -2706,11 +1798,11 @@ $(document).ready(function(e) {
                                             tickMarkSelectedFilters();
                                         } else {
                                             if(sorterFlag == '.sortByPrice') {
-                                                getFlagResults('.sort_price','/sortByPrice');
+                                                getFlagResults('.sort_price','/sortByTab');
                                             } else if(sorterFlag == '.stars') {
-                                                getFlagResults('.sort_star','/sortByStars');
+                                                getFlagResults('.sort_star','/sortByTab');
                                             } else if(sorterFlag == '.hotels') {
-                                                getFlagResults('.sort_hotels','/sortByHotelNames');
+                                                getFlagResults('.sort_hotels','/sortByTab');
                                             }
                                         }
                                     } else {
@@ -2719,11 +1811,11 @@ $(document).ready(function(e) {
                                             tickMarkSelectedFilters();
                                         } else {
                                             if(sorterFlag == '.sortByPrice') {
-                                                getFlagResults('.sort_price','/sortByPrice');
+                                                getFlagResults('.sort_price','/sortByTab');
                                             } else if(sorterFlag == '.stars') {
-                                                getFlagResults('.sort_star','/sortByStars');
+                                                getFlagResults('.sort_star','/sortByTab');
                                             } else if(sorterFlag == '.hotels') {
-                                                getFlagResults('.sort_hotels','/sortByHotelNames');
+                                                getFlagResults('.sort_hotels','/sortByTab');
                                             }
                                         }
                                     }
@@ -2739,9 +1831,7 @@ $(document).ready(function(e) {
                 }
             }
         });
-
-        function getFlagResults(appendClass,urlSegment)
-        {
+        function getFlagResults(appendClass,urlSegment) {
             getSelectedFilters();
             tickMarkSelectedFilters();
             facsParam = facs;
@@ -2760,13 +1850,9 @@ $(document).ready(function(e) {
                 type : "GET",
                 url : site_url+urlSegment,
                 data:{price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
                 dataType : 'json',
-
                 cache : false,
-
                 success : function(data){
-                    console.log();
                     tickMarkSelectedFilters();
                     $(appendClass).html(data);
                     HideProgress();
@@ -2787,60 +1873,30 @@ $(document).ready(function(e) {
         }
 
         $(document).on('click','.sidebar-content ul li',function(event){
-
             var currFilterBox = $(this).children().find('input[type=checkbox]');
-
             if($(event.target)[0].className == 'fac-filter' || $(event.target)[0].className == 'star-filter'
-
-                || $(event.target)[0].className == 'dest-filters common-dest')
-
-            {
-
+                || $(event.target)[0].className == 'dest-filters common-dest') {
                 if($(currFilterBox).length == 1)
-
                 {
-
                     if($(currFilterBox).prop('checked') == true)
-
                     {
-
                         $(this).prop('checked',false);
-
                     }
-
                     else
-
                     {
-
                         $(this).prop('checked',true);
-
                     }
-
                 }
-
             }
-
-            else
-
-            {
-
-                console.log($(currFilterBox));
-
+            else {
                 if($(currFilterBox).length == 1)
-
                 {
-
                     $(currFilterBox).click();
-
                 }
-
             }
-
         });
     }
-
-    function getSelectedFilters()
-    {
+    function getSelectedFilters() {
         starElems   = $('.star-filter');
         facElems 	= $('.fac-filter');
         destElems   = $(".dest-count li").length;
@@ -2855,35 +1911,30 @@ $(document).ready(function(e) {
                 dests.push($(this).attr('id'));
                 filterFlag = true;
             }
-            else
-            {
+            else {
                 $(this).prop("checked",false);
             }
         });
         /*================= Ens script to manage filter by area ======================*/
         for(i = 0; i< starElems.length; i++)
         {
-            if($(starElems[i]).prop('checked'))
-            {
+            if($(starElems[i]).prop('checked')) {
                 $(starElems[i]).prop("checked",true);
                 stars.push($(starElems[i]).val());
                 filterFlag = true;
             }
-            else
-            {
+            else {
                 $(starElems[i]).prop("checked",true);
             }
         }
         for(i = 0; i< facElems.length; i++)
         {
-            if($(facElems[i]).prop('checked'))
-            {
+            if($(facElems[i]).prop('checked')) {
                 $(facElems[i]).prop("checked",true);
                 facs.push($(facElems[i]).attr('id'));
                 filterFlag = true;
             }
-            else
-            {
+            else {
                 $(facElems[i]).prop("checked",false);
             }
         }
@@ -2974,248 +2025,124 @@ $(document).ready(function(e) {
         }
         else {
             window.history.pushState({},document.title,'./');
-
         }
-
     }
-
-    function checkAllFilters()
-
-    {
-
+    function checkAllFilters() {
         starElems   = $('.star-filter');
-
         facElems 	= $('.fac-filter');
-
         destElems   = $(".dest-count li").length;
-
-
-
         /*================= this script is to manage filter by area ======================*/
-
         dests = [];
-
         facs = [];
-
         stars = [];
-
         filterFlag = false;
-
-
-
         $(".dest-count li").find("input").each(function(i, val){
-
             $(this).prop("checked",true);
-
             dests.push($(this).attr('id'));
-
         });
-
         /*================= Ens script to manage filter by area ======================*/
-
         for(i = 0; i< starElems.length; i++)
-
         {
-
             $(starElems[i]).prop("checked",true);
-
             stars.push($(starElems[i]).val());
-
         }
-
         for(i = 0; i< facElems.length; i++)
-
         {
-
             $(facElems[i]).prop("checked",true);
-
             facs.push($(facElems[i]).attr('id'));
-
         }
-
         filterFlag = true;
-
     }
 
     /*============script for filter by area=================*/
 
     $(document).on("change",".allDesFilter",function(){
-
         $(".overlay").show();
-
-        if($(this).prop('checked') === true)
-
-        {
-
+        if($(this).prop('checked') === true) {
             $('.dest-filters').each(function(i){
-
                 $(this).prop('checked',true);
-
             });
-
         }
-
-        else
-
-        {
-
+        else {
             $('.dest-filters').each(function(i){
-
                 $(this).prop('checked',false);
-
             });
-
         }
-
         lastIndex = 0;
-
         getSelectedFilters();
-
         tickMarkSelectedFilters();
-
         facsParam = facs;
-
         starsParam = stars;
-
         destsParam = dests;
-
         if(facs.length == 0){
-
             facsParam = 0;
-
         }
-
         if(stars.length == 0){
-
             starsParam = 0;
-
         }
-
         if(dests.length == 0){
-
             destsParam = 0;
-
         }
-
         var value = $(".allDesFilter").attr("id");
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/hotelImages", //destination
-
             data : {price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam},
-
             dataType : 'json',
-
             async:true,
-
             cache : false,
-
             success : function(response){
-
-
                 tickMarkSelecetedFilters();
-
                 // console.log(tickMarkSelecetedFilters());
                 $(".overlay").hide();
-
                 // $(".overlay").show();
-
-                if(response.msg == "")
-
-                {
-
+                if(response.msg == "") {
                     lastIndex = totalDeals;
-
                     $(".filter-data").html('<h3>No record found</h3>');
-
-                }
-
-                else
-
-                {
-
+                } else {
                     lastIndex = response.lastindex;
-
                     $(".filter-data").html(response.msg);
-
                 }
-
             }
-
         });
 
     });
 
     $(document).on("click",".dest-filters",function(){
         $(".overlay").show();
-
         lastIndex = 0;
-
         var chekStatus = false;
-
         $(".allDesFilter").prop('checked',false);
-
         $('.dest-filters').each(function(i){
-
             if($(this).prop('checked') === true){
-
                 chekStatus = true;
-
             }
-
         });
-
         getSelectedFilters();
-
         tickMarkSelectedFilters();
-
         facsParam = facs;
-
         starsParam = stars;
-
         destsParam = dests;
-
         if(facs.length == 0){
-
             facsParam = 0;
-
         }
-
         if(stars.length == 0){
-
             starsParam = 0;
-
         }
-
         if(dests.length == 0){
-
             destsParam = 0;
-
         }
-
         var value = $(".allDesFilter").attr("id");
-
         var check = $(this).attr("data-link");
-
         $.ajax({
-
             type : "GET",
-
             url : site_url + "/hotelImages", //destination
-
             data : {
                 price:$("#amount").val(),filters:filterFlag,facss:facsParam,destss:destsParam,starss:starsParam
             },
-
             dataType : 'json',
-
             async:true,
-
             cache : false,
-
             success : function(response){
                 tickMarkSelectedFilters();
                 $(".overlay").hide();
@@ -3241,498 +2168,236 @@ $(document).ready(function(e) {
     /*=========script for load more facilities =================*/
 
     $(document).on('click','#more-facs',function (){
-
         var  size_facs = $(".outer-fac-filter").size();
-
         console.log(size_facs);
-
         x = size_facs;
-
         $('.outer-fac-filter:lt('+x+')').fadeIn();
-
         if(size_facs == x){
-
             $("#more-facs").hide();
-
             $("#less-facs").show();
-
         }
-
     });
-
     $(document).on('click','#less-facs',function (){
-
         x = 6;
-
         $('.outer-fac-filter').hide();
-
         $('.outer-fac-filter:lt('+x+')').fadeIn();
-
         $("#less-facs").hide();
-
         $("#more-facs").show();
-
     });
 
     /*=========End script for load more room page left sidebar tabs===========*/
-
     /*========= script for displaying home page search box rooms =============*/
-
     $(document).on('change','#rooms_count',function(event){
-
         var horizVal = $(this).val();
-
-        if(preValRooms === 0)
-
-        {
-
+        if(preValRooms === 0) {
             preValRooms = horizVal;
-
             $('.search-engine-row-display-hide:lt('+horizVal+')').slideDown(500);
-
         }
-
-        else
-
-        {
-
-            if(preValRooms < horizVal)
-
-            {
-
+        else {
+            if(preValRooms < horizVal) {
                 preValRooms = horizVal;
-
                 $('.search-engine-row-display-hide:lt('+horizVal+')').slideDown(500);
-
             }
-
-            else if(preValRooms >= horizVal)
-
-            {
-
+            else if(preValRooms >= horizVal) {
                 preValRooms = horizVal;
-
                 $('.search-engine-row-display-hide:gt('+(horizVal-1)+')').slideUp(500);
-
             }
-
         }
-
         //$('.search-engine-row-display-hide').css('display','none');
-
         /*$('.search-engine-row-display-hide:lt('+horizVal+')').css('display','block');*/
-
     });
-
     $(document).on('change','.search-engine-child',function(event){
-
         var horizClass = $(this).attr('id');
-
         horizClass = horizClass+'_ages';
-
         var horizVal = $(this).val();
-
         if(horizVal > 0)
-
         {
-
             selElems = $('.'+horizClass).find("select");
-
             //$('.'+horizClass).css('display','block');
-
             $('.'+horizClass).slideDown(500);
-
             $('.'+horizClass).find("select").attr('disabled','disabled');
-
             for(var el = 0; el < selElems.length; el++)
-
             {
-
-                if(el < horizVal)
-
-                {
-
+                if(el < horizVal) {
                     $(selElems[el]).removeAttr('disabled');
-
                 }
-
             }
-
         }
-
-        else
-
-        {
-
+        else {
             //$('.'+horizClass).css('display','none');
-
             $('.'+horizClass).find("select").attr('disabled','disabled');
-
             $('.'+horizClass).slideUp(500);
-
         }
-
     });
-
     /*========= End script for displaying home page search box rooms ========*/
-
     /*========= script for displaying horizontal search box =================*/
-
     $(document).on('click',function(event){
-
         parent1 = "",parent2 = "",parent3 = "",parent4 = "",parent5 = ""
-
-        if($(event.target).parents().eq(0).length !== 0)
-
-        {
-
+        if($(event.target).parents().eq(0).length !== 0) {
             parent1 = $(event.target).parents().eq(0)[0].className;
-
         }
-
-        if($(event.target).parents().eq(1).length !== 0)
-
-        {
-
+        if($(event.target).parents().eq(1).length !== 0) {
             parent2 = $(event.target).parents().eq(1)[0].className;
-
         }
-
-        if($(event.target).parents().eq(2).length !== 0)
-
-        {
-
+        if($(event.target).parents().eq(2).length !== 0) {
             parent3 = $(event.target).parents().eq(2)[0].className;
-
         }
-
-        if($(event.target).parents().eq(3).length !== 0)
-
-        {
-
+        if($(event.target).parents().eq(3).length !== 0) {
             parent4 = $(event.target).parents().eq(3)[0].className;
-
         }
-
         if($(event.target).parents().eq(4).length !== 0)
-
         {
-
             parent5 = $(event.target).parents().eq(4)[0].className;
-
         }
-
         current = $(event.target)[0].className;
-
-        if(current.search("horiz-search") !== -1)
-
-        {
-
+        if(current.search("horiz-search") !== -1) {
             $('#horiz-box').slideToggle("fast");
-
         }
-
-        else
-
-        {
-
+        else {
             if(parent1 !== 'engine-dropdown-row' && parent2 !== 'engine-dropdown-row' && parent3 !== 'engine-dropdown-row' &&
-
                 parent4 !== 'engine-dropdown-row' && current !== 'engine-dropdown-row' && current !== 'engine-dropdown-btns' &&
-
                 parent5 !== 'engine-dropdown-row' && current !== 'btn-addrow' && current !== 'btn-cnfrm')
-
             {
-
                 $('#horiz-box').hide();
-
             }
-
         }
-
     });
-
     $(document).on('click','#addStickyRoom',function(event){
-
         event.preventDefault();
-
         var roomValOld = parseInt($('#rooms_change').val());
-
         if(roomValOld < 5)
-
         {
-
             roomValNew = parseInt(roomValOld)+1;
-
             preValRooms1 = roomValNew;
-
             //$('.engine-dropdown-row:lt('+roomValNew+')').css('display','block');
-
             $('.engine-dropdown-row:lt('+roomValNew+')').slideDown(500);
-
             var newVal = $('#rooms_change').val(roomValNew);
-
             var totalChild = calculate_children_main('#rooms_change','.horiz-child');
-
             var totalAdult = calculate_adults_main('#rooms_change','.adults-sticky');
-
-
-
             var result = $('#rooms_change').val()+' rooms, '+(totalAdult+totalChild)+' guests';
-
             $('#adultsChildSticky').val(result);
-
         }
-
     });
 
     $(document).on('change','.adults-sticky',function(event){
-
         var currName = $(this).attr('name');
-
         $('select[name='+currName+']').val($(this).val());
-
         var totalChild = calculate_children('#rooms_change','.horiz-child');
-
         var totalAdult = calculate_adults_main('#rooms_change','.adults-sticky');
         var rooms = $('#rooms_change').val();
-        // console.log(rooms);
         var result = rooms + 'rooms, '+(totalAdult+totalChild)+' guests';
-        // console.log(result);
         $('#adultsChildSticky').val(result);
-
-        // $('#adultChildSumRooms').val(result);
-
         setQueryStrings();
-
     });
-
     $(document).on('click','#confirmStickyRoom',function(event){
-
         event.preventDefault();
-
         $('#horiz-box').hide();
-
     });
-
     $(document).on('change','#rooms_change',function(event){
-
         var horizVal = $(this).val();
-
-        if(preValRooms1 === 0)
-
-        {
-
+        if(preValRooms1 === 0) {
             preValRooms1 = horizVal;
-
             $('.engine-dropdown-row:not(.engine-dropdown-row-rooms):lt('+horizVal+')').slideDown(500);
-
-        }
-
-        else
-
-        {
-
-            if(preValRooms1 < horizVal)
-
-            {
-
+        } else {
+            if(preValRooms1 < horizVal) {
                 preValRooms1 = horizVal;
-
                 $('.engine-dropdown-row:not(.engine-dropdown-row-rooms):lt('+horizVal+')').slideDown(500);
-
             }
-
-            else if(preValRooms1 >= horizVal)
-
-            {
-
+            else if(preValRooms1 >= horizVal) {
                 preValRooms1 = horizVal;
-
                 $('.engine-dropdown-row:not(.engine-dropdown-row-rooms):gt('+(horizVal-1)+')').slideUp(500);
-
             }
-
         }
-
         var totalChild = calculate_children_main('#rooms_change','.horiz-child');
-
         var totalAdult = calculate_adults_main('#rooms_change','.adults-sticky');
-
         var result = $('#rooms_change').val()+' rooms, '+(totalAdult+totalChild)+' guests';
-
         $('#adultsChildSticky').val(result);
-
-        //$('.engine-dropdown-row').css('display','none');
-
-        //$('.engine-dropdown-row:lt('+horizVal+')').css('display','block');
-
     });
-
 
     $(document).on('change','.horiz-child',function(event){
-
         var horizClass = $(this).attr('id');
-
         var horizClass1 = horizClass.replace('sticky','rooms');
-
         var currName = $(this).attr('name');
-
         $('select[name='+currName+']').val($(this).val());
-
         horizClass = horizClass+'_ages';
-
         horizClass1 = horizClass1+'_ages';
-
         var horizVal = $(this).val();
-
         if(horizVal > 0)
-
         {
-
             selElems = $('.'+horizClass).find("select");
-
             $('.'+horizClass).css('display','block');
-
             $('.'+horizClass).find("select").attr('disabled','disabled');
-
             selElems1 = $('.'+horizClass1).find("select");
-
             $('.'+horizClass1).css('display','block');
-
             $('.'+horizClass1).find("select").attr('disabled','disabled');
-
             for(var el = 0; el < selElems.length; el++)
-
             {
-
                 if(el < horizVal)
-
                 {
-
                     $(selElems[el]).removeAttr('disabled');
-
                     $(selElems1[el]).removeAttr('disabled');
-
                 }
-
             }
-
         }
-
         else
-
         {
-
             $('.'+horizClass).css('display','none');
-
             $('.'+horizClass).find("select").attr('disabled','disabled');
-
             $('.'+horizClass1).css('display','none');
-
             $('.'+horizClass1).find("select").attr('disabled','disabled');
-
         }
-
         var totalChild = calculate_children('#rooms_change','.horiz-child');
-        console.log(totalChild);
         var totalAdult = calculate_adults_main('#rooms_change','.adults-sticky');
-
         var result = $('#rooms_change').val()+' rooms, '+(totalAdult+totalChild)+' guests';
-
         $('#adultsChildSticky').val(result);
-
         $('#adultChildSumRooms').val(result);
-
         setQueryStrings();
-
     });
-
     function calculate_children(roomsClass,childClass)
-
     {
-
         var roomsCount = $(roomsClass).val();
-
         var childElems = $(childClass);
-
         var totalChild = 0;
-
-        for(var i = 0; i < roomsCount; i++)
-
-        {
-
+        for(var i = 0; i < roomsCount; i++) {
             var currVal = parseInt($(childElems[i])[0].value)||0;
-
             totalChild = totalChild+currVal;
-
         }
-
         return totalChild;
-
     }
-
     function calculate_children_main(roomsClass,childClass)
-
     {
-
         var roomsCount = $(roomsClass).val();
-
         var childElems = $(childClass);
-
         var totalChild = 0;
-
         for(var i = 0; i < roomsCount; i++)
-
         {
-
             var currVal = parseInt($(childElems[i])[0].value)||0;
-
             totalChild = totalChild+currVal;
-
         }
-
         return totalChild;
-
     }
 
     function calculate_adults_main(roomsClass,adultClass)
-
     {
-
         var roomsCount = $(roomsClass).val();
-
         var adultElems = $(adultClass);
-
         var totalAdult = 0;
-
         for(var i = 0; i < roomsCount; i++)
-
         {
-
             var currVal = parseInt($(adultElems[i])[0].value)||0;
-
             totalAdult = totalAdult+currVal;
-
         }
-
         return totalAdult;
-
     }
-
     /*========= End script for displaying horizontal search box ===========*/
     /*========= Script for displaying toggle hotel list on destination box ========*/
-
     $(".m-titlenav-h").click(function(){
-
         $(this).parent(".m-titlenav").toggleClass("active");
-
     });
 
     /*==== end script for displaying toggle hotel list on destination box ========*/
 
     $(document).on('click','.scroll-btn',function(){
-
         $(".popup-d-body").mCustomScrollbar("scrollTo","top");
 
     });
@@ -3740,7 +2405,5 @@ $(document).ready(function(e) {
 }); /*===== Close ready function =======*/
 
 $(document).on("click", function () {
-
     $(".ui-menu-item").hide();
-
 });
